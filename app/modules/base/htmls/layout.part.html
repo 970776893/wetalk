@@ -1,0 +1,20 @@
+<div>
+	<section class="container">
+		<div ng-view></div>
+	</section>
+
+	<footer class="navbar-fixed-bottom text-center">
+		<ul class="nav nav-tabs">
+			<li role="presentation">
+				<a href="#/1" class="{{url == '/1' ? 'active' : 'inactive'}}">
+					<span class="glyphicon glyphicon-comment" aria-hidden="true"></span> 聊天
+				</a>
+			</li>
+			<li role="presentation">
+				<a href="#/userList" class="{{url == '/userList' ? 'active' : 'inactive'}}">
+					<span class="glyphicon glyphicon-user" aria-hidden="true"></span> 通讯录
+				</a>
+			</li>
+		</ul>
+	</footer>
+</div>

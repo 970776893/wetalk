@@ -1,0 +1,26 @@
+{
+  "name": "EasyShopping",
+  "version": "0.1.0",
+  "author": {
+    "name":"张凯",
+    "email": "970776893@qq.com"
+  },
+  "description": "这是一个众销平台，主要旨在建立有货的供应商和有销售能力的分销商的网络，解决供应商销售问题，解决分销商货源问题。",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-concat": "~0.4.0",
+    "grunt-contrib-connect": "~0.8.0",
+    "grunt-contrib-copy": "~0.4.0",
+    "grunt-contrib-cssmin": "~0.10.0",
+    "grunt-contrib-jshint": "^0.11.3",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-html2js": "~0.2.7",
+    "grunt-ng-annotate": "~0.3.2",
+    "load-grunt-tasks": "^3.4.0"
+  },
+  "dependencies": {
+    "grunt-contrib-rename": "0.0.3"
+  }
+}

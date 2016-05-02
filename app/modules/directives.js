@@ -1,0 +1,68 @@
+/* 
+ * 页面模板-内容 
+ * eg:<we-layout></we-layout>
+ */
+app.directive('weLayout', function () {
+    return {
+        restrict: 'EA',
+        templateUrl: '/app/modules/base/htmls/layout.part.html',
+        controller : function($rootScope, $scope, $location){
+        	$scope.$on('$viewContentLoaded', function(item){
+        		$scope.url = $location.$$url;
+        	});
+
+        }
+    };
+});
+
+
+/* 
+ *  封装三个滑动时间（开始时，滑动中，结束时） 
+ *  eg:ng-touchmove="someFunction($event)"
+*/
+app.directive("ngTouchstart", function () {
+	return {
+		controller: function ($scope, $element, $attrs) {
+			$element.bind('touchstart', onTouchStart);
+			function onTouchStart(event) {
+				var method = $element.attr('ng-touchstart');
+				$scope.$event = event;
+				$scope.$apply(method);
+			};
+		}
+	};
+});
+app.directive("ngTouchmove", function () {
+	return {
+		controller: function ($scope, $element, $attrs) {
+			$element.bind('touchstart', onTouchStart);
+			function onTouchStart(event) {
+				event.preventDefault();
+				$element.bind('touchmove', onTouchMove);
+				$element.bind('touchend', onTouchEnd);
+			};
+			function onTouchMove(event) {
+				var method = $element.attr('ng-touchmove');
+				$scope.$event = event;
+				$scope.$apply(method);
+			};
+			function onTouchEnd(event) {
+				event.preventDefault();
+				$element.unbind('touchmove', onTouchMove);
+				$element.unbind('touchend', onTouchEnd);
+			};
+		}
+	};
+});
+app.directive("ngTouchend", function () {
+	return {
+		controller: function ($scope, $element, $attrs) {
+			$element.bind('touchend', onTouchEnd);
+			function onTouchEnd(event) {
+				var method = $element.attr('ng-touchend');
+				$scope.$event = event;
+				$scope.$apply(method);
+			};
+		}
+	};
+});
