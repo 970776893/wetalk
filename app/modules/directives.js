@@ -7,9 +7,12 @@ app.directive('weLayout', function () {
         restrict: 'EA',
         templateUrl: '/app/modules/base/htmls/layout.part.html',
         controller : function($rootScope, $scope, $location){
-        	$scope.$on('$viewContentLoaded', function(item){
+        	$scope.$on('$locationChangeSuccess', function(item){
         		$scope.url = $location.$$url;
         	});
+        	// $scope.$on('$locationChangeStart', function(item){
+        	// 	$('.container').addClass('page-is-changing');
+        	// });
 
         }
     };

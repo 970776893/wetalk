@@ -1,12 +1,13 @@
 <input type="text" class="search-input" mg-model="query" placeholder="搜索">
 <table class="table ">
 	<tbody>
-		<tr ng-repeat="user in userList" ng-touchend="showUserOpt($event, user)">
+		<tr ng-repeat="user in talkList" ng-touchend="showUserOpt($event, user)">
 			<td width="18%">
 				<img class="img-circle" src="/app/displaydata/imgs/chenyixun.png"/>
 			</td>
 			<td width="60%">
 				<h5>{{user.name}}</h5>
+				<p>聊天记录</p>
 			</td>
 			<td>
 				<span ng-show="user.isShow">删除</span>
@@ -14,6 +15,3 @@
 		</tr>
 	</tbody>
 </table>
-<div class= "user-letter">
-	<div ng-repeat="key in queryKeyList">{{key}}</div>
-</div>

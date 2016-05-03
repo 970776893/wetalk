@@ -39,9 +39,12 @@ app.directive('weLayout', function () {
         restrict: 'EA',
         templateUrl: '/app/modules/base/htmls/layout.part.html',
         controller : function($rootScope, $scope, $location){
-        	$scope.$on('$viewContentLoaded', function(item){
+        	$scope.$on('$locationChangeSuccess', function(item){
         		$scope.url = $location.$$url;
         	});
+        	// $scope.$on('$locationChangeStart', function(item){
+        	// 	$('.container').addClass('page-is-changing');
+        	// });
 
         }
     };
@@ -117,7 +120,11 @@ app.config( function ($routeProvider) {
 	$routeProvider
 	.when('/userList', {
 		templateUrl: "/app/modules/user/htmls/user_list.html",
-		controller : 'userListController'
+		controller : "userListController"
+	})
+	.when('/talkList', {
+		templateUrl: "/app/modules/talk/htmls/talk_list.html",
+		controller : "talkListController"
 	})
 	.otherwise({
 		templateUrl: "/app/modules/base/htmls/unknow.part.html"
@@ -143,10 +150,72 @@ app.service("commonService", function ($http) {
 
 /* 用户列表 */
 
-app.controller("userListController", function ($rootScope, $scope, $location) {
-	$scope.touch = function(item){
-		console.log(item);
+app.controller("talkListController", function ($rootScope, $scope, $location) {
+	//初始化数据
+	$scope.talkList = [
+		{
+			id : 1,
+			name : '陈奕迅1'
+		},{
+			id : 1,
+			name : '陈奕迅1'
+		},{
+			id : 1,
+			name : '陈奕迅1'
+		},{
+			id : 1,
+			name : '陈奕迅1'
+		},{
+			id : 1,
+			name : '陈奕迅1'
+		},{
+			id : 1,
+			name : '陈奕迅1'
+		}
+	];
+	$scope.queryKeyList = ['A','B','C','D','E','F'];
+
+	$scope.showUserOpt = function($event, item){
+		//隐藏其他按钮
+		angular.forEach($scope.userList, function(user){
+			if(user.id != item.id){
+				user.isShow = false;
+			}
+		});
+		item.isShow = !item.isShow;
 	};
-	console.log('----');
+
+});
+
+/* 用户列表 */
+
+app.controller("userListController", function ($rootScope, $scope, $location) {
+	//初始化数据
+	$scope.userList = [
+		{
+			id : 1,
+			name : '陈奕迅1'
+		},{
+			id : 2,
+			name : '陈奕迅2'
+		},{
+			id : 3,
+			name : '陈奕迅3'
+		},{
+			id : 4,
+			name : '陈奕迅4'
+		}
+	];
+	$scope.queryKeyList = ['A','B','C','D','E','F'];
+
+	$scope.showUserOpt = function($event, item){
+		//隐藏其他按钮
+		angular.forEach($scope.userList, function(user){
+			if(user.id != item.id){
+				user.isShow = false;
+			}
+		});
+		item.isShow = !item.isShow;
+	};
 
 });
