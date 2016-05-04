@@ -1,15 +1,12 @@
-<input type="text" class="search-input" mg-model="query" placeholder="搜索">
+<input type="text" class="form-control" mg-model="query" placeholder="搜索">
 <table class="table ">
 	<tbody>
 		<tr ng-repeat="user in userList" ng-touchend="showUserOpt($event, user)">
 			<td width="18%">
 				<img class="img-circle" src="/app/displaydata/imgs/chenyixun.png"/>
 			</td>
-			<td width="60%">
+			<td width="82%">
 				<h5>{{user.name}}</h5>
-			</td>
-			<td>
-				<span ng-show="user.isShow">删除</span>
 			</td>
 		</tr>
 	</tbody>

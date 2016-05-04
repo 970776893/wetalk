@@ -28,13 +28,32 @@ footer>ul>li {
 /*表格头像的大小控制--头像*/
 .table>tbody>tr>td>img{
 	width: 95%;
-	margin-right: 2%;
+	padding: 6px;
 }
-/*表格文本大小控制--聊天记录*/
-.table>tbody>tr>td>p{
+/*表格文本大小控制--聊天记录-已读 */
+.history-readed>p{
     margin: 0 0 0 0;
     font-size: small;
     color: gray;
+}
+/*表格文本大小控制--聊天记录-已读 */
+.history-readed>p>span{
+    display: none;
+}
+/*表格文本大小控制--聊天记录-未读 */
+.history-no-readed>p{
+    margin: 0 0 0 0;
+    font-size: small;
+    color: #2EEA10;
+}
+/*表格文本大小控制--聊天记录-未读 */
+.history-no-readed>p>span{
+    background-color: red;
+    font-size: small;
+}
+.history-time>p{
+    text-align: right;
+    font-size: x-small;
 }
 /* 显示时的样式 */ 
 .table>tbody>tr>td>span.ng-enter { 
@@ -46,7 +65,7 @@ footer>ul>li {
    width : 100%;
 }
 
-/*用户列表，将检索abcd..放在右边*/
+/*用户列表中检索abcd..放在右边*/
 .user-letter{
 	right: 0;
 	top: 15%; 
@@ -55,28 +74,52 @@ footer>ul>li {
 	z-index: 9999; 
 	height: 100%;
 }
-/*用户列表，将检索abcd..的字体大小*/
+/*用户列表中检索abcd..的字体大小*/
 .user-letter>div{
 	font-size: x-small;
 }
-.search-input {
-	display: block;
-    text-align:center;
-    width: 100%;
-    height: 34px;
-    padding: 6px 12px;
-    margin: 3px 0 1px 0;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #555;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 50px;
-    outline:none;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.75);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+.talk-item {
+    background-color: #169816;
+    -webkit-border-radius:5px;  
+    -moz-border-radius:5px;
+    border-radius: 5px;
+
+}
+
+/* 聊天页面不显示导航按钮 */
+.we-talkwindow>div>footer {
+    display: none;
+}
+
+/*聊天列表页面： 表格文本大小控制--聊天记录-已读 */
+.we-talklist h5{
+    margin: 2px 0px 6px 0px
+}
+/*聊天列表页面： 表格文本大小控制--聊天记录-已读 */
+.we-talklist input{
+    margin-top: 2px;
+    -webkit-border-radius:20px;  
+    -moz-border-radius:20px;  
+    border-radius: 20px;
+    text-align: center;
+}
+/*聊天列表页面： 表格文本大小控制--聊天记录-已读 */
+.we-userlist input{
+    margin-top: 2px;
+    -webkit-border-radius:20px;  
+    -moz-border-radius:20px;
+    border-radius: 20px;
+    text-align: center;
+}
+/*表格文本大小控制--聊天记录-已读 */
+.we-talkwindow input{
+    text-align:left;
+    border-radius: 5px;
+}
+
+/*表格边框留白*/
+.we-talkwindow .table>tbody>tr>td{
+    padding : 1%;
+    border: none;
+    vertical-align: middle;
 }

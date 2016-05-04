@@ -1,0 +1,27 @@
+<table class="table ">
+	<tbody>
+		<tr ng-repeat="user in talkList" ng-click="talk(user)">
+			<td width="18%" ng-if="user.isRead == 0">
+				<img class="img-circle" src="/app/displaydata/imgs/chenyixun.png"/>
+			</td>
+			<td width="82%">
+				<div class="talk-item panel-body">
+				  <div class="">
+				    Basic panel example
+				  </div>
+				</div>
+			</td>
+			<td width="18%" ng-if="user.isRead != 0">
+				<img class="img-circle" src="/app/displaydata/imgs/chenyixun.png"/>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<div class="navbar-fixed-bottom input-group">
+	<input type="text" class="form-control" mg-model="query" placeholder="输入">
+	<span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+    </span>
+</div>

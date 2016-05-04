@@ -1,20 +1,16 @@
 /* 用户列表 */
 
-app.controller("userListController", function ($rootScope, $scope, $location) {
+app.controller("talkWindowController", function ($rootScope, $scope, $location) {
 	//初始化数据
-	$scope.userList = [
+	$scope.talkList = [
 		{
 			id : 1,
-			name : '陈奕迅1'
+			name : '陈奕迅1',
+			isRead: 1
 		},{
-			id : 2,
-			name : '陈奕迅2'
-		},{
-			id : 3,
-			name : '陈奕迅3'
-		},{
-			id : 4,
-			name : '陈奕迅4'
+			id : 1,
+			name : '陈奕迅1',
+			isRead: 0
 		}
 	];
 	$scope.queryKeyList = ['A','B','C','D','E','F'];

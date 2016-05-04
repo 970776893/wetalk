@@ -39,13 +39,19 @@ app.directive('weLayout', function () {
         restrict: 'EA',
         templateUrl: '/app/modules/base/htmls/layout.part.html',
         controller : function($rootScope, $scope, $location){
-        	$scope.$on('$locationChangeSuccess', function(item){
+        	$scope.$on('$locationChangeSuccess', function(event, newUrl, oldUrl){
+        		// url 便于下方导航栏的显示当前所在的按钮颜色
         		$scope.url = $location.$$url;
+        		//为每个页面动态添加独自的url，便于定制化开发（eg：聊天页面不显示下方导航栏）
+        		var className = 'we' + '-' + newUrl.substring(newUrl.indexOf('#') + 2).toLocaleLowerCase().replace("/","-");
+        		$('body').addClass(className);
+        		if(newUrl !== oldUrl){
+	        		//删除上一个页面class
+	        		var rmClassName = 'we' + '-' +  oldUrl.substring(oldUrl.indexOf('#') + 2).toLocaleLowerCase().replace("/","-");
+	        		$('body').removeClass(rmClassName);
+        		}
+	        	console.log(event);
         	});
-        	// $scope.$on('$locationChangeStart', function(item){
-        	// 	$('.container').addClass('page-is-changing');
-        	// });
-
         }
     };
 });
@@ -126,6 +132,10 @@ app.config( function ($routeProvider) {
 		templateUrl: "/app/modules/talk/htmls/talk_list.html",
 		controller : "talkListController"
 	})
+	.when('/talkWindow', {
+		templateUrl: "/app/modules/talk/htmls/talk_window.html",
+		controller : "talkWindowController"
+	})
 	.otherwise({
 		templateUrl: "/app/modules/base/htmls/unknow.part.html"
 	});
@@ -155,22 +165,28 @@ app.controller("talkListController", function ($rootScope, $scope, $location) {
 	$scope.talkList = [
 		{
 			id : 1,
-			name : '陈奕迅1'
+			name : '陈奕迅1',
+			isRead: 0
 		},{
 			id : 1,
-			name : '陈奕迅1'
+			name : '陈奕迅1',
+			isRead: 1
 		},{
 			id : 1,
-			name : '陈奕迅1'
+			name : '陈奕迅1',
+			isRead: 1
 		},{
 			id : 1,
-			name : '陈奕迅1'
+			name : '陈奕迅1',
+			isRead: 0
 		},{
 			id : 1,
-			name : '陈奕迅1'
+			name : '陈奕迅1',
+			isRead: 1
 		},{
 			id : 1,
-			name : '陈奕迅1'
+			name : '陈奕迅1',
+			isRead: 0
 		}
 	];
 	$scope.queryKeyList = ['A','B','C','D','E','F'];
@@ -178,7 +194,40 @@ app.controller("talkListController", function ($rootScope, $scope, $location) {
 	$scope.showUserOpt = function($event, item){
 		//隐藏其他按钮
 		angular.forEach($scope.userList, function(user){
-			if(user.id != item.id){
+			if(user.id !== item.id){
+				user.isShow = false;
+			}
+		});
+		item.isShow = !item.isShow;
+	};
+
+	$scope.talk = function(user){
+		$location.path("/talkWindow");
+	};
+
+});
+
+/* 用户列表 */
+
+app.controller("talkWindowController", function ($rootScope, $scope, $location) {
+	//初始化数据
+	$scope.talkList = [
+		{
+			id : 1,
+			name : '陈奕迅1',
+			isRead: 1
+		},{
+			id : 1,
+			name : '陈奕迅1',
+			isRead: 0
+		}
+	];
+	$scope.queryKeyList = ['A','B','C','D','E','F'];
+
+	$scope.showUserOpt = function($event, item){
+		//隐藏其他按钮
+		angular.forEach($scope.userList, function(user){
+			if(user.id !== item.id){
 				user.isShow = false;
 			}
 		});
@@ -211,7 +260,7 @@ app.controller("userListController", function ($rootScope, $scope, $location) {
 	$scope.showUserOpt = function($event, item){
 		//隐藏其他按钮
 		angular.forEach($scope.userList, function(user){
-			if(user.id != item.id){
+			if(user.id !== item.id){
 				user.isShow = false;
 			}
 		});
