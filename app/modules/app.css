@@ -56,16 +56,6 @@ footer>ul>li {
     text-align: right;
     font-size: x-small;
 }
-/* 显示时的样式 */ 
-.table>tbody>tr>td>span.ng-enter { 
-  transition: all 4s ease-in ; /* 当使用css transition实现动画效果时，在开始时的样式中必须包含transition的设置 */ 
-  width : 0;
-}
-/* 显示时的样式 */
-.table>tbody>tr>td>span.ng-enter.ng-enter-active {
-   width : 100%;
-}
-
 /*用户列表中检索abcd..放在右边*/
 .user-letter{
 	right: 0;
@@ -130,7 +120,6 @@ footer>ul>li {
     text-align:left;
     border-radius: 5px;
 }
-
 /*表格边框留白*/
 .we-talkwindow .table>tbody>tr>td{
     background-color: #EAE8E8;
@@ -138,3 +127,43 @@ footer>ul>li {
     border: none;
     vertical-align: middle;
 }
+
+/* 发送消息动画 */
+.talk-item-animation{
+  -webkit-transition: all linear 1s;
+  -o-transition: all linear 1s;
+  -ms-transition: all linear 1s;
+  -moz-transition: all linear 1s;
+  transition: all linear 1s;
+}
+/* 发送消息动画 -开始状态*/
+.talk-item-animation.ng-enter{
+  opacity: 0.2;
+}
+/*发送消息动画 -动画过程*/
+.talk-item-animation.ng-enter-active{
+  opacity: 1;
+}
+
+/* 发送消息动画 */
+/*.view-slide-animation{
+  transition: all ease-in-out 1s;
+  -webkit-transition: all ease-in-out 1s;
+  -o-transition: all ease-in-out 1s;
+}
+*/
+
+/*.view-slide-animation.ng-enter{
+    transform: translateX(100%);
+}
+
+.view-slide-animation.ng-enter-active{
+    transform: translateX(0);
+}
+.view-slide-animation.ng-leave{
+    transform: translateY(0);
+}
+.view-slide-animation.ng-leave-active{
+    transform: translateY(100%);
+}
+*/

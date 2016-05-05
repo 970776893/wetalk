@@ -18,7 +18,7 @@ module.exports = function (grunt) {
         //合并文件
         concat: {
             js: {
-                src: ['app/modules/*.js','app/modules/*/*.js'],
+                src: ['app/modules/app.js', 'app/modules/*.js','app/modules/*/*.js'],
                 dest: 'dist/js/weTalk.js'
             },
             css: {
