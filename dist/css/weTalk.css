@@ -1,7 +1,7 @@
 body {
 	width: 100%;
 	height:100%;
-    background-color: #FDFDFD;
+    background-color: #EAE8E8;
     margin-bottom: 20%;
 }
 /*底部按钮颜色*/
@@ -20,6 +20,7 @@ footer>ul>li {
 }
 /*表格边框留白*/
 .table>tbody>tr>td{
+    background-color: white;
 	padding : 2%;
 	border-top: none;
     vertical-align: middle;
@@ -78,14 +79,27 @@ footer>ul>li {
 .user-letter>div{
 	font-size: x-small;
 }
+/*聊天页面的聊天内容显示*/
 .talk-item {
-    background-color: #169816;
     -webkit-border-radius:5px;  
     -moz-border-radius:5px;
-    border-radius: 5px;
-
+    border-radius: 10px;
+    padding: 14px 4% 14px 4%;
+    width: auto;
+    display: inline-block;
 }
-
+/*聊天页面的聊天内容-我的*/
+.talk-item-my {
+    text-align: right;
+    background-color: #169816;
+    float: right;
+}
+/*聊天页面的聊天内容你得*/
+.talk-item-you {
+    text-align: left;
+    background-color: white;
+    float: left;
+}
 /* 聊天页面不显示导航按钮 */
 .we-talkwindow>div>footer {
     display: none;
@@ -119,7 +133,8 @@ footer>ul>li {
 
 /*表格边框留白*/
 .we-talkwindow .table>tbody>tr>td{
-    padding : 1%;
+    background-color: #EAE8E8;
+    padding : 1% 0 1% 0;
     border: none;
     vertical-align: middle;
 }

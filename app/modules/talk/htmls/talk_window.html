@@ -1,20 +1,18 @@
 <table class="table ">
 	<tbody>
-		<tr ng-repeat="user in talkList">
-			<td style="width: 18%;" >
-				<img class="img-circle" src="/app/displaydata/imgs/chenyixun.png" ng-if="user.isRead == 0"/>
+		<tr ng-repeat="history in historyList">
+			<td style="width: 15%;" >
+				<img class="img-circle" src="/app/displaydata/imgs/chenyixun.png" ng-if="history.isMine == 0"/>
 			</td>	
-			<td style="width: 64%">
-				<div class="talk-item panel-body" style="display: inline-block;">
-				  <div class="">
-				    Basic panel example
-				    Basic panel example
-				    Basic panel example
-				  </div>
+			<td style="width: 70%">
+				<div class="talk-item panel-body {{history.isMine == 0 ? 'talk-item-you':'talk-item-my'}}">
+					<div >
+						{{history.content}}
+					</div>
 				</div>
 			</td>
-			<td style="width: 18%;"  >
-				<img class="img-circle" src="/app/displaydata/imgs/chenyixun.png" ng-if="user.isRead != 0"/>
+			<td style="width: 15%;" >
+				<img class="img-circle" src="/app/displaydata/imgs/chenyixun.png" ng-if="history.isMine == 1"/>
 			</td>
 		</tr>
 	</tbody>
@@ -22,12 +20,12 @@
 
 <div class="row navbar-fixed-bottom">
 	<div class="col-lg-6">
-	    <div class="input-group">
-	      <input type="text" class="form-control" placeholder="Search for...">
-	      <span class="input-group-btn">
-	        <button class="btn btn-default" type="button">Go!</button>
-	      </span>
-	    </div>
-  </div>
+		<div class="input-group">
+			<input type="text" ng-model="inputContent" class="form-control"  ng-keyup="keySend($event)" >
+			<span class="input-group-btn">
+				<button class="btn btn-primary" type="button" ng-click="sendMsg()" >发送</button>
+			</span>
+		</div>
+	</div>
 </div>
 

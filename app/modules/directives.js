@@ -18,7 +18,6 @@ app.directive('weLayout', function () {
 	        		var rmClassName = 'we' + '-' +  oldUrl.substring(oldUrl.indexOf('#') + 2).toLocaleLowerCase().replace("/","-");
 	        		$('body').removeClass(rmClassName);
         		}
-	        	console.log(event);
         	});
         }
     };
