@@ -22,35 +22,51 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location) 
 		},{
 			id : 1,
 			content : '反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污',
-			isMine: 0
+			isMine: 1
 		}
 	];
 
 	// 回车键发送消息
-	$scope.keySend = function($event){
-		if($event.keyCode === 13){
-			$scope.sendMsg();
-		}
+	$scope.keySend = function($event, inputContent){
+		
 	};
 	//发送消息
 	$scope.sendMsg = function(){
+		var inputContent = $("#msgInput").val();
 		//内容为空则不发送信息
-		if(!$scope.inputContent){
+		if(!inputContent){
 			return ;
 		}
 		//正在发送，置灰发送按钮
 		$scope.sending = true;
 		$scope.historyList.push({
 			id : 1,
-			content : $scope.inputContent,
+			content : inputContent,
 			isMine : 1
 		});
+		//手动渲染
+		$scope.$digest();
 		//滚动条滚动到底部
-		$(document).scrollTop($(document).height());
+		//$('table').scrollTop(100000000);
 		//清空输入框内容
-		$scope.inputContent = null;
-		//正在完毕，启动发送按钮
-		$scope.sending = false;
+		$("#msgInput").val(null);
+		//获取焦点
+		//$("#msgInput").focus(); 
+		
 	};
+
+	$(window).scroll(function(){
+		var s=$(window).scrollTop();
+		console.log(s);
+	});
+
+	$("#msgInput").bind('keyup', function(event){
+		if(event.keyCode === 13){
+			$scope.sendMsg();
+		}
+	});
+	$("#msgBtn").bind('click', function(){
+		$scope.sendMsg();
+	});
 
 });

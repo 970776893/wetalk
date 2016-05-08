@@ -1,4 +1,4 @@
-<table class="table ">
+<table class="table clearfix">
 	<tbody>
 		<tr ng-repeat="history in historyList" class="talk-item-animation">
 			<td style="width: 15%;" >
@@ -10,6 +10,7 @@
 						{{history.content}}
 					</div>
 				</div>
+				<span class="navbar-text glyphicon glyphicon-repeat"></span>
 			</td>
 			<td style="width: 15%;" >
 				<img class="img-circle" src="/app/displaydata/imgs/chenyixun.png" ng-if="history.isMine == 1"/>
@@ -17,15 +18,3 @@
 		</tr>
 	</tbody>
 </table>
-
-<div class="row navbar-fixed-bottom">
-	<div class="col-lg-6">
-		<div class="input-group">
-			<input type="text" ng-model="inputContent" class="form-control"  ng-keyup="keySend($event)" >
-			<span class="input-group-btn">
-				<button class="btn btn-primary" type="button" ng-click="sendMsg()" >发送</button>
-			</span>
-		</div>
-	</div>
-</div>
-

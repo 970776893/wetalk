@@ -2,7 +2,7 @@ body {
 	width: 100%;
 	height:100%;
     background-color: #EAE8E8;
-    margin-bottom: 20%;
+    margin-bottom: 70px;
 }
 /*底部按钮颜色*/
 footer>ul>li {
@@ -17,6 +17,25 @@ footer>ul>li {
 /*底部按钮颜色-激活*/
 .active {
     color : #1C528C;
+}
+/*搜索框 */
+.input-search{
+    margin-top: 2px;
+    -webkit-border-radius:20px;  
+    -moz-border-radius:20px;
+    -o-border-radius:20px;
+    border-radius: 20px;
+    text-align: center;
+}
+/*发送消息框 */
+.input-send-msg{
+    margin: 2px 0 0 0;
+    padding: 0;
+    -webkit-border-radius:5px;  
+    -moz-border-radius:5px;
+    -o-border-radius:5px;
+    border-radius: 5px;
+    text-align: left;
 }
 /*表格边框留白*/
 .table>tbody>tr>td{
@@ -74,7 +93,8 @@ footer>ul>li {
     -webkit-border-radius:5px;  
     -moz-border-radius:5px;
     border-radius: 10px;
-    padding: 14px 4% 14px 4%;
+    padding: 14px 8px 14px 8px;
+    max-width: 94%;
     width: auto;
     display: inline-block;
 }
@@ -90,8 +110,26 @@ footer>ul>li {
     background-color: white;
     float: left;
 }
+.talk-item-my + span{
+    color: red;
+    float: right;
+    margin-right: 2px;
+}
+.talk-item-you + span{
+    color: red;
+    float: left;
+    margin-left: 2px;
+}
 /* 聊天页面不显示导航按钮 */
-.we-talkwindow>div>footer {
+.we-talkwindow>div>footer>ul {
+    display: none;
+}
+/* 聊天页面不显示导航按钮 */
+.we-talklist>div>footer>div {
+    display: none;
+}
+/* 聊天页面不显示导航按钮 */
+.we-userlist>div>footer>div {
     display: none;
 }
 
@@ -99,27 +137,7 @@ footer>ul>li {
 .we-talklist h5{
     margin: 2px 0px 6px 0px
 }
-/*聊天列表页面： 表格文本大小控制--聊天记录-已读 */
-.we-talklist input{
-    margin-top: 2px;
-    -webkit-border-radius:20px;  
-    -moz-border-radius:20px;  
-    border-radius: 20px;
-    text-align: center;
-}
-/*聊天列表页面： 表格文本大小控制--聊天记录-已读 */
-.we-userlist input{
-    margin-top: 2px;
-    -webkit-border-radius:20px;  
-    -moz-border-radius:20px;
-    border-radius: 20px;
-    text-align: center;
-}
-/*表格文本大小控制--聊天记录-已读 */
-.we-talkwindow input{
-    text-align:left;
-    border-radius: 5px;
-}
+
 /*表格边框留白*/
 .we-talkwindow .table>tbody>tr>td{
     background-color: #EAE8E8;
@@ -146,14 +164,17 @@ footer>ul>li {
 }
 
 /* 发送消息动画 */
-/*.view-slide-animation{
+.view-slide-animation{
+    position: absolute;
+    top: 0;
+    left: 0;
   transition: all ease-in-out 1s;
   -webkit-transition: all ease-in-out 1s;
   -o-transition: all ease-in-out 1s;
 }
-*/
 
-/*.view-slide-animation.ng-enter{
+
+.view-slide-animation.ng-enter{
     transform: translateX(100%);
 }
 
@@ -161,9 +182,9 @@ footer>ul>li {
     transform: translateX(0);
 }
 .view-slide-animation.ng-leave{
-    transform: translateY(0);
+    transform: translateX(0);
 }
 .view-slide-animation.ng-leave-active{
-    transform: translateY(100%);
+    transform: translateX(-100%);
 }
-*/
+
