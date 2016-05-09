@@ -47,7 +47,7 @@ app.directive('weLayout', function () {
         		//为每个页面动态添加独自的url，便于定制化开发（eg：聊天页面不显示下方导航栏）
         		var className = 'we' + '-' + newUrl.substring(newUrl.indexOf('#') + 2).toLocaleLowerCase();
         		if(className.indexOf('/') > 0){
-        			className = className.substring(0, className.indexOf('/'))
+        			className = className.substring(0, className.indexOf('/'));
         		}
         		$('body').addClass(className);
         		if(newUrl !== oldUrl){
@@ -151,7 +151,18 @@ app.config( function ($routeProvider) {
 //登陆信息
 app.service("weService", function ($http) {
     return {
-        //获取用户列表
+        /*
+        获取用户列表
+            数据结构eg：
+            [
+                {
+                "id": 1,  ----用户编码
+                "name": "陈奕迅",   ----用户姓名
+                "imgUrl": "/app/displaydata/imgs/chenyixun.png",   ----用户头像
+                "initial":"C"   ----首字母，便于查询
+                }
+            ]
+        */
         getUserList : function () {
             return $http({
                 url : '/app/displaydata/userlist.json',
@@ -168,45 +179,18 @@ app.controller("talkListController", function ($rootScope, $scope, $location) {
 	//初始化数据
 	$scope.talkList = [
 		{
-			id : 1,
-			name : '陈奕迅1',
-			isRead: 0
-		},{
-			id : 1,
-			name : '陈奕迅1',
-			isRead: 1
-		},{
-			id : 1,
-			name : '陈奕迅1',
-			isRead: 1
-		},{
-			id : 1,
-			name : '陈奕迅1',
-			isRead: 0
-		},{
-			id : 1,
-			name : '陈奕迅1',
-			isRead: 1
-		},{
-			id : 1,
-			name : '陈奕迅1',
-			isRead: 0
+			userId : 2,
+			userName : "陈奕迅",
+			userImgUrl : "陈奕迅",
+			noReadNum: 2,
+			lastMsgContent : "最后一条内容",
+			lastMsgTime : 16711312832
 		}
 	];
-	$scope.queryKeyList = ['A','B','C','D','E','F'];
 
-	$scope.showUserOpt = function($event, item){
-		//隐藏其他按钮
-		angular.forEach($scope.userList, function(user){
-			if(user.id !== item.id){
-				user.isShow = false;
-			}
-		});
-		item.isShow = !item.isShow;
-	};
 
-	$scope.talk = function(user){
-		$location.path("/talkWindow/" + user.id);
+	$scope.talk = function(talkItem){
+		$location.path("/talkWindow/" + talkItem.userId);
 	};
 
 });
@@ -381,10 +365,10 @@ app.controller("userListController", function ($rootScope, $scope, $location, we
 	$scope.queryByKeyBLur = function(){
 		$scope.userList = $scope.userListOrg;
 		$scope.queryData = null;
-	}
+	};
 	//搜索-开始
 	$scope.queryByKeyFocus = function(){
 		$scope.userList = [];
-	}
+	};
 
 });

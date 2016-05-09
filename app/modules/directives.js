@@ -13,7 +13,7 @@ app.directive('weLayout', function () {
         		//为每个页面动态添加独自的url，便于定制化开发（eg：聊天页面不显示下方导航栏）
         		var className = 'we' + '-' + newUrl.substring(newUrl.indexOf('#') + 2).toLocaleLowerCase();
         		if(className.indexOf('/') > 0){
-        			className = className.substring(0, className.indexOf('/'))
+        			className = className.substring(0, className.indexOf('/'));
         		}
         		$('body').addClass(className);
         		if(newUrl !== oldUrl){

@@ -45,10 +45,10 @@ app.controller("userListController", function ($rootScope, $scope, $location, we
 	$scope.queryByKeyBLur = function(){
 		$scope.userList = $scope.userListOrg;
 		$scope.queryData = null;
-	}
+	};
 	//搜索-开始
 	$scope.queryByKeyFocus = function(){
 		$scope.userList = [];
-	}
+	};
 
 });
