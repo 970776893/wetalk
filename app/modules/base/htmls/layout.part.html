@@ -1,26 +1,25 @@
-<div>
-	<section>
-		<div ng-view class="view-slide-animation"></div>
-	</section>
 
-	<footer class="navbar-fixed-bottom text-center">
-		<ul class="nav nav-tabs">
-			<li role="presentation">
-				<a href="#/talkList" class="{{url == '/talkList' ? 'active' : 'inactive'}}">
-					<span class="glyphicon glyphicon-comment" aria-hidden="true"></span> 聊天
-				</a>
-			</li>
-			<li role="presentation">
-				<a href="#/userList" class="{{url == '/userList' ? 'active' : 'inactive'}}">
-					<span class="glyphicon glyphicon-user" aria-hidden="true"></span> 通讯录
-				</a>
-			</li>
-		</ul>
-		<div class="input-group">
-			<input type="text" id="msgInput" class="form-control input-send-msg" maxlength="120">
-			<span class="input-group-btn">
-				<button class="btn btn-primary" type="button" id="msgBtn" >发送</button>
-			</span>
-		</div>
-	</footer>
-</div>
+<section>
+	<div ng-view class="view-slide-animation"></div>
+</section>
+
+<footer class="navbar-fixed-bottom text-center">
+	<ul class="nav nav-tabs">
+		<li role="presentation">
+			<a href="#/talkList" class="{{url == '/talkList' ? 'active' : 'inactive'}}">
+				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span> 聊天
+			</a>
+		</li>
+		<li role="presentation">
+			<a href="#/userList" class="{{url == '/userList' ? 'active' : 'inactive'}}">
+				<span class="glyphicon glyphicon-user" aria-hidden="true"></span> 通讯录
+			</a>
+		</li>
+	</ul>
+	<div class="input-group">
+		<input type="text" id="msgInput" class="form-control input-send-msg" maxlength="120">
+		<span class="input-group-btn">
+			<button class="btn btn-primary" type="button" id="msgBtn" >发送</button>
+		</span>
+	</div>
+</footer>

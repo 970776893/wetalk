@@ -2,7 +2,10 @@ body {
     width: 100%;
     height:100%;
     background-color: #EAE8E8;
-    margin-bottom: 70px;
+}
+section {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
 }
 /*底部按钮颜色*/
 footer>ul>li {
@@ -122,15 +125,15 @@ footer>ul>li {
     margin-left: 2px;
 }
 /* 聊天页面不显示导航按钮 */
-.we-talkwindow>div>footer>ul {
+.we-talkwindow>footer>ul {
     display: none;
 }
 /* 聊天页面不显示导航按钮 */
-.we-talklist>div>footer>div {
+.we-talklist>footer>div {
     display: none;
 }
 /* 聊天页面不显示导航按钮 */
-.we-userlist>div>footer>div {
+.we-userlist>footer>div {
     display: none;
 }
 
@@ -163,30 +166,3 @@ footer>ul>li {
 .talk-item-animation.ng-enter-active{
     opacity: 1;
 }
-
-/* 发送消息动画 */
-/*.view-slide-animation{
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: all ease-in-out 1s;
-    -webkit-transition: all ease-in-out 1s;
-    -o-transition: all ease-in-out 1s;
-
-}
-
-
-.view-slide-animation.ng-enter{
-    transform: translateX(100%);
-}
-
-.view-slide-animation.ng-enter-active{
-    transform: translateX(0);
-}
-.view-slide-animation.ng-leave{
-    transform: translateX(0);
-}
-.view-slide-animation.ng-leave-active{
-    transform: translateX(-100%);
-}
-*/

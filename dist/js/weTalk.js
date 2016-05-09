@@ -274,7 +274,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location) 
 	};
 	//收取消息
 	$scope.getMsg = function(){
-		var msgContent = '测试受到消息';
+		var msgContent = '我收到你得消息了。-测试';
 		//内容为空则不发送信息
 		if(!msgContent){
 			return ;
@@ -318,8 +318,8 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location) 
 	};
 	//监听滚动事件
 	$(window).scroll(function(){
-		var top =$(window).scrollTop();
-		if(top == 0){
+		var top = $(window).scrollTop();
+		if(top === 0){
 			// 滚动到顶部
 			$scope.showLoading = true;
 		}
