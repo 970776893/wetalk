@@ -143,17 +143,14 @@ app.config( function ($routeProvider) {
 
 });
 //登陆信息
-app.service("commonService", function ($http) {
+app.service("weService", function ($http) {
     return {
-        //登陆
-        getPublicKey : function (userId) {
+        //获取用户列表
+        getUserList : function () {
             return $http({
-                url : '/easyShopping/rsa/getPublicKey.json',
+                url : '/app/displaydata/userlist.json',
                 method : 'get',
-                dataType : 'json',
-                params : {
-                    userId : userId
-                }
+                dataType : 'json'
             });
         }
     };
@@ -337,24 +334,30 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location) 
 
 /* 用户列表 */
 
-app.controller("userListController", function ($rootScope, $scope, $location) {
+app.controller("userListController", function ($rootScope, $scope, $location, weService) {
 	//初始化数据
-	$scope.userList = [
-		{
-			id : 1,
-			name : '陈奕迅1'
-		},{
-			id : 2,
-			name : '陈奕迅2'
-		},{
-			id : 3,
-			name : '陈奕迅3'
-		},{
-			id : 4,
-			name : '陈奕迅4'
-		}
-	];
-	$scope.queryKeyList = ['A','B','C','D','E','F'];
+	//$scope.userList = [];
+	weService.getUserList().then(function(res){
+		$scope.userList = res.data;
+		$scope.queryKeyList = [];
+		angular.forEach($scope.userList, function(user){
+			var queryKey = user.initial;
+			var flag = true;
+			angular.forEach($scope.queryKeyList, function(qk){
+				if(qk === queryKey){
+					flag = false;
+					return ;
+				}
+			});
+			if(flag){
+				$scope.queryKeyList.push(queryKey);
+			}
+		});
+	});
+	// $scope.queryKeyList = [];
+	// for(var i = 0 ; i < 26; i ++){
+	// 	$scope.queryKeyList.push(String.fromCharCode(65 + i));
+	// }
 
 	$scope.showUserOpt = function($event, item){
 		//隐藏其他按钮

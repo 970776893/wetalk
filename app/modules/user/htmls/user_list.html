@@ -1,9 +1,9 @@
 <input type="text" class="form-control input-search" mg-model="query" placeholder="搜索">
 <table class="table ">
 	<tbody>
-		<tr ng-repeat="user in userList" ng-touchend="showUserOpt($event, user)">
+		<tr ng-repeat="user in userList">
 			<td width="18%">
-				<img class="img-circle" src="/app/displaydata/imgs/chenyixun.png"/>
+				<img class="img-circle" ng-src="{{user.imgUrl}}"/>
 			</td>
 			<td width="82%">
 				<h5>{{user.name}}</h5>

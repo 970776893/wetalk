@@ -1,15 +1,12 @@
 //登陆信息
-app.service("commonService", function ($http) {
+app.service("weService", function ($http) {
     return {
-        //登陆
-        getPublicKey : function (userId) {
+        //获取用户列表
+        getUserList : function () {
             return $http({
-                url : '/easyShopping/rsa/getPublicKey.json',
+                url : '/app/displaydata/userlist.json',
                 method : 'get',
-                dataType : 'json',
-                params : {
-                    userId : userId
-                }
+                dataType : 'json'
             });
         }
     };
