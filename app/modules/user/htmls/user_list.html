@@ -1,7 +1,7 @@
 <input type="text" class="form-control input-search" mg-model="query" placeholder="搜索">
 <table class="table ">
 	<tbody>
-		<tr ng-repeat="user in userList">
+		<tr ng-repeat="user in userList"  ng-click="talk(user)">
 			<td width="18%">
 				<img class="img-circle" ng-src="{{user.imgUrl}}"/>
 			</td>

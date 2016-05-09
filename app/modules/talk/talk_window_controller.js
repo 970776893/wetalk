@@ -58,10 +58,6 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location) 
 		}
 	];
 
-	// 回车键发送消息
-	$scope.keySend = function($event, inputContent){
-		
-	};
 	//收取消息
 	$scope.getMsg = function(){
 		var msgContent = '我收到你得消息了。-测试';

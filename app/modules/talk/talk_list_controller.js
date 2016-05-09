@@ -42,7 +42,7 @@ app.controller("talkListController", function ($rootScope, $scope, $location) {
 	};
 
 	$scope.talk = function(user){
-		$location.path("/talkWindow");
+		$location.path("/talkWindow/" + user.id);
 	};
 
 });

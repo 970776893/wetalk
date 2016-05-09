@@ -9,7 +9,7 @@ app.config( function ($routeProvider) {
 		templateUrl: "/app/modules/talk/htmls/talk_list.html",
 		controller : "talkListController"
 	})
-	.when('/talkWindow', {
+	.when('/talkWindow/:id', {
 		templateUrl: "/app/modules/talk/htmls/talk_window.html",
 		controller : "talkWindowController"
 	})

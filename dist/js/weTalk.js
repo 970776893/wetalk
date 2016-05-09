@@ -45,11 +45,13 @@ app.directive('weLayout', function () {
         		// url 便于下方导航栏的显示当前所在的按钮颜色
         		$scope.url = $location.$$url;
         		//为每个页面动态添加独自的url，便于定制化开发（eg：聊天页面不显示下方导航栏）
-        		var className = 'we' + '-' + newUrl.substring(newUrl.indexOf('#') + 2).toLocaleLowerCase().replace("/","-");
+        		var className = 'we' + '-' + newUrl.substring(newUrl.indexOf('#') + 2).toLocaleLowerCase();
+        		className = className.substring(0, className.indexOf('/'))
         		$('body').addClass(className);
         		if(newUrl !== oldUrl){
 	        		//删除上一个页面class
-	        		var rmClassName = 'we' + '-' +  oldUrl.substring(oldUrl.indexOf('#') + 2).toLocaleLowerCase().replace("/","-");
+	        		var rmClassName = 'we' + '-' +  oldUrl.substring(oldUrl.indexOf('#') + 2).toLocaleLowerCase();
+	        		rmClassName = rmClassName.substring(0, rmClassName.indexOf('/') );
 	        		$('body').removeClass(rmClassName);
         		}
         	});
@@ -133,7 +135,7 @@ app.config( function ($routeProvider) {
 		templateUrl: "/app/modules/talk/htmls/talk_list.html",
 		controller : "talkListController"
 	})
-	.when('/talkWindow', {
+	.when('/talkWindow/:id', {
 		templateUrl: "/app/modules/talk/htmls/talk_window.html",
 		controller : "talkWindowController"
 	})
@@ -200,7 +202,7 @@ app.controller("talkListController", function ($rootScope, $scope, $location) {
 	};
 
 	$scope.talk = function(user){
-		$location.path("/talkWindow");
+		$location.path("/talkWindow/" + user.id);
 	};
 
 });
@@ -265,10 +267,6 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location) 
 		}
 	];
 
-	// 回车键发送消息
-	$scope.keySend = function($event, inputContent){
-		
-	};
 	//收取消息
 	$scope.getMsg = function(){
 		var msgContent = '我收到你得消息了。-测试';
@@ -335,10 +333,10 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location) 
 /* 用户列表 */
 
 app.controller("userListController", function ($rootScope, $scope, $location, weService) {
-	//初始化数据
-	//$scope.userList = [];
+	//初始化数据-获取用户列表
 	weService.getUserList().then(function(res){
 		$scope.userList = res.data;
+		//整理右侧的query
 		$scope.queryKeyList = [];
 		angular.forEach($scope.userList, function(user){
 			var queryKey = user.initial;
@@ -354,10 +352,10 @@ app.controller("userListController", function ($rootScope, $scope, $location, we
 			}
 		});
 	});
-	// $scope.queryKeyList = [];
-	// for(var i = 0 ; i < 26; i ++){
-	// 	$scope.queryKeyList.push(String.fromCharCode(65 + i));
-	// }
+
+	$scope.talk = function(user){
+		$location.path("/talkWindow/" + user.id);
+	};
 
 	$scope.showUserOpt = function($event, item){
 		//隐藏其他按钮

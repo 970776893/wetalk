@@ -11,11 +11,13 @@ app.directive('weLayout', function () {
         		// url 便于下方导航栏的显示当前所在的按钮颜色
         		$scope.url = $location.$$url;
         		//为每个页面动态添加独自的url，便于定制化开发（eg：聊天页面不显示下方导航栏）
-        		var className = 'we' + '-' + newUrl.substring(newUrl.indexOf('#') + 2).toLocaleLowerCase().replace("/","-");
+        		var className = 'we' + '-' + newUrl.substring(newUrl.indexOf('#') + 2).toLocaleLowerCase();
+        		className = className.substring(0, className.indexOf('/'))
         		$('body').addClass(className);
         		if(newUrl !== oldUrl){
 	        		//删除上一个页面class
-	        		var rmClassName = 'we' + '-' +  oldUrl.substring(oldUrl.indexOf('#') + 2).toLocaleLowerCase().replace("/","-");
+	        		var rmClassName = 'we' + '-' +  oldUrl.substring(oldUrl.indexOf('#') + 2).toLocaleLowerCase();
+	        		rmClassName = rmClassName.substring(0, rmClassName.indexOf('/') );
 	        		$('body').removeClass(rmClassName);
         		}
         	});
