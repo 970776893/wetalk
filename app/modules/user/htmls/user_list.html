@@ -1,4 +1,5 @@
-<input type="text" class="form-control input-search" mg-model="query" placeholder="搜索">
+<input type="text" class="form-control input-search" ng-model="queryData" placeholder="搜索" ng-change="queryByKey()" ng-focus="queryByKeyFocus()" ng-blur="queryByKeyBLur()"/>
+<p class="text-center" ng-if="!userList || userList.length == 0">  没有数据 </p>
 <table class="table ">
 	<tbody>
 		<tr ng-repeat="user in userList"  ng-click="talk(user)">
@@ -12,5 +13,5 @@
 	</tbody>
 </table>
 <div class= "user-letter">
-	<div ng-repeat="key in queryKeyList">{{key}}</div>
+	<div ng-repeat="key in queryKeyList" ng-mousemove="queryByinitial(key)">{{key}}</div>
 </div>
