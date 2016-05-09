@@ -368,7 +368,7 @@ app.controller("userListController", function ($rootScope, $scope, $location, we
 		//隐藏其他按钮
 		console.log(key);
 	};
-
+	//搜索
 	$scope.queryByKey = function(){
 		$scope.userList = [];
 		angular.forEach($scope.userListOrg, function(user){
@@ -377,10 +377,12 @@ app.controller("userListController", function ($rootScope, $scope, $location, we
 			}
 		});
 	};
+	//搜索-结束
 	$scope.queryByKeyBLur = function(){
 		$scope.userList = $scope.userListOrg;
 		$scope.queryData = null;
 	}
+	//搜索-开始
 	$scope.queryByKeyFocus = function(){
 		$scope.userList = [];
 	}
