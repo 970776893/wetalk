@@ -45,7 +45,7 @@ footer>ul>li {
 /*表格边框留白*/
 .table>tbody>tr>td{
     background-color: white;
-    padding : 2%;
+    padding : 2px;
     border-top: none;
     vertical-align: middle;
     border-bottom: 1px solid #ddd;
@@ -53,7 +53,7 @@ footer>ul>li {
 /*表格头像的大小控制--头像*/
 .table>tbody>tr>td>img{
     width: 95%;
-    padding: 6px;
+    padding: 4px;
 }
 /*表格文本大小控制--聊天记录-已读 */
 .history-readed>p{

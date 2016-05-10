@@ -1,16 +1,20 @@
 <input type="text" class="form-control input-search" mg-model="query" placeholder="搜索">
+<p class="text-center" ng-if="!talkList || talkList.length == 0">  没有数据 </p>
 <table class="table ">
 	<tbody>
-		<tr ng-repeat="user in talkList" ng-click="talk(user)">
+		<tr ng-repeat="recent in talkList" ng-click="talk(recent)">
 			<td width="18%">
-				<img class="img-circle" src="/app/displaydata/imgs/chenyixun.png"/>
+				<img class="img-circle" ng-src="{{recent.userImgUrl}}"/>
 			</td>
-			<td width="60%" class="{{user.isRead == 0 ? 'history-readed' : 'history-no-readed'}}">
-				<h5>{{user.name}}</h5>
-				<p>聊天记录<span class="badge">3</p>
+			<td width="60%" class="{{recent.noReadNum != 0 && recent.noReadNum != null ? 'history-no-readed' : 'history-readed'}}">
+				<h5>{{recent.userName}}</h5>
+				<p >{{recent.lastMsgContent}}
+					<span class="badge" ng-if="recent.noReadNum != 0 && recent.noReadNum != null">{{recent.noReadNum}}</span>
+				</p>
 			</td>
 			<td width="22%" class="history-time">
-				<p>05-01</p>
+				<p ng-if="recent.isToday">{{recent.lastMsgTime | date:'HH:mm'}}</p>
+				<p ng-if="!recent.isToday">{{recent.lastMsgTime | date:'MM-dd'}}</p>
 			</td>
 		</tr>
 	</tbody>
