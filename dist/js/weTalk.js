@@ -290,7 +290,7 @@ app.service("localStorageService", function ($http, $cookies) {
                     noReadNum: noReadNum,
                     lastMsgContent : lastMsgContent,
                     lastMsgTime : (new Date()).getTime()
-                }
+                };
                 storage.setItem(iKey, JSON.stringify(content));
             }else{
                 // TODO 请求服务器
