@@ -9,11 +9,17 @@ section {
     padding-bottom: 20px;
     margin-bottom: 20px;
 }
+
 /*底部按钮颜色*/
 footer>ul>li {
     width: 50%; /*两个按钮，每个50%*/
     background-color: #F7F7F7;
     border-top: 1px solid #A2A2A2;
+    line-height: 70px;
+}
+/*底部按钮颜色*/
+footer>ul>li>a {
+    line-height: 1.9 !important;
 }
 /*底部按钮颜色-非激活*/
 .inactive {
