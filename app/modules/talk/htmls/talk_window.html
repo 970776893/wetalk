@@ -2,7 +2,7 @@
 	<tbody>
 		<tr ng-repeat="history in historyList" class="talk-item-animation">
 			<td style="width: 15%;" >
-				<img class="img-circle" src="/app/displaydata/imgs/chenyixun.png" ng-if="history.isMine == 0"/>
+				<img class="img-thumbnail" src="/app/displaydata/imgs/chenyixun.png" ng-if="history.isMine == 0"/>
 			</td>	
 			<td style="width: 70%">
 				<div class="talk-item panel-body {{history.isMine == 0 ? 'talk-item-you':'talk-item-my'}}">
@@ -13,7 +13,7 @@
 				<span class="navbar-text glyphicon glyphicon-repeat"></span>
 			</td>
 			<td style="width: 15%;" >
-				<img class="img-circle" src="/app/displaydata/imgs/chenyixun.png" ng-if="history.isMine == 1"/>
+				<img class="img-thumbnail" src="/app/displaydata/imgs/chenyixun.png" ng-if="history.isMine == 1"/>
 			</td>
 		</tr>
 	</tbody>

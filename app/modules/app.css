@@ -67,9 +67,11 @@ footer>ul>li>a {
 }
 /*表格头像的大小控制--头像*/
 .table>tbody>tr>td>img{
-    width: 95%;
-    max-width:70px;
+    width: 85%;
+    max-width:60px;
     padding: 5px;
+    display: block;
+    margin: 5px auto 5px auto;
 }
 
 /*表格文本大小控制--聊天记录-已读 */
