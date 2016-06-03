@@ -9,7 +9,10 @@ section {
     padding-bottom: 20px;
     margin-bottom: 20px;
 }
-
+footer {
+    padding: 0px 2px 0px 2px;
+    background-color: rgb(249, 249, 249);;
+}
 /*底部按钮颜色*/
 footer>ul>li {
     width: 50%; /*两个按钮，每个50%*/
@@ -19,6 +22,10 @@ footer>ul>li {
 }
 /*底部按钮颜色*/
 footer>ul>li>a {
+    line-height: 1.9 !important;
+}
+/*底部按钮颜色*/
+footer>div>input {
     line-height: 1.9 !important;
 }
 /*底部按钮颜色-非激活*/
@@ -42,11 +49,12 @@ footer>ul>li>a {
 .input-send-msg{
     margin: 2px 0 0 0;
     padding: 0;
-    -webkit-border-radius:5px;  
-    -moz-border-radius:5px;
-    -o-border-radius:5px;
-    border-radius: 5px;
     text-align: left;
+    border-radius: 5px !important;
+    -webkit-border-radius:5px !important;  
+    -moz-border-radius:5px !important;
+    -o-border-radius:5px !important;
+    border-radius: 5px !important;
 }
 /*表格边框留白*/
 .table>tbody>tr>td{
@@ -107,6 +115,11 @@ footer>ul>li>a {
     fixed; 
     z-index: 9999; 
     height: 100%;
+}
+/*工具按钮的显示，例如发送语音，添加文件*/
+.tool-button{
+    margin:auto 7px auto 7px;
+    width: 21px;
 }
 /*用户列表中检索abcd..的字体大小*/
 .user-letter>div{
