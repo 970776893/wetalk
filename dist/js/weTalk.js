@@ -194,7 +194,7 @@ app.service("weService", function ($http) {
 });
 
 
-//登陆信息
+//本地存储信息
 app.service("localStorageService", function ($http, $cookies) {
     return {
             /*
@@ -233,13 +233,16 @@ app.service("localStorageService", function ($http, $cookies) {
                     }
                 });
             }else{
-                // TODO 请求服务器
                 console.log("不支持本地存储");
             }
             return recentUsers;
         },
         /*
             收到消息后，缓存处理
+            @params userId 发送人ID
+            @params userName 发送人姓名
+            @params userImgUrl 发送人头像
+            @params lastmsgContent 接收到的消息
         */
         handlerReceiveMsg : function (userId, userName, userImgUrl, lastMsgContent) {
             var loginUser = $cookies.getObject('loginUser');
@@ -252,14 +255,20 @@ app.service("localStorageService", function ($http, $cookies) {
                 }else{
                     recentUsers = JSON.parse(recentUsers);
                 }
-                var isFirst = true;
-                angular.forEach(recentUsers, function(rUser){
-                    if(Number(rUser.userId) === Number(userId)){
-                        isFirst = false;
+                var index = -1;
+                for(var i = 0; i < recentUsers.length; i++){
+                    var rUser = recentUsers[i];
+                    if(String(rUser.userId) === String(userId)){
+                        index = i;
+                        break;
                     }
-                });
-                //之前没有聊天-添加最近聊天记录
-                if(isFirst){
+                }
+                if(index > 0){
+                    //不是第一个,删除原来的
+                    recentUsers.splice(index, 1);
+                }
+                //添加最近的聊天
+                if(index !== 0){
                     recentUsers.unshift({
                         userId : userId,
                         userName : userName,
@@ -269,7 +278,6 @@ app.service("localStorageService", function ($http, $cookies) {
                 storage.setItem(key, JSON.stringify(recentUsers));
                 var iKey =  loginUser.id + "_recent_user_" + userId;
                 // 页面是否－当前页面
-                console.log(window.location.hash);
                 // 获取的消息是否是当前聊天页面
                 var talkWindowUrl = '#/talkWindow/';
                 var noReadNum = 1;
@@ -293,7 +301,6 @@ app.service("localStorageService", function ($http, $cookies) {
                 };
                 storage.setItem(iKey, JSON.stringify(content));
             }else{
-                // TODO 请求服务器
                 console.log("不支持本地存储");
             }
         }
