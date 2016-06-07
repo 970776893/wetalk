@@ -55,11 +55,27 @@ app.service("localStorageService", function ($http, $cookies) {
                     recentUsers = JSON.parse(recentUsers);
                 }
                 angular.forEach(recentUsers, function(rUser){
-                    var iKey =  loginUser.id + "_recent_user_" + rUser.userId;
-                    var talkItem = storage.getItem(iKey);
-                    if(talkItem != null){
+                    var iKey =  loginUser.id + "_history_" + rUser.userId;
+                    var historyList = storage.getItem(iKey);
+                    if(historyList != null){
                         //最近消息
-                        angular.extend(rUser, JSON.parse(talkItem));
+                        historyList = JSON.parse(historyList);
+                        var lastmsg = historyList[historyList.length-1];
+                        rUser.lastMsgContent = lastmsg.content;
+                        rUser.lastMsgTime = lastmsg.time;
+                        //未读数
+                        var noReadNum = 0;
+                        for(var i = 0; i < historyList.length; i++){
+                            var historyItem = historyList[i];
+                            if(historyItem.sourceType === 1){
+                                if(!historyItem.isRead){
+                                    noReadNum ++;
+                                }else{
+                                    break;
+                                }
+                            }
+                        }
+                        rUser.noReadNum =  noReadNum;
                     }
                 });
             }else{
@@ -68,16 +84,145 @@ app.service("localStorageService", function ($http, $cookies) {
             return recentUsers;
         },
         /*
+            获取最近聊天记录
+
+            [
+              {
+                "id": "1",
+                "content": "我收到你得消息了。-测试",
+                "time": 1465293529060,
+                "sourceType": 1,
+                "msgType": 1,
+                "isRead": false
+              },
+              {
+                "id": 1,
+                "content": "nihao ",
+                "time": 1465293529059,
+                "sourceType": 2,
+                "msgType": 1
+              }
+            ]
+
+            @params userId 用户ID
+        */
+        getRecentMsgList : function (userId) {
+            var loginUser = $cookies.getObject('loginUser');
+            var storage = window.localStorage;
+            var historyList;
+            if(storage){
+                // start-- 最近聊天记录 --
+                var hKey =  loginUser.id + "_history_" + userId;
+                historyList = storage.getItem(hKey);
+                if(historyList !== null){
+                    historyList = JSON.parse(historyList);
+                }else {
+                    historyList = [];
+                }
+                // 未读数
+                for(var i = 0; i < historyList.length; i++){
+                    var historyItem = historyList[i];
+                    if(historyItem.sourceType === 1){
+                        historyItem.isRead = true;
+                    }
+                }
+                storage.setItem(hKey, JSON.stringify(historyList));
+                // end -- 最近聊天记录 --
+            }else{
+                console.log("不支持本地存储");
+            }
+            return historyList;
+        },
+        /*
             收到消息后，缓存处理
+
             @params userId 发送人ID
             @params userName 发送人姓名
             @params userImgUrl 发送人头像
             @params lastmsgContent 接收到的消息
+            @params msgId 消息ID
+            @params talkingUserId 正在聊天的用户ID
         */
-        handlerReceiveMsg : function (userId, userName, userImgUrl, lastMsgContent) {
+        handlerReceiveMsg : function (userId, userName, userImgUrl, msgContent, msgId) {
             var loginUser = $cookies.getObject('loginUser');
             var storage = window.localStorage;
             if(storage){
+                // start -- 聊天记录 --
+                var hKey =  loginUser.id + "_history_" + userId;
+                var historyList = storage.getItem(hKey);
+                if(historyList === null){
+                    historyList = [];
+                }else{
+                    historyList = JSON.parse(historyList);
+                }
+                // 最多存储100条
+                if(historyList.length === 100){
+                    historyList.pop();
+                }
+                // 获取的消息是否是当前聊天页面
+                var talkWindowUrl = '#/talkWindow/';
+                var isTalkWindows = false;
+                if(window.location.hash.indexOf(talkWindowUrl) !== -1){
+                    var talkWindowId =　Number(window.location.hash.substring(talkWindowUrl.length));
+                    if(userId === talkWindowId){
+                        isTalkWindows = true;
+                    }
+                }
+
+                historyList.push({
+                    id : msgId,
+                    content  : msgContent,
+                    time : (new Date()).getTime(),
+                    sourceType : 1,  // 1-接收，2-发送
+                    msgType : 1,     // 1-文本，2-语音
+                    isRead : isTalkWindows
+                });
+                storage.setItem(hKey, JSON.stringify(historyList));
+                // end -- 聊天记录 --
+            }else{
+                console.log("不支持本地存储");
+            }
+        },
+        /*
+            收到消息后，缓存处理
+
+            @params userId 接收人ID
+            @params userName 接收人姓名
+            @params userImgUrl 接收人头像
+            @params lastmsgContent 发送的消息
+            @params msgId 消息ID
+        */
+        handlerSendMsg : function (userId, userName, userImgUrl, msgContent, msgId) {
+            var loginUser = $cookies.getObject('loginUser');
+            var storage = window.localStorage;
+            if(storage){
+                // start -- 聊天记录 --
+                var hKey =  loginUser.id + "_history_" + userId;
+                var historyList = storage.getItem(hKey);
+                if(historyList === null){
+                    historyList = [];
+                }else{
+                    historyList = JSON.parse(historyList);
+                }
+                // 当前正在聊天窗口
+                historyList.push({
+                    id : msgId,
+                    content  : msgContent,
+                    time : (new Date()).getTime(),
+                    sourceType : 2,  // 1-接收，2-发送
+                    msgType : 1     // 1-文本，2-语音
+                });
+                storage.setItem(hKey, JSON.stringify(historyList));
+                // end -- 聊天记录 --
+            }else{
+                console.log("不支持本地存储");
+            }
+        },
+        handlerRecentTalkList : function(userId, userName, userImgUrl){
+            var loginUser = $cookies.getObject('loginUser');
+            var storage = window.localStorage;
+            if(storage){
+                // start-- 最近聊天列表 --
                 var key = loginUser.id + '_recent_users';
                 var recentUsers = storage.getItem(key);
                 if(recentUsers === null){
@@ -106,33 +251,11 @@ app.service("localStorageService", function ($http, $cookies) {
                     });
                 }
                 storage.setItem(key, JSON.stringify(recentUsers));
-                var iKey =  loginUser.id + "_recent_user_" + userId;
-                // 页面是否－当前页面
-                // 获取的消息是否是当前聊天页面
-                var talkWindowUrl = '#/talkWindow/';
-                var noReadNum = 1;
-                if(window.location.hash.indexOf(talkWindowUrl) !== -1){
-                    var talkWindowId =　Number(window.location.hash.substring(talkWindowUrl.length));
-                    if(userId === talkWindowId){
-                        noReadNum = 0;
-                    }
-                }
-                //　非当前聊天页面
-                if(noReadNum === 1){
-                    var talkItem = storage.getItem(iKey);
-                    if(talkItem !== null){
-                        noReadNum = JSON.parse(talkItem).noReadNum + 1;
-                    }
-                }
-                var content = {
-                    noReadNum: noReadNum,
-                    lastMsgContent : lastMsgContent,
-                    lastMsgTime : (new Date()).getTime()
-                };
-                storage.setItem(iKey, JSON.stringify(content));
+                // end -- 最近聊天列表
             }else{
                 console.log("不支持本地存储");
             }
         }
+
     };
 });

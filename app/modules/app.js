@@ -18,6 +18,7 @@ app.run(function($cookies){
 app.run(function($cookies, localStorageService){
 	//localStorageService.handlerReceiveMsg(1, '陈奕迅', '/app/displaydata/imgs/chenyixun.png', '测试收到消息');
 	//localStorageService.handlerReceiveMsg(3, '范冰冰', '/app/displaydata/imgs/fanbingbing.png', '测试收到消息-范冰冰');
+	//localStorageService.handlerRecentTalkList(3, '范冰冰', '/app/displaydata/imgs/fanbingbing.png');
 	//console.log(window.localStorage);
 });
 

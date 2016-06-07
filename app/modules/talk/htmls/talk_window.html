@@ -2,18 +2,18 @@
 	<tbody>
 		<tr ng-repeat="history in historyList" class="talk-item-animation">
 			<td style="width: 15%;" >
-				<img class="img-thumbnail" src="/app/displaydata/imgs/chenyixun.png" ng-if="history.isMine == 0"/>
+				<img class="img-thumbnail" ng-src="{{userInfo.imgUrl}}" ng-if="history.sourceType == 1"/>
 			</td>	
 			<td style="width: 70%">
-				<div class="talk-item panel-body {{history.isMine == 0 ? 'talk-item-you':'talk-item-my'}}">
+				<div class="talk-item panel-body {{history.sourceType == 1 ? 'talk-item-you':'talk-item-my'}}">
 					<div >
 						{{history.content}}
 					</div>
 				</div>
-				<span class="navbar-text glyphicon glyphicon-repeat"></span>
+				<span ng-if="history.stauts" class="navbar-text glyphicon glyphicon-repeat"></span>
 			</td>
 			<td style="width: 15%;" >
-				<img class="img-thumbnail" src="/app/displaydata/imgs/chenyixun.png" ng-if="history.isMine == 1"/>
+				<img class="img-thumbnail" ng-src="{{loginUser.imgUrl}}" ng-if="history.sourceType == 2"/>
 			</td>
 		</tr>
 	</tbody>

@@ -1,62 +1,21 @@
 /* 用户列表 */
 
-app.controller("talkWindowController", function ($rootScope, $scope, $location) {
+app.controller("talkWindowController", function ($rootScope, $scope, $location, $routeParams, $cookies, weService, localStorageService) {
+	
+	var userId = String($routeParams.id);
+	// 根据用户ID获取用户信息
+	weService.getUserList().then(function(res){
+		angular.forEach(res.data, function(user){
+			if(String(user.id) === userId){
+				$scope.userInfo = user;
+			}
+		});
+	});
+
+	$scope.loginUser = $cookies.getObject('loginUser');
+
 	//初始化数据
-	$scope.historyList = [
-		{
-			id : 1,
-			content : '双双真矫情',
-			isMine: 0
-		},{
-			id : 1,
-			content : '对呀对呀',
-			isMine: 1
-		},{
-			id : 1,
-			content : '反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污',
-			isMine: 1
-		},{
-			id : 1,
-			content : '有多污啊',
-			isMine: 0
-		},{
-			id : 1,
-			content : '反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污',
-			isMine: 1
-		},{
-			id : 1,
-			content : '对呀对呀',
-			isMine: 1
-		},{
-			id : 1,
-			content : '反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污',
-			isMine: 1
-		},{
-			id : 1,
-			content : '有多污啊',
-			isMine: 0
-		},{
-			id : 1,
-			content : '反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污',
-			isMine: 1
-		},{
-			id : 1,
-			content : '对呀对呀',
-			isMine: 1
-		},{
-			id : 1,
-			content : '反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污',
-			isMine: 1
-		},{
-			id : 1,
-			content : '有多污啊',
-			isMine: 0
-		},{
-			id : 1,
-			content : '反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污反正是很污',
-			isMine: 1
-		}
-	];
+	$scope.historyList = localStorageService.getRecentMsgList(userId);
 
 	//收取消息
 	$scope.getMsg = function(){
@@ -70,8 +29,11 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location) 
 		$scope.historyList.push({
 			id : 1,
 			content : msgContent,
-			isMine : 0
+			sourceType : 1
 		});
+		var msgId = 1;
+		localStorageService.handlerReceiveMsg($scope.userInfo.id, $scope.userInfo.name, $scope.userInfo.imgUrl, msgContent);
+		localStorageService.handlerRecentTalkList($scope.userInfo.id, $scope.userInfo.name, $scope.userInfo.imgUrl);
 		//手动渲染
 		$scope.$apply();
 		//滚动条滚动到底部
@@ -89,7 +51,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location) 
 		$scope.historyList.push({
 			id : 1,
 			content : inputContent,
-			isMine : 1
+			sourceType : 2
 		});
 		//手动渲染
 		$scope.$apply();
@@ -99,6 +61,10 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location) 
 		$("#msgInput").val(null);
 		//获取焦点
 		//$("#msgInput").focus();
+		var msgId = 1;
+		localStorageService.handlerSendMsg($scope.userInfo.id, $scope.userInfo.name, $scope.userInfo.imgUrl, inputContent, msgId);
+		localStorageService.handlerRecentTalkList($scope.userInfo.id, $scope.userInfo.name, $scope.userInfo.imgUrl);
+
 		// TODO 测试收到回复 
 		$scope.getMsg();
 	};
@@ -108,6 +74,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location) 
 		if(top === 0){
 			// 滚动到顶部
 			$scope.showLoading = true;
+			console.log($scope.showLoading);
 		}
 	});
 
