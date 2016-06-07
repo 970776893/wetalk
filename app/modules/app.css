@@ -38,12 +38,13 @@ footer>div>input {
 }
 /*搜索框 */
 .input-search{
-    margin-top: 2px;
-    -webkit-border-radius:20px;  
-    -moz-border-radius:20px;
-    -o-border-radius:20px;
-    border-radius: 20px;
+    width: 90%;
+    margin : 3px auto 3px auto;
     text-align: center;
+    border-radius: 5px;
+    -webkit-border-radius:5px;  
+    -moz-border-radius:5px;
+    -o-border-radius:5px;
 }
 /*发送消息框 */
 .input-send-msg{
@@ -110,11 +111,13 @@ footer>div>input {
 /*用户列表中检索abcd..放在右边*/
 .user-letter{
     right: 0;
-    top: 15%; 
+    top: 20%; 
     position: 
     fixed; 
-    z-index: 9999; 
-    height: 100%;
+    z-index: 9000; 
+    width: 20px;
+    text-align: center;
+    background-color: #EFE9E9;
 }
 /*工具按钮的显示，例如发送语音，添加文件*/
 .tool-button{
