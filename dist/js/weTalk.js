@@ -468,7 +468,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 	$scope.loginUser = $cookies.getObject('loginUser');
 
 	//初始化数据
-	$rootScope.historyList = localStorageService.getRecentMsgList(userId);
+	$rootScope.talkingList = localStorageService.getRecentMsgList(userId);
 
 	//收取消息
 	$scope.getMsg = function(){
@@ -479,7 +479,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 		}
 		//正在发送，置灰发送按钮
 		$scope.sending = true;
-		$rootScope.historyList.push({
+		$rootScope.talkingList.push({
 			id : 1,
 			content : msgContent,
 			sourceType : 1
@@ -501,7 +501,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 		}
 		//正在发送，置灰发送按钮
 		$scope.sending = true;
-		$rootScope.historyList.push({
+		$rootScope.talkingList.push({
 			id : 1,
 			content : inputContent,
 			sourceType : 2
