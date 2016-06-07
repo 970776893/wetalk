@@ -468,7 +468,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 	$scope.loginUser = $cookies.getObject('loginUser');
 
 	//初始化数据
-	$scope.historyList = localStorageService.getRecentMsgList(userId);
+	$rootScope.historyList = localStorageService.getRecentMsgList(userId);
 
 	//收取消息
 	$scope.getMsg = function(){
@@ -479,7 +479,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 		}
 		//正在发送，置灰发送按钮
 		$scope.sending = true;
-		$scope.historyList.push({
+		$rootScope.historyList.push({
 			id : 1,
 			content : msgContent,
 			sourceType : 1
@@ -501,13 +501,11 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 		}
 		//正在发送，置灰发送按钮
 		$scope.sending = true;
-		$scope.historyList.push({
+		$rootScope.historyList.push({
 			id : 1,
 			content : inputContent,
 			sourceType : 2
 		});
-		//手动渲染
-		$scope.$apply();
 		//滚动条滚动到底部
 		$(document).scrollTop(100000000);
 		//清空输入框内容
@@ -519,7 +517,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 		localStorageService.handlerRecentTalkList($scope.userInfo.id, $scope.userInfo.name, $scope.userInfo.imgUrl);
 
 		// TODO 测试收到回复 
-		$scope.getMsg();
+		//$scope.getMsg();
 	};
 	//监听滚动事件
 	$(window).scroll(function(){
@@ -530,15 +528,14 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 			console.log($scope.showLoading);
 		}
 	});
-
-	$("#msgInput").bind('keyup', function(event){
+	$rootScope.sendMsgByKeyup = function(event){
 		if(event.keyCode === 13){
 			$scope.sendMsg();
 		}
-	});
-	$("#msgBtn").bind('click', function(){
+	}
+	$rootScope.sendMsgByButton = function(){
 		$scope.sendMsg();
-	});
+	}
 });
 
 /* 用户列表 */

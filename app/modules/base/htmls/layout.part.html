@@ -20,12 +20,12 @@
 		<span class="input-group-btn">
 			<img class="tool-button" src="/imgs/speaking.png"/>
 		</span>
-		<input type="text" id="msgInput" class="form-control input-send-msg" maxlength="120">
+		<input type="text" id="msgInput" ng-keyup="sendMsgByKeyup($event)" class="form-control input-send-msg" maxlength="120">
 		<span class="input-group-btn">
 			<img class="tool-button" src="/imgs/plus.png"/>
 		</span>
 		<span class="input-group-btn">
-			<button class="btn btn-primary" type="button" id="msgBtn" >发&nbsp;送</button>
+			<button class="btn btn-primary" type="button" id="msgBtn" ng-click="sendMsgByButton()">发&nbsp;送</button>
 		</span>
 	</div>
 </footer>

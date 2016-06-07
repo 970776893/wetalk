@@ -186,6 +186,12 @@ footer>div>input {
     border: none;
     vertical-align: middle;
 }
+/*表格边框留白*/
+.we-talkwindow .table{
+    margin-bottom: 100px;
+}
+
+
 
 /* 发送消息动画 */
 .talk-item-animation{
