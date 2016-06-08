@@ -4,6 +4,41 @@ var app = angular.module("app", dependencies);
 
 
 // 模拟当前登陆用户
+app.run(function($rootScope){
+	//根据用户ID判断是否是正在聊天的用户
+	$rootScope.isTalkingUser = function(userId){
+        var talkWindowUrl = '#/talkWindow/';
+        var isTalkWindows = false;
+        if(window.location.hash.indexOf(talkWindowUrl) !== -1){
+            var talkWindowId =　Number(window.location.hash.substring(talkWindowUrl.length));
+            if(userId === talkWindowId){
+                isTalkWindows = true;
+            }
+        }
+        return isTalkWindows;
+	};
+});
+
+// 监听接收消息
+app.run(function($rootScope, localStorageService){
+	//收取消息之后的处理
+	$rootScope.getMsg = function(userInfo, msgInfo){
+		// 处理缓存信息
+		localStorageService.handlerReceiveMsg(userInfo, msgInfo);
+		localStorageService.handlerRecentTalkList(userInfo);
+		//是否是当前聊天页面
+		var isTalkWindows = $rootScope.isTalkingUser(userInfo.id);
+		if(isTalkWindows){
+			// 正在聊天的人
+			$rootScope.talkingList.push(msgInfo);
+		}else{
+			// TODO 非当前页面
+		}
+	};
+	// 模拟收到消息
+});
+
+// 模拟当前登陆用户
 app.run(function($cookies){
 	//当前登陆用户
 	var loginUser = {
@@ -14,13 +49,6 @@ app.run(function($cookies){
 	$cookies.putObject('loginUser', loginUser);
 });
 
-// 模拟的消息接受
-app.run(function($cookies, localStorageService){
-	//localStorageService.handlerReceiveMsg(1, '陈奕迅', '/app/displaydata/imgs/chenyixun.png', '测试收到消息');
-	//localStorageService.handlerReceiveMsg(3, '范冰冰', '/app/displaydata/imgs/fanbingbing.png', '测试收到消息-范冰冰');
-	//localStorageService.handlerRecentTalkList(3, '范冰冰', '/app/displaydata/imgs/fanbingbing.png');
-	//console.log(window.localStorage);
-});
 
 
 
@@ -135,6 +163,25 @@ app.directive("ngTouchend", function () {
 		}
 	};
 });
+
+// 定位焦点
+app.directive('focusable', function() {
+	return {
+		restrict: 'A',
+		scope: {
+			focusable: '='
+		},
+		link: function(scope, elm, attrs) {
+			scope.$watch('focusable', function (value) {
+				if (value) {
+					setTimeout(function(){
+						elm[0].focus();
+					}, 0);
+				}
+			});
+		}
+	};
+});
 // 用户状态 '状态[0-正常;1-冻结]'
 app.filter('userStatusFilter', function($rootScope) {  
    return function(input) {
@@ -196,7 +243,7 @@ app.service("weService", function ($http) {
 
 
 //本地存储信息
-app.service("localStorageService", function ($http, $cookies) {
+app.service("localStorageService", function ($rootScope, $http, $cookies) {
     return {
             /*
                 最近聊天记录
@@ -307,19 +354,15 @@ app.service("localStorageService", function ($http, $cookies) {
         /*
             收到消息后，缓存处理
 
-            @params userId 发送人ID
-            @params userName 发送人姓名
-            @params userImgUrl 发送人头像
-            @params lastmsgContent 接收到的消息
-            @params msgId 消息ID
-            @params talkingUserId 正在聊天的用户ID
+            @params userInfo 发送人信息
+            @params msgInfo  收到的消息信息
         */
-        handlerReceiveMsg : function (userId, userName, userImgUrl, msgContent, msgId) {
+        handlerReceiveMsg : function (userInfo, msgInfo) {
             var loginUser = $cookies.getObject('loginUser');
             var storage = window.localStorage;
             if(storage){
                 // start -- 聊天记录 --
-                var hKey =  loginUser.id + "_history_" + userId;
+                var hKey =  loginUser.id + "_history_" + userInfo.id;
                 var historyList = storage.getItem(hKey);
                 if(historyList === null){
                     historyList = [];
@@ -331,22 +374,15 @@ app.service("localStorageService", function ($http, $cookies) {
                     historyList.pop();
                 }
                 // 获取的消息是否是当前聊天页面
-                var talkWindowUrl = '#/talkWindow/';
-                var isTalkWindows = false;
-                if(window.location.hash.indexOf(talkWindowUrl) !== -1){
-                    var talkWindowId =　Number(window.location.hash.substring(talkWindowUrl.length));
-                    if(userId === talkWindowId){
-                        isTalkWindows = true;
-                    }
-                }
+                var isTalkWindows = $rootScope.isTalkingUser(userInfo.id);
 
                 historyList.push({
-                    id : msgId,
-                    content  : msgContent,
+                    id : msgInfo.id,
+                    content  : msgInfo.content,
                     time : (new Date()).getTime(),
                     sourceType : 1,  // 1-接收，2-发送
-                    msgType : 1,     // 1-文本，2-语音
-                    isRead : isTalkWindows
+                    msgType : msgInfo.Type,     // 1-文本，2-语音
+                    isRead : isTalkWindows //当前才窗口默认已读
                 });
                 storage.setItem(hKey, JSON.stringify(historyList));
                 // end -- 聊天记录 --
@@ -357,18 +393,15 @@ app.service("localStorageService", function ($http, $cookies) {
         /*
             收到消息后，缓存处理
 
-            @params userId 接收人ID
-            @params userName 接收人姓名
-            @params userImgUrl 接收人头像
-            @params lastmsgContent 发送的消息
-            @params msgId 消息ID
+            @params userInfo 接收人
+            @params msgInfo 消息
         */
-        handlerSendMsg : function (userId, userName, userImgUrl, msgContent, msgId) {
+        handlerSendMsg : function (userInfo, msgInfo) {
             var loginUser = $cookies.getObject('loginUser');
             var storage = window.localStorage;
             if(storage){
                 // start -- 聊天记录 --
-                var hKey =  loginUser.id + "_history_" + userId;
+                var hKey =  loginUser.id + "_history_" + userInfo.id;
                 var historyList = storage.getItem(hKey);
                 if(historyList === null){
                     historyList = [];
@@ -376,20 +409,19 @@ app.service("localStorageService", function ($http, $cookies) {
                     historyList = JSON.parse(historyList);
                 }
                 // 当前正在聊天窗口
-                historyList.push({
-                    id : msgId,
-                    content  : msgContent,
-                    time : (new Date()).getTime(),
-                    sourceType : 2,  // 1-接收，2-发送
-                    msgType : 1     // 1-文本，2-语音
-                });
+                historyList.push(msgInfo);
                 storage.setItem(hKey, JSON.stringify(historyList));
                 // end -- 聊天记录 --
             }else{
                 console.log("不支持本地存储");
             }
         },
-        handlerRecentTalkList : function(userId, userName, userImgUrl){
+        /*
+            最近联系人
+
+            @params userInfo 用户信息
+        */
+        handlerRecentTalkList : function(userInfo){
             var loginUser = $cookies.getObject('loginUser');
             var storage = window.localStorage;
             if(storage){
@@ -404,7 +436,7 @@ app.service("localStorageService", function ($http, $cookies) {
                 var index = -1;
                 for(var i = 0; i < recentUsers.length; i++){
                     var rUser = recentUsers[i];
-                    if(String(rUser.userId) === String(userId)){
+                    if(String(rUser.userId) === String(userInfo.id)){
                         index = i;
                         break;
                     }
@@ -416,9 +448,9 @@ app.service("localStorageService", function ($http, $cookies) {
                 //添加最近的聊天
                 if(index !== 0){
                     recentUsers.unshift({
-                        userId : userId,
-                        userName : userName,
-                        userImgUrl : userImgUrl
+                        userId : userInfo.id,
+                        userName : userInfo.name,
+                        userImgUrl : userInfo.imgUrl
                     });
                 }
                 storage.setItem(key, JSON.stringify(recentUsers));
@@ -445,7 +477,6 @@ app.controller("talkListController", function ($rootScope, $scope, $location, lo
 	});
 
 	$scope.talk = function(talkItem){
-		console.log(talkItem);
 		$location.path("/talkWindow/" + talkItem.userId);
 	};
 
@@ -470,28 +501,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 	//初始化数据
 	$rootScope.talkingList = localStorageService.getRecentMsgList(userId);
 
-	//收取消息
-	$scope.getMsg = function(){
-		var msgContent = '我收到你得消息了。-测试';
-		//内容为空则不发送信息
-		if(!msgContent){
-			return ;
-		}
-		//正在发送，置灰发送按钮
-		$scope.sending = true;
-		$rootScope.talkingList.push({
-			id : 1,
-			content : msgContent,
-			sourceType : 1
-		});
-		var msgId = 1;
-		localStorageService.handlerReceiveMsg($scope.userInfo.id, $scope.userInfo.name, $scope.userInfo.imgUrl, msgContent);
-		localStorageService.handlerRecentTalkList($scope.userInfo.id, $scope.userInfo.name, $scope.userInfo.imgUrl);
-		//手动渲染
-		$scope.$apply();
-		//滚动条滚动到底部
-		$(document).scrollTop(100000000);
-	};
+	
 	//发送消息
 	$scope.sendMsg = function(){
 		var inputContent = $("#msgInput").val();
@@ -501,41 +511,39 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 		}
 		//正在发送，置灰发送按钮
 		$scope.sending = true;
-		$rootScope.talkingList.push({
+		var msgInfo = {
 			id : 1,
 			content : inputContent,
-			sourceType : 2
-		});
-		//滚动条滚动到底部
-		$(document).scrollTop(100000000);
+			time : (new Date()).getTime(),
+			sourceType : 2, // 1-接收，2-发送
+			msgType : 1  // 1-文本
+		};
+		$rootScope.talkingList.push(msgInfo);
+		
 		//清空输入框内容
 		$("#msgInput").val(null);
-		//获取焦点
-		//$("#msgInput").focus();
-		var msgId = 1;
-		localStorageService.handlerSendMsg($scope.userInfo.id, $scope.userInfo.name, $scope.userInfo.imgUrl, inputContent, msgId);
-		localStorageService.handlerRecentTalkList($scope.userInfo.id, $scope.userInfo.name, $scope.userInfo.imgUrl);
 
-		// TODO 测试收到回复 
-		//$scope.getMsg();
+		localStorageService.handlerSendMsg($scope.userInfo, msgInfo);
+		localStorageService.handlerRecentTalkList($scope.userInfo);
+		// TODO 发送消息到服务器 --------------------------------------------------------------------------
 	};
-	//监听滚动事件
-	$(window).scroll(function(){
-		var top = $(window).scrollTop();
-		if(top === 0){
-			// 滚动到顶部
-			$scope.showLoading = true;
-			console.log($scope.showLoading);
-		}
-	});
+
 	$rootScope.sendMsgByKeyup = function(event){
 		if(event.keyCode === 13){
 			$scope.sendMsg();
 		}
-	}
+	};
 	$rootScope.sendMsgByButton = function(){
+		//获取焦点
+		$rootScope.msgInputFocus = true;
 		$scope.sendMsg();
-	}
+	};
+	// 监听聊天记录，保持滚动到最下面
+	$rootScope.$watch('talkingList', function(newValue, oldValue, scope){
+		//滚动条滚动到底部
+		console.log($('table').scrollTop());
+		$(document).scrollTop(100000000);
+	}, true);
 });
 
 /* 用户列表 */

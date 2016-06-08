@@ -80,3 +80,22 @@ app.directive("ngTouchend", function () {
 		}
 	};
 });
+
+// 定位焦点
+app.directive('focusable', function() {
+	return {
+		restrict: 'A',
+		scope: {
+			focusable: '='
+		},
+		link: function(scope, elm, attrs) {
+			scope.$watch('focusable', function (value) {
+				if (value) {
+					setTimeout(function(){
+						elm[0].focus();
+					}, 0);
+				}
+			});
+		}
+	};
+});

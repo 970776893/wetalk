@@ -12,7 +12,6 @@ app.controller("talkListController", function ($rootScope, $scope, $location, lo
 	});
 
 	$scope.talk = function(talkItem){
-		console.log(talkItem);
 		$location.path("/talkWindow/" + talkItem.userId);
 	};
 

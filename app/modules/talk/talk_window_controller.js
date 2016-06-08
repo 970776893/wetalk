@@ -17,28 +17,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 	//初始化数据
 	$rootScope.talkingList = localStorageService.getRecentMsgList(userId);
 
-	//收取消息
-	$scope.getMsg = function(){
-		var msgContent = '我收到你得消息了。-测试';
-		//内容为空则不发送信息
-		if(!msgContent){
-			return ;
-		}
-		//正在发送，置灰发送按钮
-		$scope.sending = true;
-		$rootScope.talkingList.push({
-			id : 1,
-			content : msgContent,
-			sourceType : 1
-		});
-		var msgId = 1;
-		localStorageService.handlerReceiveMsg($scope.userInfo.id, $scope.userInfo.name, $scope.userInfo.imgUrl, msgContent);
-		localStorageService.handlerRecentTalkList($scope.userInfo.id, $scope.userInfo.name, $scope.userInfo.imgUrl);
-		//手动渲染
-		$scope.$apply();
-		//滚动条滚动到底部
-		$(document).scrollTop(100000000);
-	};
+	
 	//发送消息
 	$scope.sendMsg = function(){
 		var inputContent = $("#msgInput").val();
@@ -48,39 +27,37 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 		}
 		//正在发送，置灰发送按钮
 		$scope.sending = true;
-		$rootScope.talkingList.push({
+		var msgInfo = {
 			id : 1,
 			content : inputContent,
-			sourceType : 2
-		});
-		//滚动条滚动到底部
-		$(document).scrollTop(100000000);
+			time : (new Date()).getTime(),
+			sourceType : 2, // 1-接收，2-发送
+			msgType : 1  // 1-文本
+		};
+		$rootScope.talkingList.push(msgInfo);
+		
 		//清空输入框内容
 		$("#msgInput").val(null);
-		//获取焦点
-		//$("#msgInput").focus();
-		var msgId = 1;
-		localStorageService.handlerSendMsg($scope.userInfo.id, $scope.userInfo.name, $scope.userInfo.imgUrl, inputContent, msgId);
-		localStorageService.handlerRecentTalkList($scope.userInfo.id, $scope.userInfo.name, $scope.userInfo.imgUrl);
 
-		// TODO 测试收到回复 
-		//$scope.getMsg();
+		localStorageService.handlerSendMsg($scope.userInfo, msgInfo);
+		localStorageService.handlerRecentTalkList($scope.userInfo);
+		// TODO 发送消息到服务器 --------------------------------------------------------------------------
 	};
-	//监听滚动事件
-	$(window).scroll(function(){
-		var top = $(window).scrollTop();
-		if(top === 0){
-			// 滚动到顶部
-			$scope.showLoading = true;
-			console.log($scope.showLoading);
-		}
-	});
+
 	$rootScope.sendMsgByKeyup = function(event){
 		if(event.keyCode === 13){
 			$scope.sendMsg();
 		}
-	}
+	};
 	$rootScope.sendMsgByButton = function(){
+		//获取焦点
+		$rootScope.msgInputFocus = true;
 		$scope.sendMsg();
-	}
+	};
+	// 监听聊天记录，保持滚动到最下面
+	$rootScope.$watch('talkingList', function(newValue, oldValue, scope){
+		//滚动条滚动到底部
+		console.log($('table').scrollTop());
+		$(document).scrollTop(100000000);
+	}, true);
 });
