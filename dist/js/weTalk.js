@@ -466,6 +466,7 @@ app.service("localStorageService", function ($rootScope, $http, $cookies) {
 /* 用户列表 */
 
 app.controller("talkListController", function ($rootScope, $scope, $location, localStorageService) {
+	$rootScope.title = '聊天';
 	//初始化数据
 	$scope.talkList = localStorageService.getRecentTalkList();
 	var today = new Date();
@@ -487,11 +488,12 @@ app.controller("talkListController", function ($rootScope, $scope, $location, lo
 app.controller("talkWindowController", function ($rootScope, $scope, $location, $routeParams, $cookies, weService, localStorageService) {
 	
 	var userId = String($routeParams.id);
-	// 根据用户ID获取用户信息
+	// 根据用户ID获取用户信息 --------------------------------------------------------------------------
 	weService.getUserList().then(function(res){
 		angular.forEach(res.data, function(user){
 			if(String(user.id) === userId){
 				$scope.userInfo = user;
+				$rootScope.title = $scope.userInfo.name;
 			}
 		});
 	});
@@ -501,7 +503,6 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 	//初始化数据
 	$rootScope.talkingList = localStorageService.getRecentMsgList(userId);
 
-	
 	//发送消息
 	$scope.sendMsg = function(){
 		var inputContent = $("#msgInput").val();
@@ -549,6 +550,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 /* 用户列表 */
 
 app.controller("userListController", function ($rootScope, $scope, $location, weService) {
+	$rootScope.title = '通讯录';
 	//初始化数据-获取用户列表
 	weService.getUserList().then(function(res){
 		//原始数据

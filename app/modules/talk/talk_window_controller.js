@@ -3,11 +3,12 @@
 app.controller("talkWindowController", function ($rootScope, $scope, $location, $routeParams, $cookies, weService, localStorageService) {
 	
 	var userId = String($routeParams.id);
-	// 根据用户ID获取用户信息
+	// 根据用户ID获取用户信息 --------------------------------------------------------------------------
 	weService.getUserList().then(function(res){
 		angular.forEach(res.data, function(user){
 			if(String(user.id) === userId){
 				$scope.userInfo = user;
+				$rootScope.title = $scope.userInfo.name;
 			}
 		});
 	});
@@ -17,7 +18,6 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 	//初始化数据
 	$rootScope.talkingList = localStorageService.getRecentMsgList(userId);
 
-	
 	//发送消息
 	$scope.sendMsg = function(){
 		var inputContent = $("#msgInput").val();

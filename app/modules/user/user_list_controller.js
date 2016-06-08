@@ -1,6 +1,7 @@
 /* 用户列表 */
 
 app.controller("userListController", function ($rootScope, $scope, $location, weService) {
+	$rootScope.title = '通讯录';
 	//初始化数据-获取用户列表
 	weService.getUserList().then(function(res){
 		//原始数据

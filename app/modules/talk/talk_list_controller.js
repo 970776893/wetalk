@@ -1,6 +1,7 @@
 /* 用户列表 */
 
 app.controller("talkListController", function ($rootScope, $scope, $location, localStorageService) {
+	$rootScope.title = '聊天';
 	//初始化数据
 	$scope.talkList = localStorageService.getRecentTalkList();
 	var today = new Date();
