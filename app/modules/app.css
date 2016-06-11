@@ -39,12 +39,14 @@ footer {
     background-color: rgb(249, 249, 249);
     height: 51px;
 }
+footer>ul, footer>ul>li, footer>ul>li>a {
+    height: 100%;
+}
 /*底部按钮颜色*/
 footer>ul>li {
     width: 50%; /*两个按钮，每个50%*/
     background-color: #F7F7F7;
     border-top: 1px solid #A2A2A2;
-    line-height: 70px;
 }
 /*聊天界面输入框外层div*/
 footer>div {
