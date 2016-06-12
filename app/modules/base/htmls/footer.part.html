@@ -1,0 +1,27 @@
+
+<footer class="navbar-fixed-bottom text-center">
+	<ul class="nav nav-tabs">
+		<li role="presentation">
+			<a href="#/talkList" class="{{url == '#/talkList' ? 'active' : 'inactive'}}">
+				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span> 消息
+			</a>
+		</li>
+		<li role="presentation">
+			<a href="#/userList" class="{{url == '#/userList' ? 'active' : 'inactive'}}">
+				<span class="glyphicon glyphicon-user" aria-hidden="true"></span> 通讯录
+			</a>
+		</li>
+	</ul>
+	<div class="input-group">
+		<span class="input-group-btn">
+			<img class="tool-button" src="/imgs/speaking.png"/>
+		</span>
+		<input type="text" id="msgInput" focusable="msgInputFocus" ng-focus="msgInputFocus=false" ng-keyup="sendMsgByKeyup($event)" class="form-control input-send-msg" maxlength="120">
+		<span class="input-group-btn">
+			<img class="tool-button" src="/imgs/plus.png"/>
+		</span>
+		<span class="input-group-btn">
+			<button class="btn btn-primary" type="button" id="msgBtn" ng-click="sendMsgByButton()">发&nbsp;送</button>
+		</span>
+	</div>
+</footer>
