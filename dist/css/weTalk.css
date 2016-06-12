@@ -17,6 +17,7 @@ header {
 }
 /*导航栏-左侧返回按钮*/
 header>ul:nth-child(1) {
+    display: none;
 }
 /*导航栏中的标题*/
 header>ul:nth-child(2) {
@@ -39,12 +40,14 @@ footer {
     background-color: rgb(249, 249, 249);
     height: 51px;
 }
+footer>ul, footer>ul>li, footer>ul>li>a {
+    height: 100%;
+}
 /*底部按钮颜色*/
 footer>ul>li {
     width: 50%; /*两个按钮，每个50%*/
     background-color: #F7F7F7;
     border-top: 1px solid #A2A2A2;
-    line-height: 70px;
 }
 /*聊天界面输入框外层div*/
 footer>div {
@@ -188,10 +191,7 @@ footer>div>input {
     float: left;
     margin-left: 2px;
 }
-/* 聊天页面不显示导航按钮 */
-.we-talkwindow>footer>ul {
-    display: none;
-}
+
 /* 聊天页面不显示导航按钮 */
 .we-talklist>footer>div {
     display: none;
@@ -200,12 +200,15 @@ footer>div>input {
 .we-userlist>footer>div {
     display: none;
 }
-
 /*聊天列表页面： 表格文本大小控制--聊天记录-已读 */
 .we-talklist h5{
     margin: 2px 0px 6px 0px
 }
 
+/* 聊天页面不显示导航按钮 */
+.we-talkwindow>footer>ul {
+    display: none;
+}
 /*表格边框留白*/
 .we-talkwindow .table>tbody>tr>td{
     background-color: #EAE8E8;
@@ -217,20 +220,22 @@ footer>div>input {
 .we-talkwindow .table{
     margin-bottom: 100px;
 }
-
-
+/*聊天窗口 显示返回消息列表按钮*/
+.we-talkwindow header>ul:nth-child(1){
+    display: block;
+}
 
 /* 发送消息动画 */
 .talk-item-animation{
+    transition: all linear 1s;
     -webkit-transition: all linear 1s;
     -o-transition: all linear 1s;
     -ms-transition: all linear 1s;
     -moz-transition: all linear 1s;
-    transition: all linear 1s;
 }
 /* 发送消息动画 -开始状态*/
 .talk-item-animation.ng-enter{
-    opacity: 0.2;
+    opacity: 0.3;
 }
 /*发送消息动画 -动画过程*/
 .talk-item-animation.ng-enter-active{
