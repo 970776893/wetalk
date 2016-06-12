@@ -14,7 +14,10 @@ app.config( function ($routeProvider) {
 		controller : "talkWindowController"
 	})
 	.otherwise({
-		templateUrl: "/app/modules/base/htmls/unknow.part.html"
+		templateUrl: "/app/modules/base/htmls/unknow.part.html",
+		controller : function($scope){
+			$('body').addClass('error-page');
+		}
 	});
 
 });

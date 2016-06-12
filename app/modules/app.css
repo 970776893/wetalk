@@ -38,9 +38,11 @@ header>ul:nth-child(3) {
 footer {
     padding: 0px;
     background-color: rgb(249, 249, 249);
+}
+footer>ul{
     height: 51px;
 }
-footer>ul, footer>ul>li, footer>ul>li>a {
+footer>ul>li, footer>ul>li>a {
     height: 100%;
 }
 /*底部按钮颜色*/
@@ -192,23 +194,25 @@ footer>div>input {
     margin-left: 2px;
 }
 
-/* 聊天页面不显示导航按钮 */
-.we-talklist>footer>div {
+/* 错误页面css */
+.error-page>footer {
+    display: none !important;
+}
+
+/* footer的显示 */
+.we-talklist>footer>ul, .we-userlist>footer>ul, .we-talkwindow>footer>div{
     display: none;
 }
-/* 聊天页面不显示导航按钮 */
-.we-userlist>footer>div {
-    display: none;
+/*聊天窗口 显示返回消息列表按钮*/
+.we-talkwindow header>ul:nth-child(1){
+    display: block;
 }
+
 /*聊天列表页面： 表格文本大小控制--聊天记录-已读 */
 .we-talklist h5{
     margin: 2px 0px 6px 0px
 }
 
-/* 聊天页面不显示导航按钮 */
-.we-talkwindow>footer>ul {
-    display: none;
-}
 /*表格边框留白*/
 .we-talkwindow .table>tbody>tr>td{
     background-color: #EAE8E8;
@@ -219,10 +223,6 @@ footer>div>input {
 /*表格边框留白*/
 .we-talkwindow .table{
     margin-bottom: 100px;
-}
-/*聊天窗口 显示返回消息列表按钮*/
-.we-talkwindow header>ul:nth-child(1){
-    display: block;
 }
 
 /* 发送消息动画 */
