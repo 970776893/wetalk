@@ -200,7 +200,7 @@ footer>div>input {
 }
 
 /* footer的显示 */
-.we-talklist>footer>ul, .we-userlist>footer>ul, .we-talkwindow>footer>div{
+.we-talklist>footer>div, .we-userlist>footer>div, .we-talkwindow>footer>ul{
     display: none;
 }
 /*聊天窗口 显示返回消息列表按钮*/
