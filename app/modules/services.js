@@ -66,7 +66,7 @@ app.service("localStorageService", function ($rootScope, $http, $cookies) {
                         //未读数
                         var noReadNum = 0;
                         for(var i = 0; i < historyList.length; i++){
-                            var historyItem = historyList[i];
+                            var historyItem = historyList[historyList.length - i - 1];
                             if(historyItem.sourceType === 1){
                                 if(!historyItem.isRead){
                                     noReadNum ++;
@@ -157,15 +157,15 @@ app.service("localStorageService", function ($rootScope, $http, $cookies) {
                 }
                 // 获取的消息是否是当前聊天页面
                 var isTalkWindows = $rootScope.isTalkingUser(userInfo.id);
-
-                historyList.push({
+                var storeMsg = {
                     id : msgInfo.id,
                     content  : msgInfo.content,
                     time : (new Date()).getTime(),
                     sourceType : 1,  // 1-接收，2-发送
-                    msgType : msgInfo.Type,     // 1-文本，2-语音
+                    msgType : msgInfo.msgType,     // 1-文本，2-语音
                     isRead : isTalkWindows //当前才窗口默认已读
-                });
+                };
+                historyList.push(storeMsg);
                 storage.setItem(hKey, JSON.stringify(historyList));
                 // end -- 聊天记录 --
             }else{

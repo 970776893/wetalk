@@ -69,7 +69,7 @@ app.run(function($rootScope, localStorageService){
 	// 模拟收到消息
 });
 
-// 聊天界面窗口-乡下滚动
+// 聊天界面窗口-下滚动
 app.run(function($rootScope, $timeout){
 	// 监听了消息记录，保持滚动到最下方
 	$rootScope.$watch('talkingList', function(newValue, oldValue, scope){
@@ -79,6 +79,8 @@ app.run(function($rootScope, $timeout){
 	}, true);
 });
 
+
+/* --------------------------------------以下为测试数据-------------------------------------------------- */
 // 模拟当前登陆用户
 app.run(function($cookies){
 	//当前登陆用户
@@ -89,6 +91,33 @@ app.run(function($cookies){
 	};
 	$cookies.putObject('loginUser', loginUser);
 });
+
+// 模拟收到消息
+app.run(function($rootScope, $cookies, weService){
+	$rootScope.testGetMessageRondom = function(){
+		// 发送人id
+		var fromUserId = Math.floor(Math.random() * 9 + 1);
+		weService.getUserList().then(function(res){
+			var fromUser;
+			var userList = res.data;
+			angular.forEach(userList, function(user){
+				if(String(user.id) === String(fromUserId)){
+					fromUser = user;
+					return ;
+				}
+			});
+			var msgInfo = {
+                "id": 1,
+                "content": "测试-收到消息 ",
+                "time": (new Date()).getTime(),
+                "sourceType": 1,
+                "msgType": 1
+             }
+             $rootScope.getMsg(fromUser, msgInfo);
+         });
+	}
+});
+
 
 
 
