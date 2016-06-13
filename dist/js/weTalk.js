@@ -3,12 +3,7 @@ var dependencies = ['ngAnimate', 'ngRoute', 'ngCookies', 'ngTouch'];
 var app = angular.module("app", dependencies);
 
 // 添加个性化class
-app.run(function($rootScope,$route, $timeout){
-	// 只有header和footer不参与滚动
-	$timeout(function(){
-		var sectionHeight = (window.innerHeight - 102) + 'px';
-		$('section').height(sectionHeight);
-	});
+app.run(function($rootScope,$route){
 
 	$rootScope.$on('$locationChangeSuccess', function(event, newUrl, oldUrl){
 		// url 便于下方导航栏的显示当前所在的按钮颜色
@@ -22,10 +17,11 @@ app.run(function($rootScope,$route, $timeout){
 		className = className.replace("/", "-");
 		$rootScope.bodyClass = className;
 	});
+
 });
 
 // 创建公共函数
-app.run(function($rootScope){
+app.run(function($rootScope, $timeout){
 	//根据用户ID判断是否是正在聊天的用户
 	$rootScope.isTalkingUser = function(userId){
         var talkWindowUrl = '#/talkWindow/';
@@ -38,6 +34,17 @@ app.run(function($rootScope){
         }
         return isTalkWindows;
 	};
+
+	// 只有header和footer不参与滚动
+	$rootScope.changeBodyHeight = function(){
+		$timeout(function(){
+			var sectionHeight = (window.innerHeight - 102) + 'px';
+			$rootScope.sectionStyle = {
+				'max-height' : sectionHeight
+			};
+		});
+	};
+	$rootScope.changeBodyHeight();
 });
 
 // 监听接收消息
@@ -567,7 +574,13 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 		$rootScope.msgInputFocus = true;
 		$scope.sendMsg();
 	};
-	
+
+	$rootScope.focusInput = function(){
+		//获取焦点
+		$rootScope.msgInputFocus = false;
+		$scope.changeBodyHeight();
+	};
+
 });
 
 /* 用户列表 */
