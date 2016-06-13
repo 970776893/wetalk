@@ -64,6 +64,7 @@ app.run(function($rootScope, localStorageService){
 			$rootScope.talkingList.push(msgInfo);
 		}else{
 			// TODO 非当前页面
+			$rootScope.refreshTalkList = true;
 		}
 	};
 	// 模拟收到消息
