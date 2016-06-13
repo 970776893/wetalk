@@ -6,7 +6,9 @@ var app = angular.module("app", dependencies);
 app.run(function($rootScope,$route, $timeout){
 	// 只有header和footer不参与滚动
 	$timeout(function(){
-		var sectionHeight = (window.screen.availHeight - 102) + 'px';
+		var sectionHeight = (window.innerHeight - 102) + 'px';
+		console.log(window.innerHeight);
+		console.log(window.innerHeight - 102);
 		$('section').height(sectionHeight);
 	});
 
