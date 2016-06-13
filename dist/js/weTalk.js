@@ -115,6 +115,35 @@ app.run(function($rootScope, $cookies, weService){
              }
              $rootScope.getMsg(fromUser, msgInfo);
          });
+	};
+
+	$rootScope.testGetMessageWindow = function(){
+		// 发送人id
+		var talkWindowUrl = '#/talkWindow/';
+        var isTalkWindows = false;
+        if(window.location.hash.indexOf(talkWindowUrl) === -1){
+        	console.log('不是聊天窗口');
+           return ;
+        }
+        var fromUserId =　Number(window.location.hash.substring(talkWindowUrl.length));
+		weService.getUserList().then(function(res){
+			var fromUser;
+			var userList = res.data;
+			angular.forEach(userList, function(user){
+				if(String(user.id) === String(fromUserId)){
+					fromUser = user;
+					return ;
+				}
+			});
+			var msgInfo = {
+                "id": 1,
+                "content": "测试-收到消息 ",
+                "time": (new Date()).getTime(),
+                "sourceType": 1,
+                "msgType": 1
+             }
+             $rootScope.getMsg(fromUser, msgInfo);
+         });
 	}
 });
 

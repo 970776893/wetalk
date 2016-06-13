@@ -152,7 +152,7 @@ footer>div>input {
     top: 20%; 
     position: 
     fixed; 
-    z-index: 9000; 
+    z-index: 900; 
     width: 20px;
     text-align: center;
     background-color: #EFE9E9;
