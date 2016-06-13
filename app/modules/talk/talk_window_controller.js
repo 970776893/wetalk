@@ -58,7 +58,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 	$rootScope.focusInput = function(){
 		//获取焦点
 		$rootScope.msgInputFocus = false;
-		$scope.changeBodyHeight();
+		//$scope.changeBodyHeight();
 	};
 
 });
