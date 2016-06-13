@@ -2,13 +2,15 @@
 
 body {
     width: 100%;
+    height: 100% ;
     background-color: #EAE8E8;
     margin: 0;
     padding: 0;
 }
 section {
-    padding: 2px 1px 2px 1px;
-    margin: 51px 0px 51px 0px;
+    overflow : auto;
+    padding: 2px;
+    margin: 51px 0px;
 }
 header {
     padding: 0px !important;
@@ -142,7 +144,7 @@ footer>div>input {
 }
 /*用户列表中检索abcd..放在右边*/
 .user-letter{
-    right: 0;
+    right: 5%;
     top: 20%; 
     position: 
     fixed; 

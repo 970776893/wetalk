@@ -3,16 +3,23 @@ var dependencies = ['ngAnimate', 'ngRoute', 'ngCookies', 'ngTouch'];
 var app = angular.module("app", dependencies);
 
 // 添加个性化class
-app.run(function($rootScope){
+app.run(function($rootScope,$route, $timeout){
+	// 只有header和footer不参与滚动
+	$timeout(function(){
+		var sectionHeight = (window.screen.availHeight - 102) + 'px';
+		$('section').height("642px");
+	});
+
 	$rootScope.$on('$locationChangeSuccess', function(event, newUrl, oldUrl){
-		console.log($rootScope.nested);
 		// url 便于下方导航栏的显示当前所在的按钮颜色
 		$rootScope.url = window.location.hash;
 		//为每个页面动态添加独自的url，便于定制化开发（eg：聊天页面不显示下方导航栏）
-		var className = 'we' + '-' + newUrl.substring(newUrl.indexOf('#') + 2).toLocaleLowerCase();
-		if(className.indexOf('/') > 0){
-			className = className.substring(0, className.indexOf('/'));
+		var className = 'we' + $route.current.$$route.originalPath.toLocaleLowerCase();
+		//去掉参数
+		if(className.indexOf(':') > 0){
+			className = className.substring(0, className.indexOf(':') - 1);
 		}
+		className = className.replace("/", "-");
 		$rootScope.bodyClass = className;
 	});
 });
