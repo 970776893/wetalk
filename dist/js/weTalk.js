@@ -221,8 +221,8 @@ app.config( function ($routeProvider) {
 	})
 	.otherwise({
 		templateUrl: "/app/modules/base/htmls/unknow.part.html",
-		controller : function($scope){
-			$('body').addClass('error-page');
+		controller : function($rootScope, $scope){
+			$rootScope.bodyClass = 'error-page';
 		}
 	});
 
