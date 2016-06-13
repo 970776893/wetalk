@@ -58,6 +58,9 @@ app.run(function($rootScope, localStorageService){
 		var isTalkWindows = $rootScope.isTalkingUser(userInfo.id);
 		if(isTalkWindows){
 			// 正在聊天的人
+			if($rootScope.talkingList == null){
+				$rootScope.talkingList = [];
+			}
 			$rootScope.talkingList.push(msgInfo);
 		}else{
 			// TODO 非当前页面
