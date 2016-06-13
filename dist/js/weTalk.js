@@ -7,7 +7,7 @@ app.run(function($rootScope,$route, $timeout){
 	// 只有header和footer不参与滚动
 	$timeout(function(){
 		var sectionHeight = (window.screen.availHeight - 102) + 'px';
-		$('section').height("642px");
+		$('section').height(sectionHeight);
 	});
 
 	$rootScope.$on('$locationChangeSuccess', function(event, newUrl, oldUrl){
