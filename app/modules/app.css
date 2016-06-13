@@ -221,13 +221,8 @@ footer>div>input {
 /*表格边框留白*/
 .we-talkwindow .table>tbody>tr>td{
     background-color: #EAE8E8;
-    padding : 1% 0 1% 0;
     border: none;
     vertical-align: middle;
-}
-/*表格边框留白*/
-.we-talkwindow .table{
-    margin-bottom: 100px;
 }
 
 /* 发送消息动画 */

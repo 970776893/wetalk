@@ -7,8 +7,6 @@ app.run(function($rootScope,$route, $timeout){
 	// 只有header和footer不参与滚动
 	$timeout(function(){
 		var sectionHeight = (window.innerHeight - 102) + 'px';
-		console.log(window.innerHeight);
-		console.log(window.innerHeight - 102);
 		$('section').height(sectionHeight);
 	});
 
@@ -59,6 +57,16 @@ app.run(function($rootScope, localStorageService){
 		}
 	};
 	// 模拟收到消息
+});
+
+// 聊天界面窗口-乡下滚动
+app.run(function($rootScope, $timeout){
+	// 监听了消息记录，保持滚动到最下方
+	$rootScope.$watch('talkingList', function(newValue, oldValue, scope){
+		$timeout(function(){
+			$('section')[0].scrollTop = $('section')[0].scrollHeight;
+		});
+	}, true);
 });
 
 // 模拟当前登陆用户
@@ -559,12 +567,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 		$rootScope.msgInputFocus = true;
 		$scope.sendMsg();
 	};
-	// 监听聊天记录，保持滚动到最下面
-	$rootScope.$watch('talkingList', function(newValue, oldValue, scope){
-		//滚动条滚动到底部
-		console.log($('table').scrollTop());
-		$(document).scrollTop(100000000);
-	}, true);
+	
 });
 
 /* 用户列表 */

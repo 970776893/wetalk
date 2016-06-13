@@ -54,10 +54,5 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 		$rootScope.msgInputFocus = true;
 		$scope.sendMsg();
 	};
-	// 监听聊天记录，保持滚动到最下面
-	$rootScope.$watch('talkingList', function(newValue, oldValue, scope){
-		//滚动条滚动到底部
-		console.log($('table').scrollTop());
-		$(document).scrollTop(100000000);
-	}, true);
+	
 });
