@@ -147,7 +147,7 @@ footer>div>input {
 }
 /*用户列表中检索abcd..放在右边*/
 .user-letter{
-    right: 7%;
+    right: 4%;
     top: 20%; 
     position: 
     fixed; 
