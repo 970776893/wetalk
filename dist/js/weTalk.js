@@ -5,6 +5,7 @@ var app = angular.module("app", dependencies);
 // 添加个性化class
 app.run(function($rootScope){
 	$rootScope.$on('$locationChangeSuccess', function(event, newUrl, oldUrl){
+		console.log($rootScope.nested);
 		// url 便于下方导航栏的显示当前所在的按钮颜色
 		$rootScope.url = window.location.hash;
 		//为每个页面动态添加独自的url，便于定制化开发（eg：聊天页面不显示下方导航栏）
@@ -12,15 +13,7 @@ app.run(function($rootScope){
 		if(className.indexOf('/') > 0){
 			className = className.substring(0, className.indexOf('/'));
 		}
-		$('body').addClass(className);
-		if(newUrl !== oldUrl){
-    		//删除上一个页面class
-    		var rmClassName = 'we' + '-' +  oldUrl.substring(oldUrl.indexOf('#') + 2).toLocaleLowerCase();
-    		if(rmClassName.indexOf('/')  > 0){
-    			rmClassName = rmClassName.substring(0, rmClassName.indexOf('/') );
-    		}
-    		$('body').removeClass(rmClassName);
-		}
+		$rootScope.bodyClass = className;
 	});
 });
 
