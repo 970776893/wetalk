@@ -9,7 +9,7 @@
 			<td width="60%" class="{{recent.noReadNum != 0 && recent.noReadNum != null ? 'history-no-readed' : 'history-readed'}}">
 				<h5>{{recent.userName}}</h5>
 				<p >{{recent.lastMsgContent}}
-					<span class="badge" ng-if="recent.noReadNum != 0 && recent.noReadNum != null">{{recent.noReadNum}}</span>
+					<span class="badge noread-badge" ng-if="recent.noReadNum != 0 && recent.noReadNum != null">{{recent.noReadNum}}</span>
 				</p>
 			</td>
 			<td width="22%" class="history-time">

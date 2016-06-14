@@ -65,10 +65,17 @@ app.run(function($rootScope, localStorageService){
 		}else{
 			// TODO 非当前页面
 			$rootScope.refreshTalkList = true;
+			$rootScope.noreadNumTotal = $rootScope.noreadNumTotal + 1;
 		}
 	};
 	// 模拟收到消息
 });
+
+// 获取未读的消息总数
+app.run(function($rootScope, localStorageService){
+	$rootScope.noreadNumTotal = localStorageService.getNoreadNumTotal();
+});
+
 
 
 

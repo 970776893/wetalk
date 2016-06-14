@@ -65,10 +65,17 @@ app.run(function($rootScope, localStorageService){
 		}else{
 			// TODO 非当前页面
 			$rootScope.refreshTalkList = true;
+			$rootScope.noreadNumTotal = $rootScope.noreadNumTotal + 1;
 		}
 	};
 	// 模拟收到消息
 });
+
+// 获取未读的消息总数
+app.run(function($rootScope, localStorageService){
+	$rootScope.noreadNumTotal = localStorageService.getNoreadNumTotal();
+});
+
 
 
 
@@ -430,8 +437,11 @@ app.service("localStorageService", function ($rootScope, $http, $cookies) {
                 // 未读数
                 for(var i = 0; i < historyList.length; i++){
                     var historyItem = historyList[i];
-                    if(historyItem.sourceType === 1){
+                    if(historyItem.sourceType === 1 && !historyItem.isRead){
                         historyItem.isRead = true;
+                        $rootScope.noreadNumTotal = $rootScope.noreadNumTotal - 1;
+                    }else if(historyItem.isRead){
+                        break;
                     }
                 }
                 storage.setItem(hKey, JSON.stringify(historyList));
@@ -509,7 +519,7 @@ app.service("localStorageService", function ($rootScope, $http, $cookies) {
             }
         },
         /*
-            最近联系人
+            最近联系人列表
 
             @params userInfo 用户信息
         */
@@ -550,6 +560,53 @@ app.service("localStorageService", function ($rootScope, $http, $cookies) {
             }else{
                 console.log("不支持本地存储");
             }
+        },
+        /*
+            获取未读消息总数
+
+        */
+        getNoreadNumTotal : function(){
+            var total = 0;
+            // 当前登陆用户
+            var loginUser = $cookies.getObject('loginUser');
+            var storage = window.localStorage;
+            var recentUsers = [];
+            //是否支持本地存储
+            if(storage){
+                var key = loginUser.id + '_recent_users';
+                recentUsers = storage.getItem(key);
+                if(recentUsers === null){
+                    return total;
+                }
+                recentUsers = JSON.parse(recentUsers);
+                angular.forEach(recentUsers, function(rUser){
+                    var iKey =  loginUser.id + "_history_" + rUser.userId;
+                    var historyList = storage.getItem(iKey);
+                    if(historyList != null){
+                        //最近消息
+                        historyList = JSON.parse(historyList);
+                        var lastmsg = historyList[0];
+                        rUser.lastMsgContent = lastmsg.content;
+                        rUser.lastMsgTime = lastmsg.time;
+                        //未读数
+                        var noReadNum = 0;
+                        for(var i = 0 ; i < historyList.length; i++){
+                            var historyItem = historyList[i];
+                            if(historyItem.sourceType === 1){
+                                if(!historyItem.isRead){
+                                    noReadNum ++;
+                                }else{
+                                    break;
+                                }
+                            }
+                        }
+                        total =  total + noReadNum;
+                    }
+                });
+            }else{
+                console.log("不支持本地存储");
+            }
+            return total;
         }
 
     };

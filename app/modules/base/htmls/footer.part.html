@@ -4,6 +4,7 @@
 		<li role="presentation">
 			<a href="#/talkList" class="{{url == '#/talkList' ? 'active' : 'inactive'}}">
 				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span> 消息
+				<span class="badge" ng-if="noreadNumTotal != 0">{{noreadNumTotal}}</span>
 			</a>
 		</li>
 		<li role="presentation">

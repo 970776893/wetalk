@@ -138,7 +138,7 @@ footer>div>input {
     color: #2EEA10;
 }
 /*表格文本大小控制--聊天记录-未读 */
-.history-no-readed>p>span{
+.noread-badge{
     background-color: red;
     font-size: small;
 }
