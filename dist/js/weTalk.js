@@ -470,6 +470,7 @@ app.service("localStorageService", function ($rootScope, $http, $cookies) {
                     id : msgInfo.id,
                     content  : msgInfo.content,
                     time : (new Date()).getTime(),
+                    status : 0, // 0-成功，1-失败
                     sourceType : 1,  // 1-接收，2-发送
                     msgType : msgInfo.msgType,     // 1-文本，2-语音
                     isRead : isTalkWindows //当前才窗口默认已读
@@ -617,6 +618,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 		var msgInfo = {
 			id : 1,
 			content : inputContent,
+			status : Math.random() > 0.5 ? 0 : 1, // 0-成功，1-失败
 			time : (new Date()).getTime(),
 			sourceType : 2, // 1-接收，2-发送
 			msgType : 1  // 1-文本

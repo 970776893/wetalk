@@ -31,6 +31,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 		var msgInfo = {
 			id : 1,
 			content : inputContent,
+			status : Math.random() > 0.5 ? 0 : 1, // 0-成功，1-失败
 			time : (new Date()).getTime(),
 			sourceType : 2, // 1-接收，2-发送
 			msgType : 1  // 1-文本

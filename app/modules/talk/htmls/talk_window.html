@@ -10,7 +10,7 @@
 						{{history.content}}
 					</div>
 				</div>
-				<span ng-if="history.stauts" class="navbar-text glyphicon glyphicon-repeat"></span>
+				<span ng-if="history.status==1" class="navbar-text glyphicon glyphicon-repeat"></span>
 			</td>
 			<td style="width: 15%;" >
 				<img class="img-thumbnail" ng-src="{{loginUser.imgUrl}}" ng-if="history.sourceType == 2"/>

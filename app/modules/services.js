@@ -164,6 +164,7 @@ app.service("localStorageService", function ($rootScope, $http, $cookies) {
                     id : msgInfo.id,
                     content  : msgInfo.content,
                     time : (new Date()).getTime(),
+                    status : 0, // 0-成功，1-失败
                     sourceType : 1,  // 1-接收，2-发送
                     msgType : msgInfo.msgType,     // 1-文本，2-语音
                     isRead : isTalkWindows //当前才窗口默认已读
