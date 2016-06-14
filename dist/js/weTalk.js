@@ -366,7 +366,7 @@ app.service("localStorageService", function ($rootScope, $http, $cookies) {
                     if(historyList != null){
                         //最近消息
                         historyList = JSON.parse(historyList);
-                        var lastmsg = historyList[historyList.length-1];
+                        var lastmsg = historyList[0];
                         rUser.lastMsgContent = lastmsg.content;
                         rUser.lastMsgTime = lastmsg.time;
                         //未读数
