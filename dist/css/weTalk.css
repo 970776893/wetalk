@@ -192,12 +192,12 @@ footer>div>input {
 .talk-item-my + span{
     color: red;
     float: right;
-    margin-right: 2px;
+    margin-right: 5px;
 }
 .talk-item-you + span{
     color: red;
     float: left;
-    margin-left: 2px;
+    margin-left: 5px;
 }
 
 /* 错误页面css */
