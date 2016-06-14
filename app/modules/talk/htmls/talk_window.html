@@ -1,6 +1,6 @@
 <table class="table clearfix">
 	<tbody>
-		<tr ng-repeat="history in $root.talkingList" class="talk-item-animation">
+		<tr ng-repeat="history in $root.talkingList | orderBy:'time':false" class="talk-item-animation">
 			<td style="width: 15%;" >
 				<img class="img-thumbnail" ng-src="{{userInfo.imgUrl}}" ng-if="history.sourceType == 1"/>
 			</td>	

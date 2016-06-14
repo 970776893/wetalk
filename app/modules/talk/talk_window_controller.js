@@ -1,6 +1,6 @@
 /* 用户列表 */
 
-app.controller("talkWindowController", function ($rootScope, $scope, $location, $routeParams, $cookies, weService, localStorageService) {
+app.controller("talkWindowController", function ($rootScope, $scope, $location, $routeParams, $cookies, $timeout, weService, localStorageService) {
 	
 	var userId = String($routeParams.id);
 	// 根据用户ID获取用户信息 --------------------------------------------------------------------------
@@ -14,9 +14,10 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 	});
 
 	$scope.loginUser = $cookies.getObject('loginUser');
-
+	$scope.pageNo = 1;
+	$scope.pageSize = 3;
 	//初始化数据
-	$rootScope.talkingList = localStorageService.getRecentMsgList(userId);
+	$rootScope.talkingList = localStorageService.getRecentMsgList(userId, $scope.pageNo, $scope.pageSize);
 
 	//发送消息
 	$scope.sendMsg = function(){
@@ -60,5 +61,10 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 		$rootScope.msgInputFocus = false;
 		//$scope.changeBodyHeight();
 	};
-
+	// 监听了消息记录，保持滚动到最下方
+	$scope.$watch('talkingList' , function(newValue, oldValue, scope){
+		$timeout(function(){
+			$('section')[0].scrollTop = $('section')[0].scrollHeight;
+		});
+	}, true);
 });

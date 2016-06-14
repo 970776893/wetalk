@@ -65,8 +65,8 @@ app.service("localStorageService", function ($rootScope, $http, $cookies) {
                         rUser.lastMsgTime = lastmsg.time;
                         //未读数
                         var noReadNum = 0;
-                        for(var i = 0; i < historyList.length; i++){
-                            var historyItem = historyList[historyList.length - i - 1];
+                        for(var i = 0 ; i < historyList.length; i++){
+                            var historyItem = historyList[i];
                             if(historyItem.sourceType === 1){
                                 if(!historyItem.isRead){
                                     noReadNum ++;
@@ -105,8 +105,10 @@ app.service("localStorageService", function ($rootScope, $http, $cookies) {
             ]
 
             @params userId 用户ID
+            @params pageNo 页码
+            @params pageSize 页大小
         */
-        getRecentMsgList : function (userId) {
+        getRecentMsgList : function (userId, pageNo, pageSize) {
             var loginUser = $cookies.getObject('loginUser');
             var storage = window.localStorage;
             var historyList;
@@ -127,6 +129,7 @@ app.service("localStorageService", function ($rootScope, $http, $cookies) {
                     }
                 }
                 storage.setItem(hKey, JSON.stringify(historyList));
+                historyList = historyList.slice((pageNo - 1 ) * pageSize, pageNo * pageSize);
                 // end -- 最近聊天记录 --
             }else{
                 console.log("不支持本地存储");
@@ -165,7 +168,7 @@ app.service("localStorageService", function ($rootScope, $http, $cookies) {
                     msgType : msgInfo.msgType,     // 1-文本，2-语音
                     isRead : isTalkWindows //当前才窗口默认已读
                 };
-                historyList.push(storeMsg);
+                historyList.unshift(storeMsg);
                 storage.setItem(hKey, JSON.stringify(historyList));
                 // end -- 聊天记录 --
             }else{
@@ -191,7 +194,7 @@ app.service("localStorageService", function ($rootScope, $http, $cookies) {
                     historyList = JSON.parse(historyList);
                 }
                 // 当前正在聊天窗口
-                historyList.push(msgInfo);
+                historyList.unshift(msgInfo);
                 storage.setItem(hKey, JSON.stringify(historyList));
                 // end -- 聊天记录 --
             }else{
