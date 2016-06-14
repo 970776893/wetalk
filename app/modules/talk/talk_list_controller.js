@@ -1,6 +1,6 @@
 /* 用户列表 */
 
-app.controller("talkListController", function ($rootScope, $scope, $location, $timeout, localStorageService) {
+app.controller("talkListController", function ($rootScope, $scope, $location, localStorageService) {
 	$rootScope.title = '消息';
 	//初始化数据
 	$scope.getTalkList = function(){

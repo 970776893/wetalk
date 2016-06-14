@@ -2,6 +2,20 @@
 var dependencies = ['ngAnimate', 'ngRoute', 'ngCookies', 'ngTouch'];
 var app = angular.module("app", dependencies);
 
+
+// 模拟当前登陆用户  测试数据--------------------------------------------------start
+app.run(function($cookies){
+	//当前登陆用户
+	var loginUser = {
+		id : 10000,
+		name : '张凯',
+		'imgUrl' : '/app/displaydata/imgs/zhangkai.png'
+	};
+	$cookies.putObject('loginUser', loginUser);
+});
+//测试数据-------------------------------------------------------------------end
+
+
 // 添加个性化class
 app.run(function($rootScope,$route){
 
@@ -21,7 +35,7 @@ app.run(function($rootScope,$route){
 });
 
 // 创建公共函数
-app.run(function($rootScope, $timeout){
+app.run(function($rootScope){
 	//根据用户ID判断是否是正在聊天的用户
 	$rootScope.isTalkingUser = function(userId){
         var talkWindowUrl = '#/talkWindow/';
@@ -37,12 +51,10 @@ app.run(function($rootScope, $timeout){
 
 	// 只有header和footer不参与滚动
 	$rootScope.changeSectionHeight = function(){
-		$timeout(function(){
-			var sectionHeight = (window.innerHeight - 102) + 'px';
-			$rootScope.sectionStyle = {
-				'max-height' : sectionHeight
-			};
-		});
+		var sectionHeight = (window.innerHeight - 102) + 'px';
+		$rootScope.sectionStyle = {
+			'max-height' : sectionHeight
+		};
 	};
 	$rootScope.changeSectionHeight();
 });
@@ -78,20 +90,7 @@ app.run(function($rootScope, localStorageService){
 
 
 
-
-/* --------------------------------------以下为测试数据-------------------------------------------------- */
-// 模拟当前登陆用户
-app.run(function($cookies){
-	//当前登陆用户
-	var loginUser = {
-		id : 10000,
-		name : '张凯',
-		'imgUrl' : '/app/displaydata/imgs/zhangkai.png'
-	};
-	$cookies.putObject('loginUser', loginUser);
-});
-
-// 模拟收到消息
+// 模拟收到消息   测试数据--------------------------------------------------start
 app.run(function($rootScope, $cookies, weService){
 	$rootScope.testGetMessageRondom = function(){
 		// 发送人id
@@ -145,6 +144,7 @@ app.run(function($rootScope, $cookies, weService){
          });
 	}
 });
+//测试数据-------------------------------------------------------------------end
 
 
 
