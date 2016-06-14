@@ -59,11 +59,55 @@ footer>ul>li {
 }
 /*聊天界面输入框外层div*/
 footer>div {
-    line-height: 51px;
+    margin: 7px 4px;
 }
 /*聊天界面输入框垂直居中*/
 footer>div>input {
     float: initial !important;
+}
+
+.msg-type-group {
+    padding: 7px 0px;
+    background-color: #fff;
+    border: 1px solid  #ddd;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+}
+.msg-type-group>div {
+    width: 25%;
+    float: left;
+}
+.msg-type-group>div>div{
+    width: 60px;
+    height: 60px;
+    padding: 4px;
+    margin: 7px auto;
+    border: 1px solid  #ddd;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+    display: block;
+}
+.msg-type-group>div>div>div:nth-child(1) {
+    height: 70%;
+    width: 70%;
+    display:  block;
+    margin: 0px auto;
+}
+.msg-type-group>div>div>div:nth-child(2) {
+    height: 30%;
+    /*line-height: 0;*/
+}
+.msg-type-group>div>div>div>img{
+    width: 100%; 
+    height: 100%;
+    vertical-align: top;
+}
+.msg-type-group>div>div>div>p{
+    font-size: small;
+    margin: 0 ;
+    height: 100%;
 }
 
 /*底部按钮颜色-非激活*/
