@@ -3,18 +3,32 @@ var dependencies = ['ngAnimate', 'ngRoute', 'ngCookies', 'ngTouch'];
 var app = angular.module("app", dependencies);
 
 
-// 模拟当前登陆用户  测试数据--------------------------------------------------start
-app.run(function($cookies){
-	//当前登陆用户
-	var loginUser = {
-		id : 10000,
-		name : '张凯',
-		'imgUrl' : '/app/displaydata/imgs/zhangkai.png'
-	};
-	$cookies.putObject('loginUser', loginUser);
+// 用户登陆
+app.run(function($rootScope, $cookies){
+	$rootScope.login = function(){
+		//当前登陆用户
+		var loginUser = {
+			id : 10000,
+			name : '张凯',
+			'imgUrl' : '/app/displaydata/imgs/zhangkai.png'
+		};
+		$cookies.putObject('loginUser', loginUser);
+		return loginUser;
+	}
+	$rootScope.loginUser = $rootScope.login();
 });
-//测试数据-------------------------------------------------------------------end
 
+// 获取发送消息类型列表+相应的处理
+app.run(function($rootScope, weService){
+	weService.getMsgToolsList().then(function(res){
+		$rootScope.msgTools = res.data;
+	});
+	$rootScope.handMsgTools = function(tools, $event){
+		console.log($event.target);
+		$($event.target).css("animation","anim 2s");
+		console.log('不支持类型:' + tools.text);
+	}
+});
 
 // 添加个性化class
 app.run(function($rootScope,$route){
@@ -329,6 +343,33 @@ app.service("weService", function ($http) {
         getUserList : function () {
             return $http({
                 url : '/app/displaydata/userlist.json',
+                method : 'get',
+                dataType : 'json'
+            });
+        },
+        /*
+        获取用户列表
+            数据结构eg：
+            [
+                [
+                    {
+                      "type": "pictures",
+                      "text": "图片",
+                      "icon": "/imgs/pictures.png",
+                      "remark":"第一行第一列"
+                    },
+                    {
+                      "type": "location",
+                      "text": "位置",
+                      "icon": "/imgs/location.png",
+                      "remark":"第二行第一列"
+                    }
+                ]
+            ]
+        */
+        getMsgToolsList : function () {
+            return $http({
+                url : '/app/displaydata/messageTools.json',
                 method : 'get',
                 dataType : 'json'
             });

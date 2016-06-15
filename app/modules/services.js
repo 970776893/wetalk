@@ -19,6 +19,33 @@ app.service("weService", function ($http) {
                 method : 'get',
                 dataType : 'json'
             });
+        },
+        /*
+        获取用户列表
+            数据结构eg：
+            [
+                [
+                    {
+                      "type": "pictures",
+                      "text": "图片",
+                      "icon": "/imgs/pictures.png",
+                      "remark":"第一行第一列"
+                    },
+                    {
+                      "type": "location",
+                      "text": "位置",
+                      "icon": "/imgs/location.png",
+                      "remark":"第二行第一列"
+                    }
+                ]
+            ]
+        */
+        getMsgToolsList : function () {
+            return $http({
+                url : '/app/displaydata/messageTools.json',
+                method : 'get',
+                dataType : 'json'
+            });
         }
     };
 });
