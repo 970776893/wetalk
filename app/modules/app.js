@@ -23,16 +23,25 @@ app.run(function($rootScope, weService){
 	weService.getMsgToolsList().then(function(res){
 		$rootScope.msgTools = res.data;
 	});
+	// 消息工具-点击时间
 	$rootScope.handMsgTools = function(tools, $event){
-		console.log($event.target);
-		$($event.target).css("animation","anim 2s");
 		console.log('不支持类型:' + tools.text);
+	};
+	$rootScope.startRecordVoice = function(){
+		$rootScope.strart4Voice = new Date();
 	}
+	// 发送语音消息
+	$rootScope.sendMsg4Voice = function(){
+		if($rootScope.strart4Voice == null){
+			return;
+		}
+		console.log('发送语音:' + (((new Date().getTime()) - $rootScope.strart4Voice.getTime()) / 1000) + 's');
+		$rootScope.strart4Voice = null;
+	};
 });
 
 // 添加个性化class
 app.run(function($rootScope,$route){
-
 	$rootScope.$on('$locationChangeSuccess', function(event, newUrl, oldUrl){
 		// url 便于下方导航栏的显示当前所在的按钮颜色
 		$rootScope.url = window.location.hash;

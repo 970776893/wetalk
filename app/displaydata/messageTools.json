@@ -1,0 +1,40 @@
+[
+  [
+    {
+      "type": "pictures",
+      "text": "图片",
+      "icon": "/imgs/pictures.png",
+      "remark":"第一行第一列"
+    },
+    {
+      "type": "location",
+      "text": "位置",
+      "icon": "/imgs/location.png",
+      "remark":"第二行第一列"
+    }
+  ],
+  [
+    {
+      "type": "camera",
+      "text": "拍摄",
+      "icon": "/imgs/camera.png",
+      "remark":"第一行第二列"
+    }
+  ],
+  [
+    {
+      "type": "video",
+      "text": "视频",
+      "icon": "/imgs/video.png",
+      "remark":"第一行第三列"
+    }
+  ],
+  [
+    {
+      "type": "favourites",
+      "text": "收藏",
+      "icon": "/imgs/favourites.png",
+      "remark":"第一行第四列"
+    }
+  ]
+]

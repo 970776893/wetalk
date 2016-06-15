@@ -60,6 +60,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 	$rootScope.focusInput = function(){
 		//获取焦点
 		$rootScope.msgInputFocus = false;
+		$rootScope.showTools = false;
 		//$scope.changeBodyHeight();
 	};
 	// 监听了消息记录，保持滚动到最下方

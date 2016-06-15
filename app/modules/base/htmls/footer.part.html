@@ -13,12 +13,13 @@
 			</a>
 		</li>
 	</ul>
-	<div class="input-group">
-		<span class="input-group-btn">
+	<div class="input-group input-msg-bar">
+		<span class="input-group-btn" ng-click="showSpeaking=!showSpeaking;showTools=false">
 			<img class="tool-button" src="/imgs/speaking.png"/>
 		</span>
-		<input type="text" id="msgInput" focusable="msgInputFocus" ng-focus="focusInput()"  ng-blur="focusInput()" ng-keyup="sendMsgByKeyup($event)" class="form-control input-send-msg" maxlength="120">
-		<span class="input-group-btn" ng-click="showTools = ! showTools">
+		<input ng-if="!showSpeaking" type="text" id="msgInput" focusable="msgInputFocus" ng-focus="focusInput()"  ng-blur="focusInput()" ng-keyup="sendMsgByKeyup($event)" class="form-control input-send-msg" maxlength="120"/>
+		<div ng-if="showSpeaking" ng-mousedown="startRecordVoice()" ng-mouseup="sendMsg4Voice()" ng-mouseout="sendMsg4Voice()"> 按住说话</div>
+		<span class="input-group-btn" ng-click="showTools=!showTools">
 			<img class="tool-button" src="/imgs/plus.png"/>
 		</span>
 		<span class="input-group-btn">
