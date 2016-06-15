@@ -42,7 +42,7 @@ app.service("weService", function ($http) {
         */
         getMsgToolsList : function () {
             return $http({
-                url : '/app/displaydata/messageTools.json',
+                url : '/app/modules/base/data/messageTools.json',
                 method : 'get',
                 dataType : 'json'
             });
