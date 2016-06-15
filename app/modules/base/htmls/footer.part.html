@@ -30,13 +30,15 @@
 		</span>
 	</div>
 	<div class="send-msg-tools clearfix" ng-if="showTools">
-		<div ng-repeat="tools in msgTools">
+		<div class="clearfix" ng-repeat="tools in msgTools">
 			<div ng-repeat="tool in tools" ng-click="handMsgTools(tool, $event)">
 				<div>
-					<img ng-src="{{tool.icon}}">
-				</div>
-				<div>
-					<p>{{tool.text}}</p>
+					<div>
+						<img ng-src="{{tool.icon}}">
+					</div>
+					<div>
+						<p>{{tool.text}}</p>
+					</div>
 				</div>
 			</div>
 		</div>

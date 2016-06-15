@@ -18,28 +18,6 @@ app.run(function($rootScope, $cookies){
 	$rootScope.loginUser = $rootScope.login();
 });
 
-// 获取发送消息类型列表+相应的处理
-app.run(function($rootScope, weService){
-	weService.getMsgToolsList().then(function(res){
-		$rootScope.msgTools = res.data;
-	});
-	// 消息工具-点击时间
-	$rootScope.handMsgTools = function(tools, $event){
-		console.log('不支持类型:' + tools.text);
-	};
-	$rootScope.startRecordVoice = function(){
-		$rootScope.strart4Voice = new Date();
-	}
-	// 发送语音消息
-	$rootScope.sendMsg4Voice = function(){
-		if($rootScope.strart4Voice == null){
-			return;
-		}
-		console.log('发送语音:' + (((new Date().getTime()) - $rootScope.strart4Voice.getTime()) / 1000) + 's');
-		$rootScope.strart4Voice = null;
-	};
-});
-
 // 添加个性化class
 app.run(function($rootScope,$route){
 	$rootScope.$on('$locationChangeSuccess', function(event, newUrl, oldUrl){
@@ -109,6 +87,41 @@ app.run(function($rootScope, localStorageService){
 app.run(function($rootScope, localStorageService){
 	$rootScope.noreadNumTotal = localStorageService.getNoreadNumTotal();
 });
+
+// 获取发送消息类型列表+相应的处理
+app.run(function($rootScope, weService){
+	weService.getMsgToolsList().then(function(res){
+		$rootScope.msgTools = [];
+		var columns = 4; //每行几个-显示
+		var line = [];
+		for(var i = 0; i < res.data.length; i++){
+			if((i % columns === 0 && i !== 0)) {
+				$rootScope.msgTools.push(line);
+				line = [];
+			}
+			line.push(res.data[i]);
+		}
+		if(line.length > 0){
+			$rootScope.msgTools.push(line);
+		}
+	});
+	// 消息工具-点击时间
+	$rootScope.handMsgTools = function(tools, $event){
+		console.log('不支持类型:' + tools.text);
+	};
+	$rootScope.startRecordVoice = function(){
+		$rootScope.strart4Voice = new Date();
+	}
+	// 发送语音消息
+	$rootScope.sendMsg4Voice = function(){
+		if($rootScope.strart4Voice == null){
+			return;
+		}
+		console.log('发送语音:' + (((new Date().getTime()) - $rootScope.strart4Voice.getTime()) / 1000) + 's');
+		$rootScope.strart4Voice = null;
+	};
+});
+
 // 获取表情列表
 app.run(function($rootScope){
 	$rootScope.emList = {
