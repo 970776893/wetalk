@@ -54,10 +54,9 @@ app.run(function($rootScope,$route){
 		className = className.replace("/", "-");
 		$rootScope.bodyClass = className;
 	});
-
 });
 
-// 创建公共函数
+// 创建全局函数
 app.run(function($rootScope){
 	//根据用户ID判断是否是正在聊天的用户
 	$rootScope.isTalkingUser = function(userId){
@@ -110,7 +109,33 @@ app.run(function($rootScope, localStorageService){
 app.run(function($rootScope, localStorageService){
 	$rootScope.noreadNumTotal = localStorageService.getNoreadNumTotal();
 });
+// 获取表情列表
+app.run(function($rootScope){
+	$rootScope.emList = {
+		faceList : []
+	};
+	var facePath = "/imgs/face/"; //脸表情保存路径
+	var _suffix = ".gif"; //脸表情后缀名
+	var startIndex = 1; //脸表情开始
+	var size = 15; //脸表情数量
+	var showColoums = 6; //显示的总列数
+	var lineFace = [];
+	for(var index = startIndex; index < size + startIndex; index++){
+		var face = {
+			code : index,
+			path : facePath + index + _suffix
+		};
+		if((index - startIndex) % showColoums === 0 && index !== startIndex){
+			$rootScope.emList.faceList.push(lineFace);
+			lineFace = [];
+		}
+		lineFace.push(face);
+	}
+	if(lineFace.length > 0){
+		$rootScope.emList.faceList.push(lineFace);
+	}
 
+});
 
 
 // 模拟收到消息   测试数据--------------------------------------------------start

@@ -9,6 +9,7 @@ body {
     padding: 0;
 }
 section {
+    min-width: 260px;
     position: absolute;
     width: 100%;
     overflow : auto;
@@ -17,6 +18,7 @@ section {
     top: 51px;
 }
 header {
+    min-width: 260px;
     padding: 0px !important;
     margin: 0px !important;
     height: 51px;
@@ -43,6 +45,7 @@ header>ul:nth-child(3) {
 }
 footer {
     padding: 0px;
+    min-width: 260px;
     background-color: rgb(249, 249, 249);
 }
 footer>ul{
@@ -76,6 +79,7 @@ footer>div {
 .input-msg-bar>div:active {
     background:#dddddd;
 }
+/*消息类型工具-即点击输入框之后出现工具*/
 .send-msg-tools {
     padding: 7px 0px;
     margin: 4px 1px 1px 1px;
@@ -97,6 +101,7 @@ footer>div {
     height: 60px;
     padding: 4px;
     margin: 7px auto;
+    cursor:pointer;
     border: 1px solid  #ddd;
     border-radius: 4px;
     box-shadow: 0 2px 2px rgba(0,0,0,0.05);
@@ -136,6 +141,20 @@ footer>div {
     font-size: small;
     margin: 0 ;
     height: 100%;
+}
+/*表情*/
+.msg-face-box>div>div {
+    width: 16.666%;
+    float: left;
+}
+.msg-face-box>div>div>img{
+    width: 36px;
+    padding: 6px 6px;
+    margin: 2px 2px;
+    cursor:pointer;
+}
+.msg-face-box>div>div>img:hover{
+    border: 1px solid  #4F9AE4;
 }
 
 /*底部按钮颜色-非激活*/
