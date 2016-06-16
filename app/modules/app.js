@@ -1,5 +1,5 @@
 /* app的总入口，定制angularJS接入总配置  */
-var dependencies = ['ngAnimate', 'ngRoute', 'ngCookies', 'ngTouch'];
+var dependencies = ['ngAnimate', 'ngRoute', 'ngCookies', 'ngTouch', 'ngSanitize'];
 var app = angular.module("app", dependencies);
 
 
@@ -130,23 +130,49 @@ app.run(function($rootScope){
 	var facePath = "/imgs/face/"; //脸表情保存路径
 	var _suffix = ".gif"; //脸表情后缀名
 	var startIndex = 1; //脸表情开始
-	var size = 15; //脸表情数量
-	var showColoums = 6; //显示的总列数
-	var lineFace = [];
+	var size = 75; //脸表情数量
+	var showColoum = 6; //显示的总列数
+	var showRow = 3; //显示的总列数
+	var lineFace = []; //每一行
+	var pageFace = []; //每一页
 	for(var index = startIndex; index < size + startIndex; index++){
 		var face = {
 			code : index,
 			path : facePath + index + _suffix
 		};
-		if((index - startIndex) % showColoums === 0 && index !== startIndex){
-			$rootScope.emList.faceList.push(lineFace);
+		//分行
+		if((index - startIndex) % showColoum === 0 && index !== startIndex){
+			pageFace.push(lineFace);
 			lineFace = [];
+			if(pageFace.length === showRow){
+				$rootScope.emList.faceList.push(pageFace);
+				pageFace = [];
+			}
 		}
 		lineFace.push(face);
 	}
 	if(lineFace.length > 0){
-		$rootScope.emList.faceList.push(lineFace);
+		pageFace.push(lineFace);
 	}
+	if(pageFace.length > 0){
+		$rootScope.emList.faceList.push(pageFace);
+	}
+	//表情轮播图-手势左划
+	$rootScope.prevCarousel = function($event){
+		$('#faceList').carousel('next');
+	};
+	//表情轮播图-手势右划
+	$rootScope.nextCarousel = function($event){
+		$('#faceList').carousel('prev');
+	};
+	$rootScope.addEm = function(em){
+		var emCode = '[em-' + em.code + ']';
+		if($rootScope.data.msgContent){
+			$rootScope.data.msgContent += emCode;
+		}else{
+			$rootScope.data.msgContent = emCode;
+		}
+	};
 
 });
 

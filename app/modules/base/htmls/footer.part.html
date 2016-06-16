@@ -14,22 +14,22 @@
 		</li>
 	</ul>
 	<div class="input-group input-msg-bar">
-		<span class="input-group-btn" ng-click="showSpeaking=!showSpeaking;showTools=false">
+		<span class="input-group-btn" ng-click="showSpeaking=!showSpeaking;showTools=0">
 			<img class="tool-button" src="/imgs/speaking.png"/>
 		</span>
-		<input ng-if="!showSpeaking" type="text" id="msgInput" focusable="msgInputFocus" ng-focus="focusInput()"  ng-blur="focusInput()" ng-keyup="sendMsgByKeyup($event)" class="form-control input-send-msg" maxlength="120"/>
+		<textarea rows="1" ng-if="!showSpeaking" id="inputMsg" focusable="msgInputFocus" type="text" ng-model="data.msgContent" ng-focus="focusInput()" ng-keyup="sendMsgByKeyup($event)" class="form-control input-send-msg" maxlength="120"/>
 		<div ng-if="showSpeaking" ng-mousedown="startRecordVoice()" ng-mouseup="sendMsg4Voice()" ng-mouseout="sendMsg4Voice()"> 按住说话</div>
 		<span class="input-group-btn" >
-			<img class="tool-button" src="/imgs/expression_wink.png"/>
+			<img class="tool-button" src="/imgs/expression_wink.png"  ng-click="showTools=2"/>
 		</span>
-		<span class="input-group-btn" ng-click="showTools=!showTools">
+		<span class="input-group-btn" ng-click="showTools=1">
 			<img class="tool-button" src="/imgs/plus.png"/>
 		</span>
 		<span class="input-group-btn" ng-if="0">
 			<button class="btn btn-primary" type="button" id="msgBtn" ng-click="sendMsgByButton()">发&nbsp;送</button>
 		</span>
 	</div>
-	<div class="send-msg-tools clearfix" ng-if="showTools">
+	<div class="send-msg-tools clearfix" ng-if="showTools==1">
 		<div class="clearfix" ng-repeat="tools in msgTools">
 			<div ng-repeat="tool in tools" ng-click="handMsgTools(tool, $event)">
 				<div>
@@ -43,11 +43,19 @@
 			</div>
 		</div>
 	</div>
-	<div class="msg-face-box clearfix">
-		<div ng-repeat="faceLine in emList.faceList" >
-			<div ng-repeat="face in faceLine" >
-				<img ng-src="{{face.path}}">
-			<div>
+	<div id="faceList" class="carousel slide" data-interval="false" ng-if="showTools==2">
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			<li data-target="#faceList" data-slide-to="{{$index}}" class="{{$index==0?'active':''}}" ng-repeat="facePage in emList.faceList" ></li>
+		</ol> 
+		<div class="carousel-inner" ng-swipe-left="prevCarousel($event)" ng-swipe-right="nextCarousel($event)">
+			<div class="msg-face-box item {{$index==0?'active':''}}" ng-repeat="facePage in emList.faceList" >
+				<div class="clearfix" ng-repeat="faceLine in facePage" >
+					<div ng-click="addEm(face)" ng-repeat="face in faceLine" >
+						<img ng-src="{{face.path}}">
+					<div>
+				</div>
+			</div>
 		</div>
 	</div>
 </footer>

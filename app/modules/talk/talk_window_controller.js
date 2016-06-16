@@ -18,10 +18,19 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 	$scope.pageSize = 3;
 	//初始化数据
 	$rootScope.talkingList = localStorageService.getRecentMsgList(userId, $scope.pageNo, $scope.pageSize);
+	// 显示表情
+	$scope.replaceEm = function(str){
+		str = str.replace(/\</g,'&lt;');
+		str = str.replace(/\>/g,'&gt;');
+		str = str.replace(/\n/g,'<br/>');
+		str = str.replace(/\[em-([0-9]*)\]/g,'<img src="/imgs/face/$1.gif"  border="0"/>');
+		return str;
+	};
 
+	$rootScope.data = {};
 	//发送消息
 	$scope.sendMsg = function(){
-		var inputContent = $("#msgInput").val();
+		var inputContent = $rootScope.data.msgContent;
 		//内容为空则不发送信息
 		if(!inputContent){
 			return ;
@@ -39,7 +48,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 		$rootScope.talkingList.push(msgInfo);
 		
 		//清空输入框内容
-		$("#msgInput").val(null);
+		$rootScope.data.msgContent = null;
 
 		localStorageService.handlerSendMsg($scope.userInfo, msgInfo);
 		localStorageService.handlerRecentTalkList($scope.userInfo);
@@ -60,7 +69,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 	$rootScope.focusInput = function(){
 		//获取焦点
 		$rootScope.msgInputFocus = false;
-		$rootScope.showTools = false;
+		$rootScope.showTools = 0;
 		//$scope.changeBodyHeight();
 	};
 	// 监听了消息记录，保持滚动到最下方
@@ -69,4 +78,6 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 			$('section')[0].scrollTop = $('section')[0].scrollHeight;
 		});
 	}, true);
+
+	
 });

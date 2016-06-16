@@ -6,8 +6,8 @@
 			</td>	
 			<td style="width: 70%">
 				<div class="talk-item panel-body {{history.sourceType == 1 ? 'talk-item-you':'talk-item-my'}}">
-					<div >
-						{{history.content}}
+					<div ng-bind-html="replaceEm(history.content)">
+						<!-- {{history.content}} -->
 					</div>
 				</div>
 				<span ng-if="history.status==1" class="navbar-text glyphicon glyphicon-repeat"></span>

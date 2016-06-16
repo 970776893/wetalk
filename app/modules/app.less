@@ -1,3 +1,14 @@
+// 底部导航栏-每个按钮的宽度
+@footer-menu-width : 50%;
+// 支持的设备的最小宽度
+@device-min-width : 260px;
+// 顶部导航栏高度
+@header-bar-height : 51px;
+// 底导航栏高度
+@footer-bar-height : 51px;
+// 表情的尺寸（正方形）
+@em-face-size : 36px;
+
 body {
     width: 100%;
     height: 100%;
@@ -7,19 +18,19 @@ body {
     padding: 0;
 }
 section {
-    min-width: 260px;
+    min-width: @device-min-width;
     position: absolute;
     width: 100%;
     overflow : auto;
     padding: 0;
     margin: 0;
-    top: 51px;
+    top: @header-bar-height;
 }
 header {
-    min-width: 260px;
+    min-width: @device-min-width;
+    height: @header-bar-height;
     padding: 0px !important;
     margin: 0px !important;
-    height: 51px;
 }
 /*导航栏-左侧返回按钮*/
 header>ul:nth-child(1) {
@@ -43,18 +54,18 @@ header>ul:nth-child(3) {
 }
 footer {
     padding: 0px;
-    min-width: 260px;
+    min-width: @device-min-width;
     background-color: rgb(249, 249, 249);
 }
 footer>ul{
-    height: 51px;
+    height: @footer-bar-height;
 }
 footer>ul>li, footer>ul>li>a {
     height: 100%;
 }
-/*底部按钮颜色*/
+/*底部按钮*/
 footer>ul>li {
-    width: 50%; /*两个按钮，每个50%*/
+    width: @footer-menu-width;
     background-color: #F7F7F7;
     border-top: 1px solid #A2A2A2;
 }
@@ -141,17 +152,21 @@ footer>div {
     height: 100%;
 }
 /*表情*/
+.msg-face-box {
+    height: 120px;
+}
 .msg-face-box>div>div {
     width: 16.666%;
     float: left;
 }
 .msg-face-box>div>div>img{
-    width: 36px;
+    width: @em-face-size;
+    height: @em-face-size;
     padding: 6px 6px;
     margin: 2px 2px;
     cursor:pointer;
 }
-.msg-face-box>div>div>img:hover{
+.msg-face-box>div>div>img:active{
     border: 1px solid  #4F9AE4;
 }
 
@@ -175,9 +190,8 @@ footer>div {
 }
 /*发送消息框 */
 .input-send-msg{
-    height: 34px;
+    // height: 34px;
     margin: 2px 0 0 0;
-    padding: 0;
     text-align: left;
     border-radius: 5px !important;
     -webkit-border-radius:5px !important;  
@@ -188,6 +202,7 @@ footer>div {
     -webkit-transition: 0s;
     -moz-transition: 0s;
     -o-transition: 0s;
+
 }
 /*表格边框留白*/
 .table>tbody>tr>td{
@@ -266,7 +281,7 @@ footer>div {
     -moz-border-radius:5px;
     border-radius: 10px;
     padding: 14px 8px 14px 8px;
-    max-width: 94%;
+    max-width: 95%;
     width: auto;
     display: inline-block;
     word-break: break-all;
@@ -286,12 +301,14 @@ footer>div {
 .talk-item-my + span{
     color: red;
     float: right;
-    margin-right: 5px;
+    width: 5%;
+    margin: auto;
 }
 .talk-item-you + span{
     color: red;
     float: left;
-    margin-left: 5px;
+    width: 5%;
+    margin: auto;
 }
 
 /* 错误页面css */
@@ -335,4 +352,14 @@ footer>div {
 /*发送消息动画 -动画过程*/
 .talk-item-animation.ng-enter-active{
     opacity: 1;
+}
+
+
+// 改写bootstip的css类-----------------------------------
+//轮播图中导航的按钮显示
+.carousel-indicators .active {
+    background-color: grey;
+}
+.carousel-indicators li {
+    border: 1px solid #C5C5C5;
 }
