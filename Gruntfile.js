@@ -15,29 +15,42 @@ module.exports = function (grunt) {
             files: ['dist']
         },
 
+        //less插件配置
+        less: {
+            main: {
+                expand: true,
+                cwd: 'app/modules/',
+                src: ['*.less'],
+                dest: 'dist/css/',
+                ext: '.css'
+            },
+            dev: {
+                options: {
+                    compress: true,
+                    yuicompress:false
+                }
+            }
+        },
+
         //合并文件
         concat: {
             js: {
                 src: ['app/modules/app.js', 'app/modules/*.js','app/modules/*/*.js'],
-                dest: 'dist/js/weTalk.js'
-            },
-            css: {
-                src: ['app/modules/**.css'],
-                dest: 'dist/css/weTalk.css'
+                dest: 'dist/js/app.js'
             }
         },
         //js文件压缩
         uglify: {
             js: {
-                src: ['dist/js/weTalk.js'],
-                dest: 'dist/js/weTalk.min.js'
+                src: ['dist/js/app.js'],
+                dest: 'dist/js/app.min.js'
             }
         },
         //css文件压缩
         cssmin: {
             js: {
-                src: ['dist/css/weTalk.css'],
-                dest: 'dist/css/weTalk.min.css'
+                src: ['dist/css/app.css'],
+                dest: 'dist/css/app.min.css'
             }
         },
 
@@ -63,9 +76,9 @@ module.exports = function (grunt) {
                 files: '<%= concat.js.src %>',
                 tasks: ['concat:js', 'jshint:js']
             },
-            css: {
-                files: '<%= concat.css.src %>',
-                tasks: ['concat:css','cssmin']
+            less: {
+                files: 'app/modules/*.less',
+                tasks: ['less']
             }
         },
 
@@ -76,13 +89,14 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
 
     //注册服务
-    grunt.registerTask('default', ['clean', 'concat', 'jshint', 'uglify', 'cssmin', 'watch']);
-    grunt.registerTask('online', ['clean',  'concat', 'jshint', 'uglify', 'cssmin']);
+    grunt.registerTask('default', ['clean', 'less', 'concat:js', 'jshint', 'uglify', 'cssmin', 'watch']);
+    grunt.registerTask('online', ['clean',  'less:main','concat', 'jshint', 'uglify', 'cssmin']);
 };
 
