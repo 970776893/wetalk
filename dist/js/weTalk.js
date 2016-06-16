@@ -14,7 +14,7 @@ app.run(function($rootScope, $cookies){
 		};
 		$cookies.putObject('loginUser', loginUser);
 		return loginUser;
-	}
+	};
 	$rootScope.loginUser = $rootScope.login();
 });
 
@@ -111,7 +111,7 @@ app.run(function($rootScope, weService){
 	};
 	$rootScope.startRecordVoice = function(){
 		$rootScope.strart4Voice = new Date();
-	}
+	};
 	// 发送语音消息
 	$rootScope.sendMsg4Voice = function(){
 		if($rootScope.strart4Voice == null){
@@ -171,7 +171,7 @@ app.run(function($rootScope, $cookies, weService){
                 "time": (new Date()).getTime(),
                 "sourceType": 1,
                 "msgType": 1
-             }
+             };
              $rootScope.getMsg(fromUser, msgInfo);
          });
 	};
@@ -200,10 +200,10 @@ app.run(function($rootScope, $cookies, weService){
                 "time": (new Date()).getTime(),
                 "sourceType": 1,
                 "msgType": 1
-             }
+             };
              $rootScope.getMsg(fromUser, msgInfo);
          });
-	}
+	};
 });
 //测试数据-------------------------------------------------------------------end
 
