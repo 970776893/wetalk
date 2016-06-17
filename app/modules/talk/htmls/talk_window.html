@@ -8,7 +8,7 @@
 				<div class="talk-item panel-body {{history.sourceType == 1 ? 'talk-item-you':'talk-item-my'}}">
 					<div ng-if="history.msgType == 1" ng-bind-html="replaceEm(history.content)">
 					</div>
-					<div ng-if="history.msgType == 2" ng-click="sounding(history)">
+					<div ng-if="history.msgType == 2" class="{{history.msgType == 2 ? 'talk-item-my-voice' : ''}}" ng-click="sounding(history)">
 						<img src="/imgs/voice.png" border="0"> {{history.lengthInSecond + 's'}}
 					</div>
 				</div>
