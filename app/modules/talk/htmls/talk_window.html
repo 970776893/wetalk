@@ -6,8 +6,10 @@
 			</td>	
 			<td style="width: 70%">
 				<div class="talk-item panel-body {{history.sourceType == 1 ? 'talk-item-you':'talk-item-my'}}">
-					<div ng-bind-html="replaceEm(history.content)">
-						<!-- {{history.content}} -->
+					<div ng-if="history.msgType == 1" ng-bind-html="replaceEm(history.content)">
+					</div>
+					<div ng-if="history.msgType == 2" ng-click="sounding(history)">
+						<img src="/imgs/voice.png" border="0"> {{history.lengthInSecond + 's'}}
 					</div>
 				</div>
 				<span ng-if="history.status==1" class="navbar-text glyphicon glyphicon-repeat"></span>
@@ -18,3 +20,4 @@
 		</tr>
 	</tbody>
 </table>
+<audio ng-show="0" ></audio>

@@ -190,16 +190,10 @@ app.service("localStorageService", function ($rootScope, $http, $cookies) {
                 }
                 // 获取的消息是否是当前聊天页面
                 var isTalkWindows = $rootScope.isTalkingUser(userInfo.id);
-                var storeMsg = {
-                    id : msgInfo.id,
-                    content  : msgInfo.content,
-                    time : (new Date()).getTime(),
-                    status : 0, // 0-成功，1-失败
-                    sourceType : 1,  // 1-接收，2-发送
-                    msgType : msgInfo.msgType,     // 1-文本，2-语音
-                    isRead : isTalkWindows //当前才窗口默认已读
-                };
-                historyList.unshift(storeMsg);
+                msgInfo.time = (new Date()).getTime();
+                msgInfo.status = 0;
+                msgInfo.isRead = isTalkWindows;
+                historyList.unshift(msgInfo);
                 storage.setItem(hKey, JSON.stringify(historyList));
                 // end -- 聊天记录 --
             }else{

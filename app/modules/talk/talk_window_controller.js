@@ -54,6 +54,11 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 		localStorageService.handlerRecentTalkList($scope.userInfo);
 		// TODO 发送消息到服务器 --------------------------------------------------------------------------
 	};
+	//播放声音
+	$scope.sounding = function(item){
+		$('audio')[0].src = item.src;
+		$('audio')[0].play();
+	};
 
 	$rootScope.sendMsgByKeyup = function(event){
 		if(event.keyCode === 13){
@@ -79,5 +84,38 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 		});
 	}, true);
 
+
+	// 消息工具
+	$rootScope.handMsgTools = function(tools, $event){
+		console.log('不支持类型:' + tools.text);
+	};
+	// 发送语音消息
+	$rootScope.startRecordVoice = function(){
+		$rootScope.strart4Voice = new Date();
+	};
+	$rootScope.sendMsg4Voice = function(){
+		if($rootScope.strart4Voice == null){
+			return;
+		}
+		var lengthInSecond = ((new Date().getTime()) - $rootScope.strart4Voice.getTime()) / 1000;
+		if(lengthInSecond < 0.5){
+			console.log('录制时间太短:' + lengthInSecond + 's');
+			return ;
+		}
+		var msgInfo = {
+			id : 1,
+			status : Math.random() > 0.5 ? 0 : 1, // 0-成功，1-失败
+			time : (new Date()).getTime(),
+			src : '/test.mp3', //音频存放位置
+			lengthInSecond : lengthInSecond.toFixed(2),
+			sourceType : 2, // 1-接收，2-发送
+			msgType : 2  // 1-文本 2-语音
+		};
+		$rootScope.talkingList.push(msgInfo);
+		localStorageService.handlerSendMsg($scope.userInfo, msgInfo);
+		localStorageService.handlerRecentTalkList($scope.userInfo);
+		console.log('发送语音:' + lengthInSecond + 's');
+		$rootScope.strart4Voice = null;
+	};
 	
 });

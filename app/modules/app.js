@@ -105,21 +105,7 @@ app.run(function($rootScope, weService){
 			$rootScope.msgTools.push(line);
 		}
 	});
-	// 消息工具-点击时间
-	$rootScope.handMsgTools = function(tools, $event){
-		console.log('不支持类型:' + tools.text);
-	};
-	$rootScope.startRecordVoice = function(){
-		$rootScope.strart4Voice = new Date();
-	};
-	// 发送语音消息
-	$rootScope.sendMsg4Voice = function(){
-		if($rootScope.strart4Voice == null){
-			return;
-		}
-		console.log('发送语音:' + (((new Date().getTime()) - $rootScope.strart4Voice.getTime()) / 1000) + 's');
-		$rootScope.strart4Voice = null;
-	};
+	
 });
 
 // 获取表情列表

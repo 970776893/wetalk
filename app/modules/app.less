@@ -306,14 +306,29 @@ footer>div {
     width: auto;
     display: inline-block;
     word-break: break-all;
+    max-width: 100%;
+}
+// 显示图片表情
+.talk-item>div>img{
+    width:(@em-face-size - 12px);
+    height:(@em-face-size - 12px);
+    margin: auto 4px;
+    // @em-face-size
 }
 /*聊天页面的聊天内容-我的*/
 .talk-item-my {
     text-align: right;
-    // background-color: #169816;
     background-color: #F9F3F3;
     float: right;
 }
+.talk-item-my>div>img {
+    float: right;
+    // transform: rotate(180deg);
+    // -webkit-transform: rotate(180deg);
+    // -moz-transform: rotate(180deg);
+    // -o-transform: rotate(180deg);
+}
+
 /*聊天页面的聊天内容你得*/
 .talk-item-you {
     text-align: left;
