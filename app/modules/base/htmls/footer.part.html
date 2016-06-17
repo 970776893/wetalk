@@ -43,19 +43,27 @@
 			</div>
 		</div>
 	</div>
-	<div id="faceList" class="carousel slide" data-interval="false" ng-if="showTools==2">
-		<!-- 轮播（Carousel）指标 -->
-		<ol class="carousel-indicators">
-			<li data-target="#faceList" data-slide-to="{{$index}}" class="{{$index==0?'active':''}}" ng-repeat="facePage in emList.faceList" ></li>
-		</ol> 
-		<div class="carousel-inner" ng-swipe-left="prevCarousel($event)" ng-swipe-right="nextCarousel($event)">
-			<div class="msg-face-box item {{$index==0?'active':''}}" ng-repeat="facePage in emList.faceList" >
-				<div class="clearfix" ng-repeat="faceLine in facePage" >
-					<div ng-click="addEm(face)" ng-repeat="face in faceLine" >
-						<img ng-src="{{face.path}}">
-					<div>
+	<div  ng-if="showTools==2">
+		<div id="faceList" class="carousel slide clearfix" data-interval="false">
+			<div class="carousel-inner" ng-swipe-left="prevCarousel($event)" ng-swipe-right="nextCarousel($event)">
+				<div class="msg-face-box item {{$index==0?'active':''}}" ng-repeat="facePage in emList.faceList" >
+					<div class="clearfix" ng-repeat="faceLine in facePage" >
+						<div ng-click="addEm(face)" ng-repeat="face in faceLine" >
+							<img ng-src="{{face.path}}" />
+						</div>
+					</div>
 				</div>
 			</div>
+
+			<!-- 轮播（Carousel）指标 -->
+			<ol class="carousel-indicators">
+				<li data-target="#faceList" data-slide-to="{{$index}}" class="{{$index==0?'active':''}}" ng-repeat="facePage in emList.faceList" ></li>
+			</ol> 
 		</div>
+		<ul class="nav nav-tabs">
+		   <li class="active"><a data-toggle="tab"><img src="imgs/face/1.gif" /></a></li>
+
+		    <li class="pull-right"><button class="btn btn-info" ng-click="sendMsgByButton()">发送</button></li>
+		</ul>
 	</div>
 </footer>

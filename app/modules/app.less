@@ -71,7 +71,7 @@ footer>ul>li {
 }
 /*聊天界面输入框外层div*/
 footer>div {
-    margin: 7px 4px;
+    margin: 8px 4px 0px 4px;
 }
 
 /*聊天界面语音输入框外层*/
@@ -168,6 +168,27 @@ footer>div {
 }
 .msg-face-box>div>div>img:active{
     border: 1px solid  #4F9AE4;
+}
+// 表情显示框
+#faceList {
+    background-color: white;
+}
+#faceList+ul {
+    border-top: 1px solid #ddd;
+    border-bottom: none;
+}
+#faceList+ul>li {
+    padding: 0px 0px;
+    margin-top: -1px;
+    margin-bottom: 0px;
+}
+#faceList+ul>li>a {
+    padding: 5px 5px;
+    border-radius: 0 0 4px 4px;
+}
+#faceList+ul>li.active>a {
+    border-top: transparent;
+    border-bottom-color: #ddd;
 }
 
 /*底部按钮颜色-非激活*/
@@ -289,7 +310,8 @@ footer>div {
 /*聊天页面的聊天内容-我的*/
 .talk-item-my {
     text-align: right;
-    background-color: #169816;
+    // background-color: #169816;
+    background-color: #F9F3F3;
     float: right;
 }
 /*聊天页面的聊天内容你得*/
@@ -362,4 +384,9 @@ footer>div {
 }
 .carousel-indicators li {
     border: 1px solid #C5C5C5;
+}
+.carousel-indicators {
+    position: initial;
+    width: 100%;
+    margin: 0px auto;
 }

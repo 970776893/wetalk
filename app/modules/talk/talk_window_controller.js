@@ -20,10 +20,10 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 	$rootScope.talkingList = localStorageService.getRecentMsgList(userId, $scope.pageNo, $scope.pageSize);
 	// 显示表情
 	$scope.replaceEm = function(str){
-		str = str.replace(/\</g,'&lt;');
-		str = str.replace(/\>/g,'&gt;');
+		str = str.replace(/</g,'&lt;');
+		str = str.replace(/>/g,'&gt;');
 		str = str.replace(/\n/g,'<br/>');
-		str = str.replace(/\[em-([0-9]*)\]/g,'<img src="/imgs/face/$1.gif"  border="0"/>');
+		str = str.replace(/\[em-([0-9]*)\]/g, '<img src="/imgs/face/$1.gif"  border="0"/>');
 		return str;
 	};
 
@@ -62,7 +62,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 	};
 	$rootScope.sendMsgByButton = function(){
 		//获取焦点
-		$rootScope.msgInputFocus = true;
+		// $rootScope.msgInputFocus = true;
 		$scope.sendMsg();
 	};
 
