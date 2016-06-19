@@ -83,6 +83,12 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 			$('section')[0].scrollTop = $('section')[0].scrollHeight;
 		});
 	}, true);
+	// 监听了消息记录，保持滚动到最下方
+	$scope.$watch('sectionStyle' , function(newValue, oldValue, scope){
+		$timeout(function(){
+			$('section')[0].scrollTop = $('section')[0].scrollHeight;
+		});
+	});
 
 
 	// 消息工具

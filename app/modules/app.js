@@ -35,7 +35,7 @@ app.run(function($rootScope,$route){
 });
 
 // 创建全局函数
-app.run(function($rootScope){
+app.run(function($rootScope, $timeout){
 	//根据用户ID判断是否是正在聊天的用户
 	$rootScope.isTalkingUser = function(userId){
         var talkWindowUrl = '#/talkWindow/';
@@ -51,11 +51,14 @@ app.run(function($rootScope){
 
 	// 只有header和footer不参与滚动
 	$rootScope.changeSectionHeight = function(){
-		var sectionHeight = (window.innerHeight - 102) + 'px';
+		var sectionHeight = (window.innerHeight - $("footer").outerHeight() - $("header").outerHeight()) + 'px';
 		$rootScope.sectionStyle = {
 			'max-height' : sectionHeight
 		};
+		console.log(sectionHeight);
+		$timeout($rootScope.changeSectionHeight, 300).then(function(){}, function(){});
 	};
+	
 	$rootScope.changeSectionHeight();
 });
 
