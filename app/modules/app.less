@@ -273,7 +273,7 @@ footer>div {
     font-size: small;
 }
 .history-time>p{
-    text-align: right;
+    // text-align: right;
     font-size: x-small;
 }
 /*用户列表中检索abcd..放在右边*/
@@ -340,12 +340,14 @@ footer>div {
     float: right;
     width: 5%;
     margin: auto;
+    cursor:pointer;
 }
 .talk-item-you + span{
     color: red;
     float: left;
     width: 5%;
     margin: auto;
+    cursor:pointer;
 }
 
 /* 错误页面css */
@@ -404,4 +406,11 @@ footer>div {
     position: initial;
     width: 100%;
     margin: 0px auto;
+}
+// 确认框的居中显示
+.modal-dialog {
+    position: absolute;
+    width: auto;
+    margin: 10px;
+    top: 30%;
 }

@@ -1,6 +1,6 @@
 /* 用户列表 */
 
-app.controller("talkWindowController", function ($rootScope, $scope, $location, $routeParams, $cookies, $timeout, weService, localStorageService) {
+app.controller("talkWindowController", function ($rootScope, $scope, $location, $routeParams, $cookies, $timeout, popup, weService, localStorageService) {
 	
 	var userId = String($routeParams.id);
 	// 根据用户ID获取用户信息 --------------------------------------------------------------------------
@@ -122,6 +122,17 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 		localStorageService.handlerRecentTalkList($scope.userInfo);
 		console.log('发送语音:' + lengthInSecond + 's');
 		$rootScope.strart4Voice = null;
+	};
+	// 消息重发
+	$scope.reSendMsg = function(item){
+		popup.confim('消息重发', '点击<strong>确定</strong>重新发送该消息').then(function(res){
+			var msgInfo = angular.copy(item);
+			msgInfo.status = 0;
+			msgInfo.time = (new Date()).getTime();
+			$rootScope.talkingList.push(msgInfo);
+			localStorageService.handlerSendMsg($scope.userInfo, msgInfo);
+			localStorageService.handlerRecentTalkList($scope.userInfo);
+		});
 	};
 	
 });

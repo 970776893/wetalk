@@ -6,16 +6,18 @@
 			<td width="18%">
 				<img class="img-thumbnail" ng-src="{{recent.userImgUrl}}"/>
 			</td>
-			<td width="60%" class="{{recent.noReadNum != 0 && recent.noReadNum != null ? 'history-no-readed' : 'history-readed'}}">
+			<td width="64%" class="{{recent.noReadNum != 0 && recent.noReadNum != null ? 'history-no-readed' : 'history-readed'}}">
 				<h5>{{recent.userName}}</h5>
 				<p >{{recent.lastMsgContent}}
 					<span class="badge noread-badge" ng-if="recent.noReadNum != 0 && recent.noReadNum != null">{{recent.noReadNum}}</span>
 				</p>
 			</td>
-			<td width="22%" class="history-time">
-				<p ng-if="recent.isToday">{{recent.lastMsgTime | date:'HH:mm'}}</p>
-				<p ng-if="!recent.isToday">{{recent.lastMsgTime | date:'MM-dd'}}</p>
+			<td width="18%" class="history-time">
+				<p >{{recent.lastMsgTime | date:'MM-dd HH:mm'}}</p>
 			</td>
+			<div width="50%" class="history-time">
+				<p >{{recent.lastMsgTime | date:'HH:mm'}}</p>
+			</div>
 		</tr>
 	</tbody>
 </table>

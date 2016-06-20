@@ -17,7 +17,7 @@ app.factory('popup', function ($uibModal) {
                         $uibModalInstance.dismiss('cancel');
                     };
                 }
-            });
+            }).result;
         }
     };
 });
