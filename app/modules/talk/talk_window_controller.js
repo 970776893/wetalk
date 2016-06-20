@@ -112,7 +112,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 			id : 1,
 			status : Math.random() > 0.5 ? 0 : 1, // 0-成功，1-失败
 			time : (new Date()).getTime(),
-			src : '/test.mp3', //音频存放位置
+			src : '/app/displaydata/test.mp3', //音频存放位置
 			lengthInSecond : lengthInSecond.toFixed(2),
 			sourceType : 2, // 1-接收，2-发送
 			msgType : 2  // 1-文本 2-语音
