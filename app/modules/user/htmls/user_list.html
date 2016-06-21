@@ -1,17 +1,17 @@
 <input type="text" class="form-control input-sm input-search" ng-model="queryData" placeholder="搜索" ng-change="queryByKey()" ng-focus="queryByKeyFocus()" ng-blur="queryByKeyBLur()"/>
 <p class="text-center" ng-if="!userList || userList.length == 0"> 没有数据 </p>
-<table class="table ">
-	<tbody>
-		<tr ng-repeat="user in userList"  ng-click="talk(user)">
-			<td width="18%">
-				<img class="img-thumbnail" ng-src="{{user.imgUrl}}"/>
-			</td>
-			<td width="82%">
-				<h5>{{user.name}}</h5>
-			</td>
-		</tr>
-	</tbody>
-</table>
+
+<div class="content">
+	<div class="clearfix" ng-repeat="user in userList"  ng-click="talk(user)">
+		<div>
+			<img class="img-thumbnail" ng-src="{{user.imgUrl}}"/>
+		</div>
+		<div>
+			<h5>{{user.name}}</h5>
+		</div>
+	</div>
+</div>
+
 <div class= "user-letter">
 	<div ng-repeat="key in queryKeyList" ng-mousemove="queryByinitial(key)">{{key}}</div>
 </div>

@@ -45,7 +45,7 @@
 	</div>
 	<div  ng-if="showTools==2">
 		<div id="faceList" class="carousel slide clearfix" data-interval="false">
-			<div class="carousel-inner" ng-swipe-left="prevCarousel($event)" ng-swipe-right="nextCarousel($event)">
+			<div class="carousel-inner" ng-swipe-up="prevCarousel($event)" ng-swipe-right="nextCarousel($event)">
 				<div class="msg-face-box item {{$index==0?'active':''}}" ng-repeat="facePage in emList.faceList" >
 					<div class="clearfix" ng-repeat="faceLine in facePage" >
 						<div ng-click="addEm(face)" ng-repeat="face in faceLine" >

@@ -25,5 +25,8 @@ app.controller("talkListController", function ($rootScope, $scope, $location, lo
 			$scope.getTalkList();
 		}
 	});
+	$scope.optHistory = function(item){
+		console.log(item);
+	};
 
 });

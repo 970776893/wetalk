@@ -1,7 +1,7 @@
 // 底部导航栏-每个按钮的宽度
 @footer-menu-width : 50%;
 // 支持的设备的最小宽度
-@device-min-width : 260px;
+@device-min-width : 320px;
 // 顶部导航栏高度
 @header-bar-height : 51px;
 // 底导航栏高度
@@ -226,30 +226,42 @@ footer>div {
 
 }
 /*表格边框留白*/
-.table>tbody>tr>td{
+.content>div {
+    background-color: white;
+    border-top: 1px solid #ddd;  
+}
+.content>div>div{
     background-color: white;
     padding : 2px;
     border-top: none;
     vertical-align: middle;
-    border-bottom: 1px solid #ddd;
+    display: inline-block;
+    // float: left; 
 }
 
 /*表格边框留白*/
-.table>tbody>tr>td:first-child{
-    background-color: white;
-    padding : 2px;
-    border-top: none;
-    vertical-align: middle;
-    border-bottom: none;
+.content>div>div:first-child{
+    margin-top: -1px;
+    // width: 18%;
 }
+.content>div>div:nth-child(2){
+    // width: 64%;
+}
+.content>div>div:nth-child(3){
+    // width: 18%;
+    float: right;
+}
+
+
 /*表格头像的大小控制--头像*/
-.table>tbody>tr>td>img{
+.content>div>div>img{
     width: 85%;
     max-width:60px;
     padding: 5px;
     display: block;
     margin: 5px auto 5px auto;
 }
+
 
 /*表格文本大小控制--聊天记录-已读 */
 .history-readed>p{
@@ -315,6 +327,13 @@ footer>div {
     margin: auto 4px;
     // @em-face-size
 }
+.talk-item +  span{
+    color: red;
+    // float: right;
+    width: 5%;
+    margin: auto;
+    cursor:pointer;
+}
 /*聊天页面的聊天内容-我的*/
 .talk-item-my {
     text-align: right;
@@ -335,20 +354,7 @@ footer>div {
     background-color: white;
     float: left;
 }
-.talk-item-my + span{
-    color: red;
-    float: right;
-    width: 5%;
-    margin: auto;
-    cursor:pointer;
-}
-.talk-item-you + span{
-    color: red;
-    float: left;
-    width: 5%;
-    margin: auto;
-    cursor:pointer;
-}
+
 
 /* 错误页面css */
 .error-page>footer {
@@ -370,10 +376,20 @@ footer>div {
 }
 
 /*表格边框留白*/
-.we-talkwindow .table>tbody>tr>td{
+.we-talkwindow .content>div>div{
     background-color: #EAE8E8;
     border: none;
     vertical-align: middle;
+}
+.we-talkwindow .content>div {
+    background-color: transparent;
+    border-top: none; 
+}
+.we-talkwindow .content>div>div:nth-child(1) {
+    max-width: 20%; 
+}
+.we-talkwindow .content>div>div:nth-child(2) {
+    max-width: 70%; 
 }
 
 /* 发送消息动画 */

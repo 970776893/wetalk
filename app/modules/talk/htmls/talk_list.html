@@ -1,23 +1,18 @@
 <input type="text" class="form-control input-sm input-search" mg-model="query" placeholder="搜索">
 <p class="text-center" ng-if="!talkList || talkList.length == 0">  没有数据 </p>
-<table class="table ">
-	<tbody>
-		<tr ng-repeat="recent in talkList" ng-click="talk(recent)">
-			<td width="18%">
-				<img class="img-thumbnail" ng-src="{{recent.userImgUrl}}"/>
-			</td>
-			<td width="64%" class="{{recent.noReadNum != 0 && recent.noReadNum != null ? 'history-no-readed' : 'history-readed'}}">
-				<h5>{{recent.userName}}</h5>
-				<p >{{recent.lastMsgContent}}
-					<span class="badge noread-badge" ng-if="recent.noReadNum != 0 && recent.noReadNum != null">{{recent.noReadNum}}</span>
-				</p>
-			</td>
-			<td width="18%" class="history-time">
-				<p >{{recent.lastMsgTime | date:'MM-dd HH:mm'}}</p>
-			</td>
-			<div width="50%" class="history-time">
-				<p >{{recent.lastMsgTime | date:'HH:mm'}}</p>
-			</div>
-		</tr>
-	</tbody>
-</table>
+<div class="content">
+	<div class="clearfix" ng-repeat="recent in talkList" ng-click="talk(recent)">
+		<div >
+			<img class="img-thumbnail" ng-src="{{recent.userImgUrl}}"/>
+		</div>
+		<div class="{{recent.noReadNum != 0 && recent.noReadNum != null ? 'history-no-readed' : 'history-readed'}}">
+			<h5>{{recent.userName}}</h5>
+			<p >{{recent.lastMsgContent.substring(0,10)}}
+				<span class="badge noread-badge" ng-if="recent.noReadNum != 0 && recent.noReadNum != null">{{recent.noReadNum}}</span>
+			</p>
+		</div>
+		<div class="history-time">
+			<p>{{recent.lastMsgTime | date:'MM-dd HH:mm'}}</p>
+		</div>
+	</div>
+</div>
