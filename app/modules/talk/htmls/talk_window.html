@@ -1,26 +1,3 @@
-<!-- <table class="table clearfix">
-	<tbody>
-		<tr ng-repeat="history in $root.talkingList | orderBy:'time':false" class="talk-item-animation">
-			<td style="width: 15%;" >
-				<img class="img-thumbnail" ng-src="{{userInfo.imgUrl}}" ng-if="history.sourceType == 1"/>
-			</td>	
-			<td style="width: 70%">
-				<div class="talk-item panel-body {{history.sourceType == 1 ? 'talk-item-you':'talk-item-my'}}">
-					<div ng-if="history.msgType == 1" ng-bind-html="replaceEm(history.content)">
-					</div>
-					<div ng-if="history.msgType == 2" class="{{history.msgType == 2 ? 'talk-item-my-voice' : ''}}" ng-click="sounding(history)">
-						<img src="/imgs/voice.png" border="0"> {{history.lengthInSecond + 's'}}
-					</div>
-				</div>
-				<span ng-if="history.status==1" ng-click="reSendMsg(history)" class="navbar-text glyphicon glyphicon-repeat"></span>
-			</td>
-			<td style="width: 15%;" >
-				<img class="img-thumbnail" ng-src="{{loginUser.imgUrl}}" ng-if="history.sourceType == 2"/>
-			</td>
-		</tr>
-	</tbody>
-</table>
- -->
  <div class="content">
  	<div class="clearfix" ng-repeat="history in $root.talkingList|orderBy:'time':false" class="talk-item-animation">
  		<div ng-if="history.sourceType == 1">
