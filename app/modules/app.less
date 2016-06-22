@@ -21,7 +21,8 @@ section {
     min-width: @device-min-width;
     position: absolute;
     width: 100%;
-    overflow : auto;
+    overflow-y : auto;
+    overflow-x: hidden; 
     padding: 0;
     margin: 0;
     top: @header-bar-height;
@@ -349,6 +350,29 @@ footer>div {
 .talk-item-you {
     text-align: left;
     background-color: white;
+    float: left;
+}
+.show-opt-wapper {
+    transform : translateX(-150px);
+    -webkit-transform : translateX(-150px);
+    -moz-transform : translateX(-150px);
+    -o-transform : translateX(-150px);
+    transition : 1s linear;
+    -webkit-transition : 1s linear;
+    -moz-transition : 1s linear;
+    -o-transition : 1s linear;
+}
+.opt-wapper {
+    position: absolute;
+    left: 100%;
+    width: 150px;
+    height: 100%;
+}
+.opt-wapper>.opt-item {
+    height: 100%;
+    text-align: center;
+    color: white;
+    padding: 12% 0px;
     float: left;
 }
 

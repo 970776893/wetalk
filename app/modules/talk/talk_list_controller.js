@@ -26,7 +26,18 @@ app.controller("talkListController", function ($rootScope, $scope, $location, lo
 		}
 	});
 	$scope.optHistory = function(item){
-		console.log(item);
+		var userId = item.userId;
+		var index = 0;
+		for(; index < $scope.talkList.length; index++){
+			if(String($scope.talkList[index].userId) === String(item.userId)){
+				break;
+			}
+		}
+		console.log(index);
+		$scope.showOptIndex = index;
 	};
+	$scope.hiddenOpt = function(){
+		$scope.showOptIndex = -1;
+	}
 
 });

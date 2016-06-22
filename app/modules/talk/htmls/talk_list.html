@@ -1,7 +1,7 @@
 <input type="text" class="form-control input-sm input-search" mg-model="query" placeholder="搜索">
 <p class="text-center" ng-if="!talkList || talkList.length == 0">  没有数据 </p>
 <div class="content">
-	<div class="clearfix" ng-repeat="recent in talkList" ng-click="talk(recent)">
+	<div class="clearfix {{$index==showOptIndex?'show-opt-wapper':''}}" ng-repeat="recent in talkList" ng-click="talk(recent)" ng-swipe-left="optHistory(recent)"  ng-swipe-right="hiddenOpt()">
 		<div >
 			<img class="img-thumbnail" ng-src="{{recent.userImgUrl}}"/>
 		</div>
@@ -13,6 +13,10 @@
 		</div>
 		<div class="history-time">
 			<p>{{recent.lastMsgTime | date:'MM-dd HH:mm'}}</p>
+		</div>
+		<div class="opt-wapper">
+			<div class="opt-item" style="background-color: red; width: 40%;">删除</div>
+			<div class="opt-item" style="background-color: gray; width: 60%;">标记未读</div>
 		</div>
 	</div>
 </div>
