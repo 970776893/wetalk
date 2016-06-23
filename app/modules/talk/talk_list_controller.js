@@ -38,6 +38,6 @@ app.controller("talkListController", function ($rootScope, $scope, $location, lo
 	};
 	$scope.hiddenOpt = function(){
 		$scope.showOptIndex = -1;
-	}
+	};
 
 });

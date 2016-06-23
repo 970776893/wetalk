@@ -8,6 +8,8 @@
 @footer-bar-height : 51px;
 // 表情的尺寸（正方形）
 @em-face-size : 36px;
+// 列表页面的高度
+@list-item-height : 55px;
 
 body {
     width: 100%;
@@ -230,27 +232,36 @@ footer>div {
 .content>div {
     // transform: translateX(-40%);
     background-color: white;
-    border-top: 1px solid #ddd;  
+    border-top: 1px solid #ddd;
+    height: (@list-item-height + 1);
 }
 .content>div>div{
     background-color: white;
     padding : 2px;
     border-top: none;
     vertical-align: middle;
-    display: inline-block;
-    // float: left; 
+    display: block;
+    height: @list-item-height;
+    float: left; 
 }
 
 /*表格边框留白*/
 .content>div>div:first-child{
     margin-top: -1px;
-    // width: 18%;
+    width: 18%;
+}
+.content>div>div:nth-child(2){
+    width: 64%;
+}
+.content>div>div:nth-child(3){
+    width: 18%;
 }
 
 
 /*表格头像的大小控制--头像*/
 .content>div>div>img{
-    width: 85%;
+    width: (@list-item-height - 10px);
+    height: (@list-item-height - 10px);
     max-width:60px;
     padding: 5px;
     display: block;
@@ -279,11 +290,9 @@ footer>div {
     background-color: red;
     font-size: small;
 }
-.history-time {
-    float: right;
-}
+
 .history-time>p{
-    // text-align: right;
+    text-align: center;
     font-size: x-small;
 }
 /*用户列表中检索abcd..放在右边*/
@@ -369,11 +378,11 @@ footer>div {
     height: 100%;
 }
 .opt-wapper>.opt-item {
-    height: 100%;
+    margin-top: -1px;
     text-align: center;
     color: white;
-    padding: 12% 0px;
     float: left;
+    line-height: (@list-item-height - 1);
 }
 
 
