@@ -1,22 +1,20 @@
 <input type="text" class="form-control input-sm input-search" mg-model="query" placeholder="搜索">
 <p class="text-center" ng-if="!talkList || talkList.length == 0">  没有数据 </p>
-<div class="content">
-	<div class="clearfix {{$index==showOptIndex?'show-opt-wapper':''}}" ng-repeat="recent in talkList" ng-click="talk(recent)" ng-swipe-left="optHistory(recent)"  ng-swipe-right="hiddenOpt()">
-		<div >
-			<img class="img-thumbnail" ng-src="{{recent.userImgUrl}}"/>
+<div >
+	<div class="clearfix recent-list-item {{$index==showOptIndex?'show-opt-wapper':''}}" ng-repeat="recent in talkList" ng-click="talk(recent)" ng-swipe-left="optHistory(recent)"  ng-swipe-right="hiddenOpt()">
+		<div class="purikura">
+			<img ng-src="{{recent.userImgUrl}}"/>
 		</div>
-		<div class="{{recent.noReadNum != 0 && recent.noReadNum != null ? 'history-no-readed' : 'history-readed'}}">
-			<h5>{{recent.userName}}</h5>
-			<p >{{recent.lastMsgContent.substring(0,10)}}
+		<div class="content">
+			<div class="name">{{recent.userName}}</div>
+			<div class="message">{{recent.lastMsgContent.substring(0,10)}}
 				<span class="badge noread-badge" ng-if="recent.noReadNum != 0 && recent.noReadNum != null">{{recent.noReadNum}}</span>
-			</p>
+			</div>
 		</div>
-		<div class="history-time">
-			<p>{{recent.lastMsgTime | date:'MM-dd HH:mm'}}</p>
+		<div class="time">
+			{{recent.lastMsgTime | date:'MM-dd HH:mm'}}
 		</div>
-		<div class="opt-wapper">
-			<div class="opt-item" style="background-color: red; width: 40%;">删除</div>
-			<div class="opt-item" style="background-color: gray; width: 60%;">标记未读</div>
-		</div>
+		<div class="opt-del">删除</div>
+		<div class="opt-mark">标记未读</div>
 	</div>
 </div>

@@ -53,7 +53,7 @@ app.run(function($rootScope, $timeout){
 	$rootScope.changeSectionHeight = function(){
 		var sectionHeight = (window.innerHeight - $("footer").outerHeight() - $("header").outerHeight()) + 'px';
 		$rootScope.sectionStyle = {
-			'max-height' : sectionHeight
+			'height' : sectionHeight
 		};
 		console.log(sectionHeight);
 		$timeout($rootScope.changeSectionHeight, 300).then(function(){}, function(){});
