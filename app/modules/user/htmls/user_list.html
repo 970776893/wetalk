@@ -1,16 +1,14 @@
-<input type="text" class="form-control input-sm input-search" ng-model="queryData" placeholder="搜索" ng-change="queryByKey()" ng-focus="queryByKeyFocus()" ng-blur="queryByKeyBLur()"/>
+<input type="text" class="form-control input-sm input-search" ng-model="queryData" placeholder="搜索" ng-change="queryByKey()" ng-blur="queryByKeyBLur()"/>
 <p class="text-center" ng-if="!userList || userList.length == 0"> 没有数据 </p>
 
 <div>
-	<div class="clearfix user-list-item  {{$index==showOptIndex?'show-opt-wapper':''}}" ng-repeat="user in userList"  ng-click="talk(user)"  ng-swipe-left="optUser(user)"  ng-swipe-right="hiddenOpt()">
+	<div class="clearfix user-list-item  {{$index==showOptIndex?'show-opt-wapper':''}}" ng-repeat="user in userList"  ng-click="talk(user)">
 		<div class="purikura">
 			<img ng-src="{{user.imgUrl}}"/>
 		</div>
 		<div class="content">
 			<div>{{user.name}}</div>
 		</div>
-		<div class="opt-del">删除</div>
-		<div class="opt-mark">标记未读</div>
 	</div>
 </div>
 

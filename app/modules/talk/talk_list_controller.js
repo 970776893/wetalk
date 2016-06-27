@@ -5,13 +5,7 @@ app.controller("talkListController", function ($rootScope, $scope, $location, lo
 	//初始化数据
 	$scope.getTalkList = function(){
 		$scope.talkList = localStorageService.getRecentTalkList();
-		var today = new Date();
-		angular.forEach($scope.talkList, function(talk){
-			var msgTime = new Date(talk.lastMsgTime);
-			if(today.getFullYear() === msgTime.getFullYear() && today.getMonth() === msgTime.getMonth() && today.getDate() === msgTime.getDate()){
-				talk.isToday = true;
-			} 
-		});
+		$scope.talkListOrg = $scope.talkList;
 		$rootScope.refreshTalkList = false;
 	};
 	$scope.getTalkList();
@@ -25,19 +19,19 @@ app.controller("talkListController", function ($rootScope, $scope, $location, lo
 			$scope.getTalkList();
 		}
 	});
-	$scope.optHistory = function(item){
-		var userId = item.userId;
-		var index = 0;
-		for(; index < $scope.talkList.length; index++){
-			if(String($scope.talkList[index].userId) === String(item.userId)){
-				break;
+	//搜索
+	$scope.queryByKey = function(){
+		$scope.talkList = [];
+		angular.forEach($scope.talkListOrg, function(item){
+			if(item.userName.indexOf($scope.queryData) !== -1 || (String(item.lastMsgContent).indexOf($scope.queryData) !== -1)){
+				$scope.talkList.push(item);
 			}
-		}
-		console.log(index);
-		$scope.showOptIndex = index;
+		});
 	};
-	$scope.hiddenOpt = function(){
-		$scope.showOptIndex = -1;
+	//搜索-结束
+	$scope.queryByKeyBLur = function(){
+		$scope.talkList = $scope.talkListOrg;
+		$scope.queryData = null;
 	};
 
 });
