@@ -338,7 +338,8 @@ app.service("localStorageService", function ($rootScope, $http, $cookies) {
                     if(String(recentUsers[index].userId) === String(userId)){
                         break;
                     }
-                };
+                }
+                
                 recentUsers.splice(index,1);
                 storage.setItem(key, JSON.stringify(recentUsers));
                 var iKey =  loginUser.id + "_history_" + userId;

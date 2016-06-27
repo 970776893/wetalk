@@ -49,6 +49,17 @@ app.run(function($rootScope, $timeout){
         return isTalkWindows;
 	};
 
+
+	//判断是否微信浏览器
+	$rootScope.isWeiXin = function() {
+	    var ua = window.navigator.userAgent.toLowerCase();
+	    if(ua.match(/MicroMessenger/i) === 'micromessenger'){
+	        return true;
+	    }else{
+	        return false;
+	    }
+	};
+
 	// 只有header和footer不参与滚动
 	$rootScope.changeSectionHeight = function(){
 		var sectionHeight = (window.innerHeight - $("footer").outerHeight() - $("header").outerHeight()) + 'px';
@@ -56,7 +67,7 @@ app.run(function($rootScope, $timeout){
 			'height' : sectionHeight
 		};
 		//body滚动到最顶部
-		if(isWeiXin()){
+		if($rootScope.isWeiXin()){
 			$('body')[0].scrollTop = 0;
 		}
 		$timeout($rootScope.changeSectionHeight, 300).then(function(){}, function(){});
@@ -168,15 +179,6 @@ app.run(function($rootScope){
 
 });
 
-//判断是否微信浏览器
-function isWeiXin(){
-    var ua = window.navigator.userAgent.toLowerCase();
-    if(ua.match(/MicroMessenger/i) == 'micromessenger'){
-        return true;
-    }else{
-        return false;
-    }
-}
 // 模拟收到消息   测试数据--------------------------------------------------start
 app.run(function($rootScope, $cookies, weService){
 	$rootScope.testGetMessageRondom = function(){
