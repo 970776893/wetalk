@@ -315,6 +315,37 @@ app.service("localStorageService", function ($rootScope, $http, $cookies) {
                 console.log("不支持本地存储");
             }
             return total;
+        },
+        /*
+            删除用户聊天
+
+        */
+        deleteUserHistory : function(userId){
+            // 当前登陆用户
+            var loginUser = $cookies.getObject('loginUser');
+            var storage = window.localStorage;
+            var recentUsers = [];
+            //是否支持本地存储
+            if(storage){
+                var key = loginUser.id + '_recent_users';
+                recentUsers = storage.getItem(key);
+                if(recentUsers === null){
+                    return ;
+                }
+                recentUsers = JSON.parse(recentUsers);
+                var index = 0;
+                for(; index < recentUsers.length; index++){
+                    if(String(recentUsers[index].userId) === String(userId)){
+                        break;
+                    }
+                };
+                recentUsers.splice(index,1);
+                storage.setItem(key, JSON.stringify(recentUsers));
+                var iKey =  loginUser.id + "_history_" + userId;
+                storage.removeItem(iKey);
+            }else{
+                console.log("不支持本地存储");
+            }
         }
 
     };

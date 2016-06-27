@@ -46,4 +46,13 @@ app.controller("talkListController", function ($rootScope, $scope, $location, lo
 	$scope.hiddenOpt = function(){
 		$scope.showOptIndex = -1;
 	};
+	//删除
+	$scope.delete = function(item, $event){
+		localStorageService.deleteUserHistory(item.userId);
+		$scope.getTalkList();
+		$rootScope.noreadNumTotal = $rootScope.noreadNumTotal - item.noReadNum;
+		$scope.showOptIndex = -1;
+		//取消动画效果
+		$($event.target).parent().removeClass('show-opt-wapper');
+	};
 });
