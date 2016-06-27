@@ -55,7 +55,6 @@ app.run(function($rootScope, $timeout){
 		$rootScope.sectionStyle = {
 			'height' : sectionHeight
 		};
-		console.log(sectionHeight);
 		$timeout($rootScope.changeSectionHeight, 300).then(function(){}, function(){});
 	};
 	
@@ -197,7 +196,7 @@ app.run(function($rootScope, $cookies, weService){
         var isTalkWindows = false;
         if(window.location.hash.indexOf(talkWindowUrl) === -1){
         	console.log('不是聊天窗口');
-           return ;
+            return ;
         }
         var fromUserId =　Number(window.location.hash.substring(talkWindowUrl.length));
 		weService.getUserList().then(function(res){
