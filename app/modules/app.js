@@ -55,6 +55,10 @@ app.run(function($rootScope, $timeout){
 		$rootScope.sectionStyle = {
 			'height' : sectionHeight
 		};
+		//body滚动到最顶部
+		if(isWeiXin()){
+			$('body')[0].scrollTop = 0;
+		}
 		$timeout($rootScope.changeSectionHeight, 300).then(function(){}, function(){});
 	};
 	
@@ -164,7 +168,15 @@ app.run(function($rootScope){
 
 });
 
-
+//判断是否微信浏览器
+function isWeiXin(){
+    var ua = window.navigator.userAgent.toLowerCase();
+    if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+        return true;
+    }else{
+        return false;
+    }
+}
 // 模拟收到消息   测试数据--------------------------------------------------start
 app.run(function($rootScope, $cookies, weService){
 	$rootScope.testGetMessageRondom = function(){
