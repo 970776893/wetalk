@@ -33,5 +33,17 @@ app.controller("talkListController", function ($rootScope, $scope, $location, lo
 		$scope.talkList = $scope.talkListOrg;
 		$scope.queryData = null;
 	};
-
+	//显示操作
+	$scope.optHistory = function(item){
+		var index = 0;
+		for(; index < $scope.talkList.length; index++){
+			if(String($scope.talkList[index].userId) === String(item.userId)){
+				break;
+			}
+		}
+		$scope.showOptIndex = index;
+	};
+	$scope.hiddenOpt = function(){
+		$scope.showOptIndex = -1;
+	};
 });

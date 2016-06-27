@@ -354,6 +354,7 @@ footer>div {
     width:(@em-face-size - 12px);
     height:(@em-face-size - 12px);
     margin: auto 4px;
+    // @em-face-size
 }
 //聊天窗口-内容-聊天内容-发送失败
 .talk-window-item .content .failed{
@@ -383,6 +384,8 @@ footer>div {
     background-color: white;
     float: left;
 }
+
+
 /*表格文本大小控制--聊天记录-已读 */
 .history-readed>p{
     margin: 0 0 0 0;
@@ -429,8 +432,17 @@ footer>div {
 .user-letter>div{
     font-size: x-small;
 }
-
-
+// 左划动画
+.show-opt-wapper {
+    transform : translateX(-150px);
+    -webkit-transform : translateX(-150px);
+    -moz-transform : translateX(-150px);
+    -o-transform : translateX(-150px);
+    transition : 1s linear;
+    -webkit-transition : 1s linear;
+    -moz-transition : 1s linear;
+    -o-transition : 1s linear;
+}
 /* 错误页面css */
 .error-page>footer {
     display: none !important;
