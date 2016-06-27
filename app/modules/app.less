@@ -236,22 +236,22 @@ footer>div {
 
 }
 
-//最近聊天页面的每一条
-.recent-list-item {
+//消息列表，用户列表
+.recent-list-item, .user-list-item{
     background-color: white;
     border-top: 1px solid #ddd;
     width: 200%;
 }
-//头像
-.recent-list-item .purikura {
+//消息列表-头像，用户列表-头像
+.recent-list-item .purikura, .user-list-item .purikura{
     margin-top: -1px;
-    background-color: white;
+    background-color: transparent;
     height: @list-item-height ;
     width: 9%;
     float: left;
 }
-//头像-图片
-.recent-list-item .purikura>img {
+//消息列表-头像-图片，用户列表-头像-图片
+.recent-list-item .purikura>img, .user-list-item .purikura>img, .talk-window-item .purikura>img{
     padding: 4px;
     line-height: 1.42857143;
     background-color: #fff;
@@ -262,20 +262,20 @@ footer>div {
     height: (@list-item-height - 4 - 2);
     width: (@list-item-height - 4 - 2);
 }
-//内容
+//消息列表-内容
 .recent-list-item .content {
     width: 32%;
     height: @list-item-height;
     float: left;
     padding-left: 6px;
 }
-//内容-用户名
+//消息列表-内容-用户名
 .recent-list-item .content>.name {
     font-style: inherit;
     height: (@list-item-height * 0.6);
     line-height:(@list-item-height * 0.6);
 }
-//内容-最后一条消息
+//消息列表-内容-最后一条消息
 .recent-list-item .content>.message {
     padding-left: 7px;
     height: (@list-item-height * 0.4);
@@ -283,7 +283,7 @@ footer>div {
     color: #666666;
     // line-height: (@list-item-height * 0.4);
 }
-//时间
+//消息列表-时间
 .recent-list-item .time {
     width: 9%;
     font-size: x-small;
@@ -291,59 +291,98 @@ footer>div {
     padding-top: 10px;
     float: left;
 }
-//删除操作
-.recent-list-item .opt-del {
-    width: 50px;
+//消息列表-删除操作,用户列表-删除操作
+.recent-list-item .opt-del, .user-list-item .opt-del{
+    width: 70px;
     background-color: red;
     height: @list-item-height;
+    line-height: @list-item-height;
+    text-align: center;
     float: left;
+    font-weight: 600;
 }
-//标记未读
-.recent-list-item .opt-mark {
-    width: 100px;
+//消息列表-标记,用户列表-标记
+.recent-list-item .opt-mark, .user-list-item .opt-mark{
+    width: 80px;
     background-color: #777777;
     height: @list-item-height;
+    line-height: @list-item-height;
+    text-align: center;
     float: left;
 }
 
-
-
-
-/*表格边框留白*/
-.content>div {
-    // transform: translateX(-40%);
-    
+//用户列表-内容
+.user-list-item .content {
+    width: 41%;
+    height: @list-item-height;
+    line-height: @list-item-height;
+    float: left;
+    padding-left: 6px;
 }
-.content>div>div{
+//聊天窗口
+.talk-window-item {
+    background-color: transparent;
+    width: 100%;
+}
+//聊天窗口-头像
+.talk-window-item .purikura{
+    background-color: transparent;
+    height: @list-item-height ;
+    width: 18%;
+    float: left;
+}
+//聊天窗口-内容
+.talk-window-item .content {
+    width: 70%;
+    margin : 4px 0px;
+    float: left;
+}
+//聊天窗口-内容-聊天内容
+.talk-window-item .content>div {
+    -webkit-border-radius:5px;  
+    -moz-border-radius:5px;
+    border-radius: 10px;
+    padding: 14px 8px 14px 8px;
+    max-width: 95%;
+    width: auto;
+    display: inline-block;
+    word-break: break-all;
+    max-width: 90%;
+}
+//聊天窗口-内容-聊天内容-图片表情
+.talk-window-item .content>div>div>img{
+    width:(@em-face-size - 12px);
+    height:(@em-face-size - 12px);
+    margin: auto 4px;
+    // @em-face-size
+}
+//聊天窗口-内容-聊天内容-发送失败
+.talk-window-item .content .failed{
+    color: red;
+    float: right;
+    width: 5%;
+    margin: auto 2px;
+    cursor:pointer;
+}
+/*聊天页面的聊天内容-我的*/
+.talk-item-my {
+    text-align: right;
+    background-color: #F9F3F3;
+    float: right;
+}
+.talk-item-my-voice>img{
+    float: right;
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+}
+
+/*聊天页面的聊天内容你得*/
+.talk-item-you {
+    text-align: left;
     background-color: white;
-    padding : 4px;
-    border-top: none;
-    vertical-align: middle;
-    display: block;
-    height: 100%;
-    float: left; 
-}
-
-/*表格边框留白*/
-.content>div>div:first-child{
-    margin-top: -1px;
-    width: 9%;
-}
-.content>div>div:nth-child(2){
-    width: 32%;
-}
-.content>div>div:nth-child(3){
-    width: 9%;
-}
-
-
-/*表格头像的大小控制--头像*/
-.content>div>div>img{
-    width: (@list-item-height - 18px);
-    height: (@list-item-height - 18px);
-    padding: 5px;
-    display: block;
-    margin: 5px auto 5px auto;
+    float: left;
 }
 
 
@@ -393,52 +432,7 @@ footer>div {
 .user-letter>div{
     font-size: x-small;
 }
-/*聊天页面的聊天内容显示*/
-.talk-item {
-    -webkit-border-radius:5px;  
-    -moz-border-radius:5px;
-    border-radius: 10px;
-    padding: 14px 8px 14px 8px;
-    max-width: 95%;
-    width: auto;
-    display: inline-block;
-    word-break: break-all;
-    max-width: 100%;
-}
-// 显示图片表情
-.talk-item>div>img{
-    width:(@em-face-size - 12px);
-    height:(@em-face-size - 12px);
-    margin: auto 4px;
-    // @em-face-size
-}
-.talk-item +  span{
-    color: red;
-    float: right;
-    width: 5%;
-    margin: auto 2px;
-    cursor:pointer;
-}
-/*聊天页面的聊天内容-我的*/
-.talk-item-my {
-    text-align: right;
-    background-color: #F9F3F3;
-    float: right;
-}
-.talk-item-my-voice>img{
-    float: right;
-    transform: rotate(180deg);
-    -webkit-transform: rotate(180deg);
-    -moz-transform: rotate(180deg);
-    -o-transform: rotate(180deg);
-}
 
-/*聊天页面的聊天内容你得*/
-.talk-item-you {
-    text-align: left;
-    background-color: white;
-    float: left;
-}
 .show-opt-wapper {
     transform : translateX(-150px);
     -webkit-transform : translateX(-150px);
@@ -479,22 +473,22 @@ footer>div {
 }
 
 /*表格边框留白*/
-.we-talkwindow .content>div>div{
-    background-color: #EAE8E8;
-    border: none;
-    vertical-align: middle;
-}
-.we-talkwindow .content>div {
-    background-color: transparent;
-    border-top: none; 
-    width: 100%;
-}
-.we-talkwindow .content>div>div:nth-child(1), .we-talkwindow .content>div>div:nth-child(3)  {
-    width: 18%; 
-}
-.we-talkwindow .content>div>div:nth-child(2) {
-    max-width: 64%; 
-}
+// .we-talkwindow .content>div>div{
+//     background-color: #EAE8E8;
+//     border: none;
+//     vertical-align: middle;
+// }
+// .we-talkwindow .content>div {
+//     background-color: transparent;
+//     border-top: none; 
+//     width: 100%;
+// }
+// .we-talkwindow .content>div>div:nth-child(1), .we-talkwindow .content>div>div:nth-child(3)  {
+//     width: 18%; 
+// }
+// .we-talkwindow .content>div>div:nth-child(2) {
+//     max-width: 64%; 
+// }
 
 /* 发送消息动画 */
 .talk-item-animation{

@@ -51,5 +51,18 @@ app.controller("userListController", function ($rootScope, $scope, $location, we
 	$scope.queryByKeyFocus = function(){
 		$scope.userList = [];
 	};
+	//显示操作
+	$scope.optUser = function(item){
+		var index = 0;
+		for(; index < $scope.userList.length; index++){
+			if(String($scope.userList[index].id) === String(item.id)){
+				break;
+			}
+		}
+		$scope.showOptIndex = index;
+	};
+	$scope.hiddenOpt = function(){
+		$scope.showOptIndex = -1;
+	};
 
 });
