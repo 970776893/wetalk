@@ -43,10 +43,7 @@ app.controller("userListController", function ($rootScope, $scope, $location, we
 		if(index === initials.length || potionY < top){
 			return;
 		}
-		console.log($event.originalEvent.touches[0]);
-		console.log(potionY + '-' + top + '-' + height + '-' + (top + height));
 		var key = $(initials[index]).text();
-		console.log(key);
 		var targetHtml = $('SUB:contains(' + key + ')').parent().parent().parent()[0];
 		targetHtml.scrollIntoView();
 	};
