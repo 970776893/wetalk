@@ -29,9 +29,23 @@ app.controller("userListController", function ($rootScope, $scope, $location, we
 		$location.path("/talkWindow/" + user.id);
 	};
 
-	$scope.queryByinitial = function(key){
+	$scope.queryByinitial = function($event){
 		//隐藏其他按钮
-		console.log(key);
+		var initials = $($event.target).parent().children();
+		var potionY = $event.originalEvent.touches[0].clientY;
+		for(var index = 0; index < initials.length; index++){
+			var top = $(initials[index]).offset().top;
+			var height = $(initials[index]).height();
+			if(potionY > top && (potionY < top + height)){
+				break;
+			}
+		}
+		if(index === initials.length){
+			return;
+		}
+		var key = $(initials[index]).text();
+		var targetHtml = $('SUB:contains(' + key + ')').parent().parent().parent()[0];
+		targetHtml.scrollIntoView();
 	};
 	//搜索
 	$scope.queryByKey = function(){

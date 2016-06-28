@@ -7,11 +7,11 @@
 			<img ng-src="{{user.imgUrl}}"/>
 		</div>
 		<div class="content"  ng-click="talk(user)">
-			<div>{{user.name}}</div>
+			<div>{{user.name}}<SUB ng-show="0">{{user.initial}}</SUB></div>
 		</div>
 	</div>
 </div>
 
-<div class= "user-letter">
-	<div ng-repeat="key in queryKeyList" ng-mousemove="queryByinitial(key)">{{key}}</div>
+<div class= "user-letter" ng-if="1">
+	<div ng-repeat="key in queryKeyList" ng-touchmove="queryByinitial($event)">{{key}}</div>
 </div>
