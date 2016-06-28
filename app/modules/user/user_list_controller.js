@@ -32,18 +32,21 @@ app.controller("userListController", function ($rootScope, $scope, $location, we
 	$scope.queryByinitial = function($event){
 		//隐藏其他按钮
 		var initials = $($event.target).parent().children();
-		var potionY = $event.originalEvent.touches[0].clientY;
+		var potionY = $event.originalEvent.touches[0].pageY;
 		for(var index = 0; index < initials.length; index++){
 			var top = $(initials[index]).offset().top;
 			var height = $(initials[index]).height();
-			if(potionY > top && (potionY < top + height)){
+			if(potionY > top && (potionY <= top + height)){
 				break;
 			}
 		}
-		if(index === initials.length){
+		if(index === initials.length || potionY < top){
 			return;
 		}
+		console.log($event.originalEvent.touches[0]);
+		console.log(potionY + '-' + top + '-' + height + '-' + (top + height));
 		var key = $(initials[index]).text();
+		console.log(key);
 		var targetHtml = $('SUB:contains(' + key + ')').parent().parent().parent()[0];
 		targetHtml.scrollIntoView();
 	};
