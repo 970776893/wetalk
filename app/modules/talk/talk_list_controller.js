@@ -57,4 +57,5 @@ app.controller("talkListController", function ($rootScope, $scope, $location, po
 			$($event.target).parent().removeClass('show-opt-wapper');
 		});
 	};
+	$scope.showReload = false;
 });

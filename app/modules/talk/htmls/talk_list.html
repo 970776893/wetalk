@@ -1,3 +1,7 @@
+<div class="tip-message" ng-if="showReload">
+	<span class="glyphicon glyphicon-refresh reload" aria-hidden="true"></span>
+</div>
+
 <input type="text" class="form-control input-sm input-search" ng-model="queryData" placeholder="搜索" ng-change="queryByKey()" ng-blur="queryByKeyBLur()">
 <p class="text-center" ng-if="!talkList || talkList.length == 0">  没有数据 </p>
 <div >
