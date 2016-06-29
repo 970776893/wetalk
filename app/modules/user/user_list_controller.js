@@ -40,7 +40,7 @@ app.controller("userListController", function ($rootScope, $scope, $location, we
 				break;
 			}
 		}
-		if(index === initials.length || potionY < top){
+		if(index === initials.length){
 			return;
 		}
 		var key = $(initials[index]).text();

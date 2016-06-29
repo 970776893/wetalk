@@ -1,5 +1,6 @@
  <div>
  	<div class="clearfix talk-item-animation talk-window-item" ng-repeat="history in $root.talkingList|orderBy:'time':false">
+ 		<div class="time">{{history.time|date : 'MM-dd HH:mm'}}</div>
  		<div class="purikura {{history.sourceType == 2 ? 'pull-right' : ''}}" ng-if="history.sourceType == 2">
  			<img ng-src="{{loginUser.imgUrl}}" />
  		</div>
