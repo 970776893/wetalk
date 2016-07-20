@@ -1,19 +1,48 @@
-<input type="text" class="form-control input-sm input-search" ng-model="queryData" placeholder="搜索" ng-change="queryByKey()" ng-blur="queryByKeyBLur()"/>
-<p class="text-center" ng-if="!userList || userList.length == 0"> 没有数据 </p>
+<div id="wrapper" style="height: 100%">
+	<div style="position: absolute;width: 100%;">
+		<div class="tip-message"  ng-if="showTip">
+			<p class="text-center"> {{tip}} </p>
+		</div>
+		<input type="text" class="form-control input-sm input-search" ng-model="queryData" placeholder="搜索" ng-change="queryByKey()" ng-blur="queryByKeyBLur()"/>
+		<p class="text-center" ng-if="!userList || userList.length == 0"> 没有数据 </p>
 
-<div>
-	<div class="clearfix user-list-item  {{$index==showOptIndex?'show-opt-wapper':''}}" ng-repeat="user in userList"  ng-swipe-left="showOpt(user)"  ng-swipe-right="hiddenOpt()">
-		<div class="purikura">
-			<img ng-src="{{user.imgUrl}}"/>
+		<div ng-touchmove="pulldownFresh($event)" ng-touchend="fresh()">
+			<div class="clearfix user-list-item  {{$index==showOptIndex?'show-opt-wapper':''}}" ng-repeat="user in userList"  ng-swipe-left="showOpt(user)"  ng-swipe-right="hiddenOpt()">
+				<div class="purikura">
+					<img ng-src="{{user.imgUrl}}"/>
+				</div>
+				<div class="content"  ng-click="talk(user)">
+					<div>{{user.name}}<SUB ng-show="0">{{user.initial}}</SUB></div>
+				</div>
+				<div class="opt-del"  ng-click="delete(recent, $event)">删除</div>
+				<div class="opt-mark">置顶</div>
+			</div>
 		</div>
-		<div class="content"  ng-click="talk(user)">
-			<div>{{user.name}}<SUB ng-show="0">{{user.initial}}</SUB></div>
+
+		<div class= "user-letter" ng-if="showOptIndex == undefined">
+			<div ng-repeat="key in queryKeyList" ng-touchmove="queryByinitial($event)">{{key}}</div>
 		</div>
-		<div class="opt-del"  ng-click="delete(recent, $event)">删除</div>
-		<div class="opt-mark">置顶</div>
 	</div>
 </div>
 
-<div class= "user-letter" ng-if="showOptIndex == undefined">
-	<div ng-repeat="key in queryKeyList" ng-touchmove="queryByinitial($event)">{{key}}</div>
-</div>
+<script type="text/javascript">
+var myScroll;
+
+function loaded() {
+	myScroll = new iScroll('wrapper', {
+		useTransition: true,
+		topOffset: 0,
+		onRefresh: function () {
+			console.log(1111);
+		},
+		onScrollMove: function () {
+			console.log(2222);
+		},
+		onScrollEnd: function () {
+			console.log(3333);
+		}
+	});
+}
+// setTimeout(loaded, 200);
+loaded();
+</script>

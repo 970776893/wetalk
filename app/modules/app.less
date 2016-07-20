@@ -37,6 +37,7 @@ header {
     height: @header-bar-height;
     padding: 0px !important;
     margin: 0px !important;
+    z-index: 1007;
 }
 /*导航栏-左侧返回按钮*/
 header>ul:nth-child(1) {
@@ -461,12 +462,25 @@ footer>div {
 .tip-message {
     margin: 10px 0px;
     text-align: center;
-    transition: 1.5s;
+    transition: all linear 0.5s;
+    -webkit-transition: all linear 0.5s;
+    -o-transition: all linear 0.5s;
+    -ms-transition: all linear 0.5s;
+    -moz-transition: all linear 0.5s;
 }
-//消息提示框 刷新
-.tip-message .reload{
-    transition: 15s;
-    transform: rotate(3600deg);
+/* 发送消息动画 -开始状态*/
+.tip-message.ng-enter{
+    transform : translateY(-100%);
+    -webkit-transform : translateY(-100%);
+    -moz-transform : translateY(-100%);
+    -o-transform : translateY(-100%);
+}
+/*发送消息动画 -动画过程*/
+.tip-message.ng-enter-active{
+    transform : translateY(0);
+    -webkit-transform : translateY(0);
+    -moz-transform : translateY(0);
+    -o-transform : translateY(0);
 }
 
 /* 发送消息动画 */

@@ -63,12 +63,14 @@ app.run(function($rootScope, $timeout){
 	// 只有header和footer不参与滚动
 	$rootScope.changeSectionHeight = function(){
 		var sectionHeight = (window.innerHeight - $("footer").outerHeight() - $("header").outerHeight()) + 'px';
-		$rootScope.sectionStyle = {
-			'height' : sectionHeight
-		};
-		//body滚动到最顶部
-		if($rootScope.isWeiXin()){
-			$('body')[0].scrollTop = 0;
+		if($rootScope.sectionStyle === undefined || $rootScope.sectionStyle.height !== sectionHeight){
+			$rootScope.sectionStyle = {
+				'height' : sectionHeight
+			};
+			//body滚动到最顶部
+			if($rootScope.isWeiXin()){
+				$('body')[0].scrollTop = 0;
+			}
 		}
 		$timeout($rootScope.changeSectionHeight, 300).then(function(){}, function(){});
 	};

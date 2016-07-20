@@ -134,5 +134,32 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 			localStorageService.handlerRecentTalkList($scope.userInfo);
 		});
 	};
+
+	$scope.pulldownFresh = function($event){
+		if($('section').scrollTop() === 0){
+			if($scope.swipeDownStartY === undefined){
+				$scope.swipeDownStartY = $event.originalEvent.touches[0].pageY;
+				return ;
+			}
+			if($event.originalEvent.touches[0].pageY - $scope.swipeDownStartY > 20){
+				$scope.showTip = true;
+				$scope.tip = '更多聊天记录';
+			}
+		}
+	};
+	$scope.fresh = function(){
+		$scope.swipeDownStartY = undefined;
+		if($scope.showTip){
+			$scope.tip = '获取中...';
+			// 模拟1秒钟后，请求完成
+			$timeout(function(){
+				$scope.pageNo = $scope.pageNo + 1;
+				var result = localStorageService.getRecentMsgList(userId, $scope.pageNo, $scope.pageSize);
+				$rootScope.talkingList = $rootScope.talkingList.concat(result);
+				$scope.tip = '刷新成功';
+				$scope.showTip = false;
+			}, 1000);
+		}
+	};
 	
 });

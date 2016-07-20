@@ -1,4 +1,8 @@
- <div>
+ <div class="tip-message"  ng-if="showTip">
+	<p class="text-center"> {{tip}} </p>
+</div>
+
+ <div  ng-touchmove="pulldownFresh($event)" ng-touchend="fresh($event)">
  	<div class="clearfix talk-item-animation talk-window-item" ng-repeat="history in $root.talkingList|orderBy:'time':false">
  		<div class="time">{{history.time|date : 'MM-dd HH:mm'}}</div>
  		<div class="purikura {{history.sourceType == 2 ? 'pull-right' : ''}}" ng-if="history.sourceType == 2">
