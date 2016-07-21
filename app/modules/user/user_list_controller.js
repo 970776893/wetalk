@@ -25,7 +25,7 @@ app.controller("userListController", function ($rootScope, $scope, $location, $t
 					$scope.queryKeyList.push(queryKey);
 				}
 			});
-			$timeout(function(){myScroll.refresh();},200);;	
+			//$timeout(function(){myScroll.refresh();},200);;	
 		});
 	};
 	$scope.getUserList();
@@ -50,7 +50,7 @@ app.controller("userListController", function ($rootScope, $scope, $location, $t
 		}
 		var key = $(initials[index]).text();
 		var targetHtml = $('SUB:contains(' + key + ')').parent().parent().parent()[0];
-		targetHtml.scrollIntoView();
+		myScroll.scrollToElement(targetHtml,300);
 	};
 	//搜索
 	$scope.queryByKey = function(){
