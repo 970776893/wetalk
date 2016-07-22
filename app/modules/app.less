@@ -472,19 +472,8 @@ footer>div {
     -ms-transition: all linear 0.5s;
     -moz-transition: all linear 0.5s;
 }
-/* 发送消息动画 -开始状态*/
-.tip-message.ng-enter{
-    transform : translateY(-100%);
-    -webkit-transform : translateY(-100%);
-    -moz-transform : translateY(-100%);
-    -o-transform : translateY(-100%);
-}
-/*发送消息动画 -动画过程*/
-.tip-message.ng-enter-active{
-    transform : translateY(0);
-    -webkit-transform : translateY(0);
-    -moz-transform : translateY(0);
-    -o-transform : translateY(0);
+.tip-message-show {
+    position: initial;
 }
 
 /* 发送消息动画 */
@@ -502,6 +491,14 @@ footer>div {
 /*发送消息动画 -动画过程*/
 .talk-item-animation.ng-enter-active{
     opacity: 1;
+}
+
+.iscroll-contenter {
+    height: 100%;
+}
+.iscroll-contenter .iscroll{
+    position: absolute;
+    width: 100%;
 }
 
 

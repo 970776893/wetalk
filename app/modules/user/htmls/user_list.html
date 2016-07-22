@@ -1,6 +1,6 @@
-<div id="wrapper" style="height: 100%">
-	<div style="position: absolute;width: 100%;">
-		<div class="tip-message"  >
+<div id="wrapper-userlist" class="iscroll-contenter">
+	<div class="iscroll">
+		<div class="tip-message {{tipShow ? 'tip-message-show' : ''}}"  >
 			<p class="text-center"> {{tip}} </p>
 		</div>
 		<input type="text" class="form-control input-sm input-search" ng-model="queryData" placeholder="搜索" ng-change="queryByKey()" ng-blur="queryByKeyBLur()"/>
@@ -24,28 +24,3 @@
 <div class= "user-letter" ng-if="showOptIndex == undefined">
 	<div ng-repeat="key in queryKeyList" ng-touchmove="queryByinitial($event)">{{key}}</div>
 </div>
-
-<script type="text/javascript">
-var myScroll;
-
-function loaded() {
-	myScroll = new iScroll('wrapper', {
-		useTransition: true,
-		topOffset: 0,
-		snap:true,
-		checkDOMChanges:true,
-		hScrollbar : false,
-		onRefresh: function () {
-			console.log(1111);
-		},
-		onScrollMove: function () {
-			console.log(myScroll.y);
-		},
-		onScrollEnd: function () {
-			console.log(3333);
-		}
-	});
-}
-// setTimeout(loaded, 200);
-loaded();
-</script>

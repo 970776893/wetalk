@@ -1,6 +1,7 @@
 /* 用户列表 */
 
 app.controller("userListController", function ($rootScope, $scope, $location, $timeout, weService) {
+	
 	$rootScope.title = '通讯录';
 	$scope.getUserList = function(){
 		$scope.userList = [];
@@ -81,28 +82,36 @@ app.controller("userListController", function ($rootScope, $scope, $location, $t
 		$scope.showOptIndex = undefined;
 	};
 
-	$scope.pulldownFresh = function($event){
-		if($('section').scrollTop() === 0){
-			if($scope.swipeDownStartY === undefined){
-				$scope.swipeDownStartY = $event.originalEvent.touches[0].pageY;
-				return ;
+	$scope.myScroll = new iScroll('wrapper-userlist', {
+		useTransition: true,
+		topOffset: 0,
+		snap:true,
+		checkDOMChanges:true,
+		hScrollbar : false,
+		onRefresh: function () {
+		},
+		onScrollMove: function () {
+			if(this.y < 40 ){
+				$scope.tip = '下拉刷新';
 			}
-			if($event.originalEvent.touches[0].pageY - $scope.swipeDownStartY > 20){
-				$scope.showTip = true;
-				$scope.tip = '松手刷新';
+			if(this.y > 40){
+				$scope.tip = '释放刷新';
+			}
+
+		},
+		onBeforeScrollEnd : {
+			$scope.tipShow = true;
+		}
+		onScrollEnd: function () {
+			console.log(111)
+			if($scope.tipShow){
+				$scope.tip = '刷新中...';
+				// 模拟2s请求
+				setTimeout(function() {
+					$scope.tipShow = false;
+				}, 2000);
 			}
 		}
-	};
-	$scope.fresh = function(){
-		$scope.swipeDownStartY = undefined;
-		if($scope.showTip){
-			$scope.tip = '刷新中...';
-			// 模拟1秒钟后，请求完成
-			$timeout(function(){
-				$scope.tip = '刷新成功';
-				$scope.showTip = false;
-			}, 1000);
-		}
-	};
+	});
 
 });
