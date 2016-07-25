@@ -84,8 +84,6 @@ app.controller("userListController", function ($rootScope, $scope, $location, $t
 
 	$scope.myScroll = new iScroll('wrapper-userlist', {
 		useTransition : true,
-		bounceLock : true,
-		snap:true,
 		checkDOMChanges:true,
 		hScroll : false,
 		onScrollMove: function () {
