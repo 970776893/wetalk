@@ -60,7 +60,7 @@ app.controller("talkListController", function ($rootScope, $scope, $location, po
 
 	$scope.myScroll = new iScroll('wrapper-talklist', {
 		useTransition : true,
-		bounce : true,
+		bounceLock : true,
 		snap:true,
 		checkDOMChanges:true,
 		hScroll : false,

@@ -144,7 +144,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 	
 	$scope.myScroll = new iScroll('wrapper-talkwindow', {
 		useTransition : true,
-		bounce : true,
+		bounceLock : true,
 		checkDOMChanges:true,
 		hScroll : false,
 		onScrollMove: function () {
