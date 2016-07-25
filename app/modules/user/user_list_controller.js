@@ -51,7 +51,7 @@ app.controller("userListController", function ($rootScope, $scope, $location, $t
 		}
 		var key = $(initials[index]).text();
 		var targetHtml = $('SUB:contains(' + key + ')').parent().parent().parent()[0];
-		myScroll.scrollToElement(targetHtml,300);
+		$scope.myScroll.scrollToElement(targetHtml,300);
 	};
 	//搜索
 	$scope.queryByKey = function(){
@@ -83,27 +83,21 @@ app.controller("userListController", function ($rootScope, $scope, $location, $t
 	};
 
 	$scope.myScroll = new iScroll('wrapper-userlist', {
-		useTransition: true,
-		topOffset: 0,
+		useTransition : true,
+		bounce : true,
 		snap:true,
 		checkDOMChanges:true,
-		hScrollbar : false,
-		onRefresh: function () {
-		},
+		hScroll : false,
 		onScrollMove: function () {
-			if(this.y < 40 ){
+			if(this.y < 10 ){
 				$scope.tip = '下拉刷新';
 			}
-			if(this.y > 40){
+			if(this.y > 10){
+				$scope.tipShow = true;
 				$scope.tip = '释放刷新';
 			}
-
 		},
-		onBeforeScrollEnd : {
-			$scope.tipShow = true;
-		}
 		onScrollEnd: function () {
-			console.log(111)
 			if($scope.tipShow){
 				$scope.tip = '刷新中...';
 				// 模拟2s请求

@@ -1,23 +1,27 @@
-<div class="tip-message"  ng-if="showTip">
-	<p class="text-center"> {{tip}} </p>
-</div>
-<input type="text" class="form-control input-sm input-search" ng-model="queryData" placeholder="搜索" ng-change="queryByKey()" ng-blur="queryByKeyBLur()">
-<p class="text-center" ng-if="!talkList || talkList.length == 0">  没有数据 </p>
-<div ng-touchmove="pulldownFresh($event)" ng-touchend="fresh($event)">
-	<div class="clearfix recent-list-item {{$index==showOptIndex?'show-opt-wapper':''}}" ng-repeat="recent in talkList" ng-swipe-left="optHistory(recent)"  ng-swipe-right="hiddenOpt()">
-		<div class="purikura">
-			<img ng-src="{{recent.userImgUrl}}"/>
+<div id="wrapper-talklist" class="iscroll-contenter">
+	<div class="iscroll">
+		<div class="tip-message {{tipShow ? 'tip-message-show' : ''}}">
+			<p class="text-center"> {{tip}} </p>
 		</div>
-		<div class="content" ng-click="talk(recent)">
-			<div class="name">{{recent.userName}}</div>
-			<div class="message">{{recent.lastMsgContent.substring(0,10)}}
-				<span class="badge noread-badge" ng-if="recent.noReadNum != 0 && recent.noReadNum != null">{{recent.noReadNum}}</span>
+		<input type="text" class="form-control input-sm input-search" ng-model="queryData" placeholder="搜索" ng-change="queryByKey()" ng-blur="queryByKeyBLur()">
+		<p class="text-center" ng-if="!talkList || talkList.length == 0">  没有数据 </p>
+		<div >
+			<div class="clearfix recent-list-item {{$index==showOptIndex?'show-opt-wapper':''}}" ng-repeat="recent in talkList" ng-swipe-left="optHistory(recent)"  ng-swipe-right="hiddenOpt()">
+				<div class="purikura">
+					<img ng-src="{{recent.userImgUrl}}"/>
+				</div>
+				<div class="content" ng-click="talk(recent)">
+					<div class="name">{{recent.userName}}</div>
+					<div class="message">{{recent.lastMsgContent.substring(0,10)}}
+						<span class="badge noread-badge" ng-if="recent.noReadNum != 0 && recent.noReadNum != null">{{recent.noReadNum}}</span>
+					</div>
+				</div>
+				<div class="time">
+					{{recent.lastMsgTime | date:'MM-dd HH:mm'}}
+				</div>
+				<div class="opt-del"  ng-click="delete(recent, $event)">删除</div>
+				<div class="opt-mark">置顶</div>
 			</div>
 		</div>
-		<div class="time">
-			{{recent.lastMsgTime | date:'MM-dd HH:mm'}}
-		</div>
-		<div class="opt-del"  ng-click="delete(recent, $event)">删除</div>
-		<div class="opt-mark">置顶</div>
 	</div>
 </div>

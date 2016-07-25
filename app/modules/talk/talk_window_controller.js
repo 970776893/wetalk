@@ -80,13 +80,19 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 	// 监听了消息记录，保持滚动到最下方
 	$scope.$watch('talkingList' , function(newValue, oldValue, scope){
 		$timeout(function(){
-			$('section')[0].scrollTop = $('section')[0].scrollHeight;
+			$scope.myScroll.refresh();
+			if($scope.myScroll.maxScrollY < 0){
+				var targetHtml = $(".talk-window-item:last");
+				$scope.myScroll.scrollToElement(targetHtml[0] ,200);
+			}
 		});
 	}, true);
 	//监听了消息记录，保持滚动到最下方
 	$scope.$watch('sectionStyle' , function(newValue, oldValue, scope){
 		$timeout(function(){
-			$('section')[0].scrollTop = $('section')[0].scrollHeight;
+			$scope.myScroll.refresh();
+			var targetHtml = $(".talk-window-item:last");
+			$scope.myScroll.scrollToElement(targetHtml[0],0);
 		});
 	});
 
@@ -135,31 +141,34 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 		});
 	};
 
-	$scope.pulldownFresh = function($event){
-		if($('section').scrollTop() === 0){
-			if($scope.swipeDownStartY === undefined){
-				$scope.swipeDownStartY = $event.originalEvent.touches[0].pageY;
-				return ;
-			}
-			if($event.originalEvent.touches[0].pageY - $scope.swipeDownStartY > 20){
-				$scope.showTip = true;
-				$scope.tip = '更多聊天记录';
-			}
-		}
-	};
-	$scope.fresh = function(){
-		$scope.swipeDownStartY = undefined;
-		if($scope.showTip){
-			$scope.tip = '获取中...';
-			// 模拟1秒钟后，请求完成
-			$timeout(function(){
-				$scope.pageNo = $scope.pageNo + 1;
-				var result = localStorageService.getRecentMsgList(userId, $scope.pageNo, $scope.pageSize);
-				$rootScope.talkingList = $rootScope.talkingList.concat(result);
-				$scope.tip = '刷新成功';
-				$scope.showTip = false;
-			}, 1000);
-		}
-	};
 	
+	$scope.myScroll = new iScroll('wrapper-talkwindow', {
+		useTransition : true,
+		bounce : true,
+		checkDOMChanges:true,
+		hScroll : false,
+		onScrollMove: function () {
+			if(this.y < 10 ){
+				$scope.tip = '下拉刷新';
+			}
+			if(this.y > 10){
+				$scope.tipShow = true;
+				$scope.tip = '释放刷新';
+			}
+		},
+		onScrollEnd: function () {
+			if($scope.tipShow){
+				$scope.tip = '刷新中...';
+				// 模拟2s请求
+				setTimeout(function() {
+					$scope.pageNo = $scope.pageNo + 1;
+					var result = localStorageService.getRecentMsgList(userId, $scope.pageNo, $scope.pageSize);
+					$rootScope.talkingList = $rootScope.talkingList.concat(result);
+					$scope.tip = '刷新成功';
+					$scope.tipShow = false;
+				}, 1000);
+			}
+		}
+	});
+
 });

@@ -28,7 +28,7 @@ section {
     min-width: @device-min-width;
     // position: absolute;
     width: 100%;
-    overflow-y : auto;
+    overflow-y : hidden;
     overflow-x: hidden; 
     //top: @header-bar-height;
 }
@@ -474,23 +474,6 @@ footer>div {
 }
 .tip-message-show {
     position: initial;
-}
-
-/* 发送消息动画 */
-.talk-item-animation{
-    transition: all linear 1s;
-    -webkit-transition: all linear 1s;
-    -o-transition: all linear 1s;
-    -ms-transition: all linear 1s;
-    -moz-transition: all linear 1s;
-}
-/* 发送消息动画 -开始状态*/
-.talk-item-animation.ng-enter{
-    opacity: 0.3;
-}
-/*发送消息动画 -动画过程*/
-.talk-item-animation.ng-enter-active{
-    opacity: 1;
 }
 
 .iscroll-contenter {

@@ -58,29 +58,30 @@ app.controller("talkListController", function ($rootScope, $scope, $location, po
 		});
 	};
 
-	$scope.pulldownFresh = function($event){
-		$event.preventDefault(false);
-		if($('section').scrollTop() === 0){
-			if($scope.swipeDownStartY === undefined){
-				$scope.swipeDownStartY = $event.originalEvent.touches[0].pageY;
-				return ;
+	$scope.myScroll = new iScroll('wrapper-talklist', {
+		useTransition : true,
+		bounce : true,
+		snap:true,
+		checkDOMChanges:true,
+		hScroll : false,
+		onScrollMove: function () {
+			if(this.y < 10 ){
+				$scope.tip = '下拉刷新';
 			}
-			if($event.originalEvent.touches[0].pageY - $scope.swipeDownStartY > 20){
-				$scope.showTip = true;
-				$scope.tip = '松手刷新';
+			if(this.y > 10){
+				$scope.tipShow = true;
+				$scope.tip = '释放刷新';
+			}
+		},
+		onScrollEnd: function () {
+			if($scope.tipShow){
+				$scope.tip = '刷新中...';
+				// 模拟2s请求
+				setTimeout(function() {
+					$scope.tipShow = false;
+				}, 2000);
 			}
 		}
-	};
-	$scope.fresh = function(){
-		$scope.swipeDownStartY = undefined;
-		if($scope.showTip){
-			$scope.tip = '刷新中...';
-			// 模拟1秒钟后，请求完成
-			$timeout(function(){
-				$scope.tip = '刷新成功';
-				$scope.showTip = false;
-			}, 1000);
-		}
-	};
+	});
 
 });
