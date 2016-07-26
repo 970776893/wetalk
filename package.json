@@ -1,11 +1,11 @@
 {
-  "name": "EasyShopping",
+  "name": "weTalk",
   "version": "0.1.0",
   "author": {
     "name":"张凯",
     "email": "970776893@qq.com"
   },
-  "description": "这是一个众销平台，主要旨在建立有货的供应商和有销售能力的分销商的网络，解决供应商销售问题，解决分销商货源问题。",
+  "description": "这是移动端聊天的静态页面，支持多种接口接入。",
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "~0.4.0",
