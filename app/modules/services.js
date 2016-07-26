@@ -21,7 +21,7 @@ app.service("weService", function ($http) {
             });
         },
         /*
-        获取用户列表
+        获取聊天界面的操作列表
             数据结构eg：
             [
                 [
