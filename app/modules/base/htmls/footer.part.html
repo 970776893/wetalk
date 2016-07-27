@@ -17,7 +17,7 @@
 		<span class="input-group-btn" ng-click="showSpeaking=!showSpeaking;showTools=0">
 			<img class="tool-button" src="./imgs/speaking.png"/>
 		</span>
-		<textarea rows="1" ng-if="!showSpeaking" id="inputMsg" focusable="msgInputFocus" type="text" ng-model="data.msgContent" ng-focus="focusInput()" ng-keyup="sendMsgByKeyup($event)" class="form-control input-send-msg" maxlength="120"/>
+		<textarea rows="1" ng-if="!showSpeaking" id="inputMsg" focusable="msgInputFocus" type="text" ng-model="data.msgContent" ng-focus="focusInput()" ng-keyup="sendMsgByKeyup($event)" class="form-control input-send-msg" maxlength="120" placeholder="点击回车，发送消息。" />
 		<div ng-if="showSpeaking" ng-mousedown="startRecordVoice()" ng-mouseup="sendMsg4Voice()" ng-mouseout="sendMsg4Voice()"> 按住说话</div>
 		<span class="input-group-btn" >
 			<img class="tool-button" src="./imgs/expression_wink.png"  ng-click="showTools=2"/>
