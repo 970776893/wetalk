@@ -77,6 +77,7 @@ app.controller("talkListController", function ($rootScope, $scope, $location, po
 				// 模拟2s请求
 				setTimeout(function() {
 					$scope.tipShow = false;
+					$scope.getTalkList();
 				}, 2000);
 			}
 		}

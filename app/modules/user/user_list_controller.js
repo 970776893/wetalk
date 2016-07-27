@@ -100,6 +100,7 @@ app.controller("userListController", function ($rootScope, $scope, $location, $t
 				$scope.tip = '刷新中...';
 				// 模拟2s请求
 				setTimeout(function() {
+					$scope.getUserList();
 					$scope.tipShow = false;
 				}, 2000);
 			}
