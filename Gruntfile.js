@@ -41,8 +41,11 @@ module.exports = function (grunt) {
         },
         //js文件压缩
         uglify: {
+             options: {
+                mangle: false, //不混淆变量名
+            },
             js: {
-                src: ['dist/js/app.js'],
+                src: 'dist/js/app.js',
                 dest: 'dist/js/app.min.js'
             }
         },
@@ -74,7 +77,7 @@ module.exports = function (grunt) {
             },
             js: {
                 files: '<%= concat.js.src %>',
-                tasks: ['concat:js', 'jshint:js']
+                tasks: ['concat:js', 'jshint:js', 'uglify:js']
             },
             less: {
                 files: 'app/modules/*.less',

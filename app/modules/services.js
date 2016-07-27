@@ -84,7 +84,7 @@ app.service("localStorageService", function ($rootScope, $http, $cookies) {
                 angular.forEach(recentUsers, function(rUser){
                     var iKey =  loginUser.id + "_history_" + rUser.userId;
                     var historyList = storage.getItem(iKey);
-                    if(historyList != null){
+                    if(historyList !== null){
                         //最近消息
                         historyList = JSON.parse(historyList);
                         var lastmsg = historyList[0];
@@ -290,7 +290,7 @@ app.service("localStorageService", function ($rootScope, $http, $cookies) {
                 angular.forEach(recentUsers, function(rUser){
                     var iKey =  loginUser.id + "_history_" + rUser.userId;
                     var historyList = storage.getItem(iKey);
-                    if(historyList != null){
+                    if(historyList !== null){
                         //最近消息
                         historyList = JSON.parse(historyList);
                         var lastmsg = historyList[0];

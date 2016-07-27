@@ -108,7 +108,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 		$rootScope.strart4Voice = new Date();
 	};
 	$rootScope.sendMsg4Voice = function(){
-		if($rootScope.strart4Voice == null){
+		if($rootScope.strart4Voice === null){
 			return;
 		}
 		var lengthInSecond = ((new Date().getTime()) - $rootScope.strart4Voice.getTime()) / 1000;
