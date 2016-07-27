@@ -15,7 +15,7 @@ app.service("weService", function ($http) {
         */
         getUserList : function () {
             return $http({
-                url : '/app/displaydata/userlist.json',
+                url : './app/displaydata/userlist.json',
                 method : 'get',
                 dataType : 'json'
             });
@@ -42,7 +42,7 @@ app.service("weService", function ($http) {
         */
         getMsgToolsList : function () {
             return $http({
-                url : '/app/modules/base/data/messageTools.json',
+                url : './app/modules/base/data/messageTools.json',
                 method : 'get',
                 dataType : 'json'
             });

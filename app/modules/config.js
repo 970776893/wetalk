@@ -4,7 +4,7 @@ app.factory('popup', function ($uibModal) {
         confim : function(title,msg){
             return $uibModal.open({
                 animation : true,
-                templateUrl : '/app/modules/base/htmls/confim.part.html',
+                templateUrl : './app/modules/base/htmls/confim.part.html',
                 controller : function($scope, $uibModalInstance){
                     $scope.title = title;
                     $scope.msg = msg;

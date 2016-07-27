@@ -23,7 +23,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 		str = str.replace(/</g,'&lt;');
 		str = str.replace(/>/g,'&gt;');
 		str = str.replace(/\n/g,'<br/>');
-		str = str.replace(/\[em-([0-9]*)\]/g, '<img src="/imgs/face/$1.gif"  border="0"/>');
+		str = str.replace(/\[em-([0-9]*)\]/g, '<img src="./imgs/face/$1.gif"  border="0"/>');
 		return str;
 	};
 
@@ -92,7 +92,9 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 		$timeout(function(){
 			$scope.myScroll.refresh();
 			var targetHtml = $(".talk-window-item:last");
-			$scope.myScroll.scrollToElement(targetHtml[0],0);
+			if(targetHtml.length > 0) {
+				$scope.myScroll.scrollToElement(targetHtml[0],0);
+			}
 		});
 	});
 
@@ -118,7 +120,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 			id : 1,
 			status : Math.random() > 0.5 ? 0 : 1, // 0-成功，1-失败
 			time : (new Date()).getTime(),
-			src : '/app/displaydata/test.mp3', //音频存放位置
+			src : './app/displaydata/test.mp3', //音频存放位置
 			lengthInSecond : lengthInSecond.toFixed(2),
 			sourceType : 2, // 1-接收，2-发送
 			msgType : 2  // 1-文本 2-语音

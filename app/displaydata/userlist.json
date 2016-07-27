@@ -2,61 +2,61 @@
   {
     "id": 1,
     "name": "陈奕迅",
-    "imgUrl": "/app/displaydata/imgs/chenyixun.png",
+    "imgUrl": "./app/displaydata/imgs/chenyixun.png",
     "initial":"C"
   },
   {
     "id": 2,
     "name": "邓超",
-    "imgUrl": "/app/displaydata/imgs/dengchao.png",
+    "imgUrl": "./app/displaydata/imgs/dengchao.png",
     "initial":"C"
   },
   {
     "id": 3,
     "name": "范冰冰",
-    "imgUrl": "/app/displaydata/imgs/fanbingbing.png",
+    "imgUrl": "./app/displaydata/imgs/fanbingbing.png",
     "initial":"F"
   },
   {
     "id": 4,
     "name": "麦克阿瑟",
-    "imgUrl": "/app/displaydata/imgs/maikease.png",
+    "imgUrl": "./app/displaydata/imgs/maikease.png",
     "initial":"M"
   },
   {
     "id": 5,
     "name": "汤唯",
-    "imgUrl": "/app/displaydata/imgs/tangwei.png",
+    "imgUrl": "./app/displaydata/imgs/tangwei.png",
     "initial":"T"
   },
   {
     "id": 6,
     "name": "王菲",
-    "imgUrl": "/app/displaydata/imgs/wangfei.png",
+    "imgUrl": "./app/displaydata/imgs/wangfei.png",
     "initial":"W"
   },
   {
     "id": 7,
     "name": "谢霆锋",
-    "imgUrl": "/app/displaydata/imgs/xietingfeng.png",
+    "imgUrl": "./app/displaydata/imgs/xietingfeng.png",
     "initial":"X"
   },
   {
     "id": 8,
     "name": "希特勒",
-    "imgUrl": "/app/displaydata/imgs/xitele.png",
+    "imgUrl": "./app/displaydata/imgs/xitele.png",
     "initial":"X"
   },
   {
     "id": 9,
     "name": "张杰",
-    "imgUrl": "/app/displaydata/imgs/zhangjie.png",
+    "imgUrl": "./app/displaydata/imgs/zhangjie.png",
     "initial":"Z"
   },
   {
     "id": 10,
     "name": "朱可夫",
-    "imgUrl": "/app/displaydata/imgs/zhukefu.png",
+    "imgUrl": "./app/displaydata/imgs/zhukefu.png",
     "initial":"Z"
   }
 ]

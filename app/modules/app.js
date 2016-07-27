@@ -10,7 +10,7 @@ app.run(function($rootScope, $cookies){
 		var loginUser = {
 			id : 10000,
 			name : '张凯',
-			'imgUrl' : '/app/displaydata/imgs/zhangkai.png'
+			'imgUrl' : './app/displaydata/imgs/zhangkai.png'
 		};
 		$cookies.putObject('loginUser', loginUser);
 		return loginUser;
@@ -132,7 +132,7 @@ app.run(function($rootScope){
 	$rootScope.emList = {
 		faceList : []
 	};
-	var facePath = "/imgs/face/"; //脸表情保存路径
+	var facePath = "./imgs/face/"; //脸表情保存路径
 	var _suffix = ".gif"; //脸表情后缀名
 	var startIndex = 1; //脸表情开始
 	var size = 75; //脸表情数量
