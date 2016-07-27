@@ -26,11 +26,8 @@ body {
 }
 section {
     min-width: @device-min-width;
-    // position: absolute;
     width: 100%;
-    overflow-y : hidden;
-    overflow-x: hidden; 
-    //top: @header-bar-height;
+    overflow : hidden;
 }
 header {
     min-width: @device-min-width;
@@ -239,14 +236,14 @@ footer>div {
 .recent-list-item, .user-list-item{
     background-color: white;
     border-top: 1px solid #ddd;
-    width: 200%;
+    width: 100%;
 }
 //消息列表-头像，用户列表-头像
 .recent-list-item .purikura, .user-list-item .purikura{
     margin-top: -1px;
     background-color: white;
     height: @list-item-height ;
-    width: 9%;
+    width: 18%;
     float: left;
 }
 //消息列表-头像-图片，用户列表-头像-图片
@@ -263,7 +260,7 @@ footer>div {
 }
 //消息列表-内容
 .recent-list-item .content {
-    width: 32%;
+    width: 64%;
     height: @list-item-height;
     float: left;
     padding-left: 6px;
@@ -284,7 +281,7 @@ footer>div {
 }
 //消息列表-时间
 .recent-list-item .time {
-    width: 9%;
+    width: 18%;
     font-size: x-small;
     height: @list-item-height;
     padding-top: 10px;
@@ -299,6 +296,8 @@ footer>div {
     text-align: center;
     float: left;
     font-weight: 600;
+    position: absolute;
+    right: -70px;
 }
 //消息列表-标记,用户列表-标记
 .recent-list-item .opt-mark, .user-list-item .opt-mark{
@@ -308,11 +307,13 @@ footer>div {
     line-height: @list-item-height;
     text-align: center;
     float: left;
+    position: absolute;
+    right: -150px;
 }
 
 //用户列表-内容
 .user-list-item .content {
-    width: 41%;
+    width: 82%;
     height: @list-item-height;
     line-height: @list-item-height;
     float: left;
