@@ -1,6 +1,8 @@
 /* app的总入口，定制angularJS接入总配置  */
 var dependencies = ['ngAnimate', 'ngRoute', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui.bootstrap'];
 var app = angular.module("app", dependencies);
+
+
 // 用户登陆
 app.run(function($rootScope, $cookies){
 	$rootScope.login = function(){
@@ -30,6 +32,8 @@ app.run(function($rootScope,$route){
 		className = className.replace("/", "-");
 		$rootScope.bodyClass = className;
 	});
+	//禁止safari可以拖动整个页面
+	document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 });
 
 // 创建全局函数
