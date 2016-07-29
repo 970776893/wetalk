@@ -10,7 +10,9 @@
 5. 运行（grunt online）进行构建（这是生产环境，取消实时监测，也不会自动更新）<br/>
 6. 安装nginx
 7. 配置nginx，在nginx.conf的http下如下配置
-` server {
+
+` 
+server {
 	listen 4000;
 	add_header Access-Control-Allow-Origin *;
 	access_log /soft/nginx-1.9.0/logs/weTalk/access.log;
@@ -21,8 +23,10 @@
 		root /home/zhangkai/code/WeTalk/;
 		index app/modules/index.html;
 	}
-} `
-8.在浏览器中输入http://localhost:4000/#/userList即可看到页面
+} 
+`
+
+8. 在浏览器中输入http://localhost:4000/#/userList即可看到页面
 
 >开发环境请运执行步骤1,2,3,4,6,7,8
 >生产环境请运执行步骤1,2,3,5,6,7,8
