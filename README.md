@@ -11,6 +11,7 @@
 6. 安装nginx
 7. 配置nginx，在nginx.conf的http下如下配置
 ` 
+
 server {
 	listen 4000;
 	add_header Access-Control-Allow-Origin *;
@@ -22,6 +23,7 @@ server {
 		index app/modules/index.html;
 	}
 }
+
 ` 
 8. 在浏览器中输入http://localhost:4000/#/userList即可看到页面
 
