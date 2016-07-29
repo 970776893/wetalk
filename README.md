@@ -17,14 +17,13 @@ server {
 	add_header Access-Control-Allow-Origin *;
 	access_log /soft/nginx-1.9.0/logs/weTalk/access.log;
 	error_log /soft/nginx-1.9.0/logs/weTalk/error.log;
-
 	location / {
 		charset utf-8;
 		root /home/zhangkai/code/WeTalk/;
 		index app/modules/index.html;
 	}
-} 
-`
+}
+` 
 
 8. 在浏览器中输入http://localhost:4000/#/userList即可看到页面
 
