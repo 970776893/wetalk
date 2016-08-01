@@ -15,6 +15,7 @@ app.controller("talkListController", function ($rootScope, $scope, $location, po
 	};
 
 	$rootScope.$watch('refreshTalkList', function(newValue, oldValue, scope){
+		console.log(newValue);
 		if(newValue){
 			$scope.getTalkList();
 		}
@@ -71,6 +72,9 @@ app.controller("talkListController", function ($rootScope, $scope, $location, po
 				$scope.tip = '释放刷新';
 			}
 		},
+		onBeforeScrollStart: function (e) {
+			//e.preventDefault();
+		}, 
 		onScrollEnd: function () {
 			if($scope.tipShow){
 				$scope.tip = '刷新中...';

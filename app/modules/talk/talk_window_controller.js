@@ -157,6 +157,9 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 				$scope.tip = '释放刷新';
 			}
 		},
+		onBeforeScrollStart: function (e) {
+			//e.preventDefault();
+		}, 
 		onScrollEnd: function () {
 			if($scope.tipShow){
 				$scope.tip = '刷新中...';
