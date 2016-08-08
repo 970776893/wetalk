@@ -2,26 +2,26 @@
   {
     "type": "pictures",
     "text": "图片",
-    "icon": "/imgs/pictures.png"
+    "icon": "./imgs/pictures.png"
   },
   {
     "type": "location",
     "text": "位置",
-    "icon": "/imgs/location.png"
+    "icon": "./imgs/location.png"
   },
   {
     "type": "camera",
     "text": "拍摄",
-    "icon": "/imgs/camera.png"
+    "icon": "./imgs/camera.png"
   },
   {
     "type": "video",
     "text": "视频",
-    "icon": "/imgs/video.png"
+    "icon": "./imgs/video.png"
   },
   {
     "type": "favourites",
     "text": "收藏",
-    "icon": "/imgs/favourites.png"
+    "icon": "./imgs/favourites.png"
   }
 ]
