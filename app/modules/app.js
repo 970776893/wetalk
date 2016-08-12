@@ -180,11 +180,10 @@ app.run(function($rootScope){
 			$rootScope.data.msgContent = emCode;
 		}
 	};
-
 });
 
 // 模拟收到消息   测试数据--------------------------------------------------start
-app.run(function($rootScope, $cookies, weService){
+app.run(function($rootScope, $cookies, $timeout, dialog, weService){
 	$rootScope.testGetMessageRondom = function(){
 		// 发送人id
 		var fromUserId = Math.floor(Math.random() * 9 + 1);
@@ -236,6 +235,46 @@ app.run(function($rootScope, $cookies, weService){
              $rootScope.getMsg(fromUser, msgInfo);
          });
 	};
+
+	//初始化数据
+	$rootScope.confirm = function(number){
+		var btns = [];
+		var title;
+		if(number === 1){
+			title = '祝您身体健康，万事如意！！';
+			btns.push('确认');
+		}else{
+			title = '删除订单';
+			btns.push('强制删除');
+			btns.push('删除');
+			btns.push('取消');
+		}
+		var instance = dialog.confirm(title ,btns);
+		instance.result.then(function(mark){
+			console.log(mark);
+			$rootScope.alerts.push({msg:mark});
+		});
+	};
+	$rootScope.loading = function(){
+		var instance = dialog.loading('加载中');
+		$timeout(function(){
+			instance.close();
+			$rootScope.alerts.push({msg:'加载成功'});
+		}, 3000);
+	};
+	var index = 0;
+	$rootScope.tip = function(){
+		$rootScope.alerts.push({msg:'信息提示' + index});
+		index = index + 1;
+	};
+	$rootScope.option = function(){
+		var instance = dialog.options('请选择操作',['买入', '卖出'], '取消');
+		instance.result.then(function(mark){
+			console.log(mark);
+			$rootScope.alerts.push({msg:mark});
+		});
+	};
+	$rootScope.alerts = [];
 });
 //测试数据-------------------------------------------------------------------end
 

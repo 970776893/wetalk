@@ -1,0 +1,9 @@
+<div>
+	<div class="btn-group-vertical block" role="group">
+		<a class="btn btn-default btn-lg disabled" >{{title}}</a>
+		<a class="btn btn-default btn-lg" ng-click="ok(btn)" ng-repeat="btn in options">{{ btn }}</a>
+	</div>
+	<div class="btn-group-vertical block" role="group" style="margin-top: 10px">
+		<a class="btn btn-danger btn-lg"  ng-click="ok(cancel)">{{ cancel}}</a>
+	</div>
+</div>

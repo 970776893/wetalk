@@ -500,9 +500,51 @@ footer>div {
     margin: 0px auto;
 }
 // 确认框的居中显示
-.modal-dialog {
+
+.block {
+    display: block;
+}
+.dialog-options .modal-content{
+    background: transparent;
+}
+.dialog-options .modal-dialog{
     position: absolute;
-    width: auto;
+    bottom: 0%;
+    width: 100%;
+    margin: 0px;
+}
+.dialog-options .modal-content{
     margin: 10px;
-    top: 30%;
+}
+.dialog-confirm .modal-dialog{
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    margin: 0px;
+}
+.dialog-confirm .modal-content{
+    margin: 30px;
+}
+.dialog-loading {
+    background-color: rgba(118, 117, 117, 0.26);
+}
+.dialog-loading .modal-dialog{
+    position: absolute;
+    width: 90px;
+    top: 40%;
+    left: 50%;
+    margin-left: -45px;
+}
+.alert {
+    position: absolute;
+    width: 120px;
+    top: 40%;
+    left: 50%;
+    margin-left: -60px;
+    padding-right: 15px;
+    text-align: center;
+    background-color: black;
+}
+.alert>button{
+    display: none;
 }

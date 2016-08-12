@@ -1,6 +1,6 @@
 /* 用户列表 */
 
-app.controller("talkListController", function ($rootScope, $scope, $location, popup, $timeout, localStorageService) {
+app.controller("talkListController", function ($rootScope, $scope, $location, dialog, $timeout, localStorageService) {
 	$rootScope.title = '消息';
 	//初始化数据
 	$scope.getTalkList = function(){
@@ -49,13 +49,15 @@ app.controller("talkListController", function ($rootScope, $scope, $location, po
 	};
 	//删除
 	$scope.delete = function(item, $event){
-		popup.confim('删除聊天', '确定删除【' + item.userName +'】的聊天').then(function(res){
-			localStorageService.deleteUserHistory(item.userId);
-			$scope.getTalkList();
-			$rootScope.noreadNumTotal = $rootScope.noreadNumTotal - item.noReadNum;
-			$scope.showOptIndex = -1;
-			//取消动画效果
-			$($event.target).parent().removeClass('show-opt-wapper');
+		dialog.confirm('确定删除【' + item.userName +'】的聊天', ['删除','取消']).result.then(function(res){
+			if(res === '删除'){
+				localStorageService.deleteUserHistory(item.userId);
+				$scope.getTalkList();
+				$rootScope.noreadNumTotal = $rootScope.noreadNumTotal - item.noReadNum;
+				$scope.showOptIndex = -1;
+				//取消动画效果
+				$($event.target).parent().removeClass('show-opt-wapper');
+			}
 		});
 	};
 

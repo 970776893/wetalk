@@ -1,26 +1,52 @@
 // 确认框
-app.factory('popup', function ($uibModal) {
+app.factory('dialog', function ($uibModal) {
     return {
-        confim : function(title,msg){
+        confirm : function(msg,buttons){
+
             return $uibModal.open({
                 animation : true,
-                templateUrl : './app/modules/base/htmls/confim.part.html',
+                templateUrl : './app/modules/base/htmls/confirm.part.html',
+                windowClass : 'dialog-confirm',
                 controller : function($scope, $uibModalInstance){
-                    $scope.title = title;
                     $scope.msg = msg;
+                    $scope.buttons = buttons;
 
-                    $scope.ok = function () {
-                        $uibModalInstance.close("ok");
-                    };
-
-                    $scope.cancel = function () {
-                        $uibModalInstance.dismiss('cancel');
+                    $scope.ok = function (value) {
+                        $uibModalInstance.close(value);
                     };
                 }
-            }).result;
+            });
+        },
+        loading : function(title){
+            return $uibModal.open({
+                animation : true,
+                size : 'sm',
+                windowClass : 'dialog-loading',
+                backdrop : false,
+                templateUrl : './app/modules/base/htmls/loading.part.html',
+                controller : function($scope, $uibModalInstance){
+                    $scope.title = title;
+                }
+            });
+        },
+        options : function(title, options, cancel){
+            return $uibModal.open({
+                animation : true,
+                windowClass : 'dialog-options',
+                templateUrl : './app/modules/base/htmls/options.part.html',
+                controller : function($scope, $uibModalInstance){
+                    $scope.title = title;
+                    $scope.options = options;
+                    $scope.cancel = cancel || 'Cancel';
+                    $scope.ok = function (value) {
+                        $uibModalInstance.close(value);
+                    };
+                }
+            });
         }
     };
 });
+
 
 // 拦截器注入
 app.config(function ($httpProvider) {

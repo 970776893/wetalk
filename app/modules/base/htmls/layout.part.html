@@ -5,3 +5,5 @@
 </section>
 
 <we-footer></we-footer>
+
+<div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="{{alert.time || '1000'}}" class="alert-warning" close="alerts.splice($index, 1);" template-url="">{{alert.msg}}</div>
