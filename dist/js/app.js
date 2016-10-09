@@ -337,6 +337,7 @@ app.config(function ($httpProvider) {
     //$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
 });
+
 /* 
  * 页面模板-内容 
  * eg:<we-layout></we-layout>
@@ -918,8 +919,8 @@ app.controller("talkListController", function ($rootScope, $scope, $location, di
 
 /* 用户列表 */
 
-app.controller("talkWindowController", function ($rootScope, $scope, $location, $routeParams, $cookies, $timeout, popup, weService, localStorageService) {
-	
+app.controller("talkWindowController", function ($rootScope, $scope, $location, $routeParams, $cookies, $timeout, dialog, weService, localStorageService) {
+
 	var userId = String($routeParams.id);
 	// 根据用户ID获取用户信息 --------------------------------------------------------------------------
 	weService.getUserList().then(function(res){
@@ -964,7 +965,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 			msgType : 1  // 1-文本
 		};
 		$rootScope.talkingList.push(msgInfo);
-		
+
 		//清空输入框内容
 		$rootScope.data.msgContent = null;
 
@@ -1051,17 +1052,24 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 	};
 	// 消息重发
 	$scope.reSendMsg = function(item){
-		popup.confim('消息重发', '点击<strong>确定</strong>重新发送该消息').then(function(res){
-			var msgInfo = angular.copy(item);
-			msgInfo.status = 0;
-			msgInfo.time = (new Date()).getTime();
-			$rootScope.talkingList.push(msgInfo);
-			localStorageService.handlerSendMsg($scope.userInfo, msgInfo);
-			localStorageService.handlerRecentTalkList($scope.userInfo);
+		var btns = [];
+		var title = "点击<strong>确定</strong>重新发送该消息";
+		btns.push('确定');
+		btns.push('取消');
+
+		dialog.confirm(title, btns).result.then(function(res){
+			if(res === "确定"){
+				var msgInfo = angular.copy(item);
+				msgInfo.status = 0;
+				msgInfo.time = (new Date()).getTime();
+				$rootScope.talkingList.push(msgInfo);
+				localStorageService.handlerSendMsg($scope.userInfo, msgInfo);
+				localStorageService.handlerRecentTalkList($scope.userInfo);
+			}
 		});
 	};
 
-	
+
 	$scope.myScroll = new iScroll('wrapper-talkwindow', {
 		useTransition : true,
 		checkDOMChanges:true,
@@ -1077,7 +1085,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 		},
 		onBeforeScrollStart: function (e) {
 			//e.preventDefault();
-		}, 
+		},
 		onScrollEnd: function () {
 			if($scope.tipShow){
 				$scope.tip = '刷新中...';
