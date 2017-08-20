@@ -1,6 +1,6 @@
 /* 用户列表 */
 
-app.controller("userListController", function ($rootScope, $scope, $location, $timeout, weService) {
+app.controller("userListController", function ($rootScope, $scope, $location, $timeout, dialog, weService) {
 	
 	$rootScope.title = '通讯录';
 	$scope.getUserList = function(){
@@ -101,6 +101,14 @@ app.controller("userListController", function ($rootScope, $scope, $location, $t
 		onScrollEnd: function () {
 			if($scope.tipShow){
 				$scope.tip = '刷新中...';
+				var title = '下来刷新已实现，可以自行接入实现！！';
+				var btns = [];
+				btns.push('确认');
+				var instance = dialog.confirm(title ,btns);
+				instance.result.then(function(mark){
+					console.log(mark);
+					$rootScope.alerts.push({msg:mark});
+				});
 				// 模拟2s请求
 				setTimeout(function() {
 					$scope.getUserList();

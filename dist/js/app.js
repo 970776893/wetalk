@@ -1020,6 +1020,14 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 
 	// 消息工具
 	$rootScope.handMsgTools = function(tools, $event){
+		var title = "[" + tools.text + ']已提供，可以自行接入实现！！';
+		var btns = [];
+		btns.push('确认');
+		var instance = dialog.confirm(title ,btns);
+		instance.result.then(function(mark){
+			console.log(mark);
+			$rootScope.alerts.push({msg:mark});
+		});
 		console.log('不支持类型:' + tools.text);
 	};
 	// 发送语音消息
@@ -1105,7 +1113,7 @@ app.controller("talkWindowController", function ($rootScope, $scope, $location, 
 
 /* 用户列表 */
 
-app.controller("userListController", function ($rootScope, $scope, $location, $timeout, weService) {
+app.controller("userListController", function ($rootScope, $scope, $location, $timeout, dialog, weService) {
 	
 	$rootScope.title = '通讯录';
 	$scope.getUserList = function(){
@@ -1206,6 +1214,14 @@ app.controller("userListController", function ($rootScope, $scope, $location, $t
 		onScrollEnd: function () {
 			if($scope.tipShow){
 				$scope.tip = '刷新中...';
+				var title = '下来刷新已实现，可以自行接入实现！！';
+				var btns = [];
+				btns.push('确认');
+				var instance = dialog.confirm(title ,btns);
+				instance.result.then(function(mark){
+					console.log(mark);
+					$rootScope.alerts.push({msg:mark});
+				});
 				// 模拟2s请求
 				setTimeout(function() {
 					$scope.getUserList();
