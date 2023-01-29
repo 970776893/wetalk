@@ -5,7 +5,7 @@ app.factory('dialog', function ($uibModal) {
 
             return $uibModal.open({
                 animation : true,
-                templateUrl : './app/modules/base/htmls/confirm.part.html',
+                templateUrl : '/wetalk/app/modules/base/htmls/confirm.part.html',
                 windowClass : 'dialog-confirm',
                 controller : function($scope, $uibModalInstance){
                     $scope.msg = msg;
@@ -23,7 +23,7 @@ app.factory('dialog', function ($uibModal) {
                 size : 'sm',
                 windowClass : 'dialog-loading',
                 backdrop : false,
-                templateUrl : './app/modules/base/htmls/loading.part.html',
+                templateUrl : '/wetalk/app/modules/base/htmls/loading.part.html',
                 controller : function($scope, $uibModalInstance){
                     $scope.title = title;
                 }
@@ -33,7 +33,7 @@ app.factory('dialog', function ($uibModal) {
             return $uibModal.open({
                 animation : true,
                 windowClass : 'dialog-options',
-                templateUrl : './app/modules/base/htmls/options.part.html',
+                templateUrl : '/wetalk/app/modules/base/htmls/options.part.html',
                 controller : function($scope, $uibModalInstance){
                     $scope.title = title;
                     $scope.options = options;
