@@ -5,21 +5,21 @@
 app.directive('weLayout', function () {
     return {
         restrict: 'EA',
-        templateUrl: './app/modules/base/htmls/layout.part.html'
+        templateUrl: '/wetalk/app/modules/base/htmls/layout.part.html'
     };
 });
 app.directive('weHeader', function () {
     return {
         restrict: 'EA',
         replace : true,
-        templateUrl: './app/modules/base/htmls/header.part.html'
+        templateUrl: '/wetalk/app/modules/base/htmls/header.part.html'
     };
 });
 app.directive('weFooter', function () {
     return {
         restrict: 'EA',
         replace : true,
-        templateUrl: './app/modules/base/htmls/footer.part.html'
+        templateUrl: '/wetalk/app/modules/base/htmls/footer.part.html'
     };
 });
 
