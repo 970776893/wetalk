@@ -1,6 +1,8 @@
 #WeTalk
 该项目使用angularjs+bootstrip+grunt开发，旨在做一个聊天的**前端**界面（不包括服务器），分为三个部分，分别是顶部菜单，中间内容，底部导航。实现了*消息*，*通讯录*和*聊天窗口*三个模块。
 预览如下：
+![通讯录](http://upload-images.jianshu.io/upload_images/2477382-907d7fd14b14152d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 ![通讯录 图1](http://upload-images.jianshu.io/upload_images/2477382-907d7fd14b14152d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ![聊天界面 图2](http://upload-images.jianshu.io/upload_images/2477382-3d4ef8b4f7a83830.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
