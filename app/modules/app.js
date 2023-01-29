@@ -10,7 +10,7 @@ app.run(function($rootScope, $cookies){
 		var loginUser = {
 			id : 10000,
 			name : '张凯',
-			'imgUrl' : './app/displaydata/imgs/zhangkai.png'
+			'imgUrl' : '/wetalk/app/displaydata/imgs/zhangkai.png'
 		};
 		$cookies.putObject('loginUser', loginUser);
 		return loginUser;
